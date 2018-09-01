@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Minesweeper" Height="400" Width="400" Loaded="Window_Loaded">
+        Closing="Window_Closed"
+        Title="Minesweeper" Height="430" Width="400" Loaded="Window_Loaded">
     <Grid>
-        <Button Content="Play Alone" HorizontalAlignment="Left" Margin="66,63,0,0" VerticalAlignment="Top" Width="261" Height="41" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFF7F5F5" FontSize="14" Foreground="#FFF9F7F7"/>
-        <Button Content="Play Online" HorizontalAlignment="Left" Margin="66,121,0,0" VerticalAlignment="Top" Width="261" Height="44" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
+        <Button Click="PlayAloneClick" Content="Play Alone" HorizontalAlignment="Left" Margin="66,63,0,0" VerticalAlignment="Top" Width="261" Height="41" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFF7F5F5" FontSize="14" Foreground="#FFF9F7F7"/>
+        <Button Click="PlayOnlineClick" Content="Play Online" HorizontalAlignment="Left" Margin="66,121,0,0" VerticalAlignment="Top" Width="261" Height="44" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
         <Label Content="Game Options" HorizontalAlignment="Left" Margin="115,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.077" Width="148" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0" Height="41">
             <Label.RenderTransform>
                 <TransformGroup>
@@ -54,6 +56,6 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-
+        <Image MouseDown="BackButton_MouseDown" Name="BackButton"  HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="43" RenderTransformOrigin="0.109,-0.311" Margin="10,365,0,0"/>
     </Grid>
 </Window>
