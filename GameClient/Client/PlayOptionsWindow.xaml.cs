@@ -23,7 +23,7 @@ namespace Client
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow.png"));
         }
-
+        //asfasf
         private void PlayOnlineClick(object sender, RoutedEventArgs e) {
             PlayerVsPlayerWindow playOnlineWindow = new PlayerVsPlayerWindow();
             playOnlineWindow.Client = Client;
