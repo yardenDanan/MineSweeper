@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f3263b4c4426446bb430fd7018d0542c" Name="Diagram1">
+        <EntityTypeShape EntityType="minesweeper_ShlomiOhana_YardenDananModel.BoardSquare" Width="1.5" PointX="7.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="minesweeper_ShlomiOhana_YardenDananModel.GameBoard" Width="1.5" PointX="4.875" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="minesweeper_ShlomiOhana_YardenDananModel.Game" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="minesweeper_ShlomiOhana_YardenDananModel.Player" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="minesweeper_ShlomiOhana_YardenDananModel.FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="minesweeper_ShlomiOhana_YardenDananModel.FK_dbo_Games_dbo_GameBoards_Board_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="minesweeper_ShlomiOhana_YardenDananModel.FK_dbo_Games_dbo_Players_Player_UserName" ManuallyRouted="false" />
+        <AssociationConnector Association="minesweeper_ShlomiOhana_YardenDananModel.FK_dbo_Games_dbo_Players_Player1_UserName" ManuallyRouted="false" />
+        <AssociationConnector Association="minesweeper_ShlomiOhana_YardenDananModel.FK_dbo_Games_dbo_Players_Player2_UserName" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

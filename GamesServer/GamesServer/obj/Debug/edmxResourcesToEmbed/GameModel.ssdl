@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="minesweeper_ShlomiOhana_YardenDananModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BoardSquares">
+    <Key>
+      <PropertyRef Name="SquareId" />
+    </Key>
+    <Property Name="SquareId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Row" Type="int" Nullable="false" />
+    <Property Name="Column" Type="int" Nullable="false" />
+    <Property Name="Mine" Type="bit" Nullable="false" />
+    <Property Name="Discovered" Type="bit" Nullable="false" />
+    <Property Name="Marked" Type="bit" Nullable="false" />
+    <Property Name="NumberOfNeighbors" Type="int" Nullable="false" />
+    <Property Name="GameBoard_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="GameBoards">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BoardWidth" Type="int" Nullable="false" />
+    <Property Name="BoardHeight" Type="int" Nullable="false" />
+    <Property Name="MineCount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="GameID" />
+    </Key>
+    <Property Name="GameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Winner" Type="nvarchar(max)" />
+    <Property Name="Board_ID" Type="int" />
+    <Property Name="Player_UserName" Type="nvarchar" MaxLength="128" />
+    <Property Name="Player1_UserName" Type="nvarchar" MaxLength="128" />
+    <Property Name="Player2_UserName" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Players">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="GamesWon" Type="int" Nullable="false" />
+    <Property Name="GamesLost" Type="int" Nullable="false" />
+    <Property Name="GamesTie" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID">
+    <End Role="GameBoards" Type="Self.GameBoards" Multiplicity="0..1" />
+    <End Role="BoardSquares" Type="Self.BoardSquares" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameBoards">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BoardSquares">
+        <PropertyRef Name="GameBoard_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Games_dbo_GameBoards_Board_ID">
+    <End Role="GameBoards" Type="Self.GameBoards" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameBoards">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Board_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Games_dbo_Players_Player_UserName">
+    <End Role="Players" Type="Self.Players" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Player_UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Games_dbo_Players_Player1_UserName">
+    <End Role="Players" Type="Self.Players" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Player1_UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Games_dbo_Players_Player2_UserName">
+    <End Role="Players" Type="Self.Players" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Player2_UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="minesweeper_ShlomiOhana_YardenDananModelStoreContainer">
+    <EntitySet Name="BoardSquares" EntityType="Self.BoardSquares" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GameBoards" EntityType="Self.GameBoards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID" Association="Self.FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID">
+      <End Role="GameBoards" EntitySet="GameBoards" />
+      <End Role="BoardSquares" EntitySet="BoardSquares" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Games_dbo_GameBoards_Board_ID" Association="Self.FK_dbo_Games_dbo_GameBoards_Board_ID">
+      <End Role="GameBoards" EntitySet="GameBoards" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Games_dbo_Players_Player_UserName" Association="Self.FK_dbo_Games_dbo_Players_Player_UserName">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Games_dbo_Players_Player1_UserName" Association="Self.FK_dbo_Games_dbo_Players_Player1_UserName">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Games_dbo_Players_Player2_UserName" Association="Self.FK_dbo_Games_dbo_Players_Player2_UserName">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

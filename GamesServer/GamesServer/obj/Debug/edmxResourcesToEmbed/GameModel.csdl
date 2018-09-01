@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="minesweeper_ShlomiOhana_YardenDananModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BoardSquare">
+    <Key>
+      <PropertyRef Name="SquareId" />
+    </Key>
+    <Property Name="SquareId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Row" Type="Int32" Nullable="false" />
+    <Property Name="Column" Type="Int32" Nullable="false" />
+    <Property Name="Mine" Type="Boolean" Nullable="false" />
+    <Property Name="Discovered" Type="Boolean" Nullable="false" />
+    <Property Name="Marked" Type="Boolean" Nullable="false" />
+    <Property Name="NumberOfNeighbors" Type="Int32" Nullable="false" />
+    <Property Name="GameBoard_ID" Type="Int32" />
+    <NavigationProperty Name="GameBoard" Relationship="Self.FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID" FromRole="BoardSquares" ToRole="GameBoards" />
+  </EntityType>
+  <EntityType Name="GameBoard">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BoardWidth" Type="Int32" Nullable="false" />
+    <Property Name="BoardHeight" Type="Int32" Nullable="false" />
+    <Property Name="MineCount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BoardSquares" Relationship="Self.FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID" FromRole="GameBoards" ToRole="BoardSquares" />
+    <NavigationProperty Name="Games" Relationship="Self.FK_dbo_Games_dbo_GameBoards_Board_ID" FromRole="GameBoards" ToRole="Games" />
+  </EntityType>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="GameID" />
+    </Key>
+    <Property Name="GameID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Winner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Board_ID" Type="Int32" />
+    <Property Name="Player_UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Player1_UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Player2_UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GameBoard" Relationship="Self.FK_dbo_Games_dbo_GameBoards_Board_ID" FromRole="Games" ToRole="GameBoards" />
+    <NavigationProperty Name="Player" Relationship="Self.FK_dbo_Games_dbo_Players_Player_UserName" FromRole="Games" ToRole="Players" />
+    <NavigationProperty Name="Player1" Relationship="Self.FK_dbo_Games_dbo_Players_Player1_UserName" FromRole="Games" ToRole="Players" />
+    <NavigationProperty Name="Player2" Relationship="Self.FK_dbo_Games_dbo_Players_Player2_UserName" FromRole="Games" ToRole="Players" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GamesWon" Type="Int32" Nullable="false" />
+    <Property Name="GamesLost" Type="Int32" Nullable="false" />
+    <Property Name="GamesTie" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Games" Relationship="Self.FK_dbo_Games_dbo_Players_Player_UserName" FromRole="Players" ToRole="Games" />
+    <NavigationProperty Name="Games1" Relationship="Self.FK_dbo_Games_dbo_Players_Player1_UserName" FromRole="Players" ToRole="Games" />
+    <NavigationProperty Name="Games2" Relationship="Self.FK_dbo_Games_dbo_Players_Player2_UserName" FromRole="Players" ToRole="Games" />
+  </EntityType>
+  <Association Name="FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID">
+    <End Role="GameBoards" Type="Self.GameBoard" Multiplicity="0..1" />
+    <End Role="BoardSquares" Type="Self.BoardSquare" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameBoards">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BoardSquares">
+        <PropertyRef Name="GameBoard_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Games_dbo_GameBoards_Board_ID">
+    <End Role="GameBoards" Type="Self.GameBoard" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameBoards">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Board_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Games_dbo_Players_Player_UserName">
+    <End Role="Players" Type="Self.Player" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Player_UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Games_dbo_Players_Player1_UserName">
+    <End Role="Players" Type="Self.Player" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Player1_UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Games_dbo_Players_Player2_UserName">
+    <End Role="Players" Type="Self.Player" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Player2_UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="minesweeper_ShlomiOhana_YardenDananEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BoardSquares" EntityType="Self.BoardSquare" />
+    <EntitySet Name="GameBoards" EntityType="Self.GameBoard" />
+    <EntitySet Name="Games" EntityType="Self.Game" />
+    <EntitySet Name="Players" EntityType="Self.Player" />
+    <AssociationSet Name="FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID" Association="Self.FK_dbo_BoardSquares_dbo_GameBoards_GameBoard_ID">
+      <End Role="GameBoards" EntitySet="GameBoards" />
+      <End Role="BoardSquares" EntitySet="BoardSquares" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Games_dbo_GameBoards_Board_ID" Association="Self.FK_dbo_Games_dbo_GameBoards_Board_ID">
+      <End Role="GameBoards" EntitySet="GameBoards" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Games_dbo_Players_Player_UserName" Association="Self.FK_dbo_Games_dbo_Players_Player_UserName">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Games_dbo_Players_Player1_UserName" Association="Self.FK_dbo_Games_dbo_Players_Player1_UserName">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Games_dbo_Players_Player2_UserName" Association="Self.FK_dbo_Games_dbo_Players_Player2_UserName">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

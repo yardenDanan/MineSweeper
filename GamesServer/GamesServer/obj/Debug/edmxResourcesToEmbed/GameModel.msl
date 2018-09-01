@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="minesweeper_ShlomiOhana_YardenDananModelStoreContainer" CdmEntityContainer="minesweeper_ShlomiOhana_YardenDananEntities">
+    <EntitySetMapping Name="BoardSquares">
+      <EntityTypeMapping TypeName="minesweeper_ShlomiOhana_YardenDananModel.BoardSquare">
+        <MappingFragment StoreEntitySet="BoardSquares">
+          <ScalarProperty Name="SquareId" ColumnName="SquareId" />
+          <ScalarProperty Name="Row" ColumnName="Row" />
+          <ScalarProperty Name="Column" ColumnName="Column" />
+          <ScalarProperty Name="Mine" ColumnName="Mine" />
+          <ScalarProperty Name="Discovered" ColumnName="Discovered" />
+          <ScalarProperty Name="Marked" ColumnName="Marked" />
+          <ScalarProperty Name="NumberOfNeighbors" ColumnName="NumberOfNeighbors" />
+          <ScalarProperty Name="GameBoard_ID" ColumnName="GameBoard_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GameBoards">
+      <EntityTypeMapping TypeName="minesweeper_ShlomiOhana_YardenDananModel.GameBoard">
+        <MappingFragment StoreEntitySet="GameBoards">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BoardWidth" ColumnName="BoardWidth" />
+          <ScalarProperty Name="BoardHeight" ColumnName="BoardHeight" />
+          <ScalarProperty Name="MineCount" ColumnName="MineCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Games">
+      <EntityTypeMapping TypeName="minesweeper_ShlomiOhana_YardenDananModel.Game">
+        <MappingFragment StoreEntitySet="Games">
+          <ScalarProperty Name="GameID" ColumnName="GameID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Winner" ColumnName="Winner" />
+          <ScalarProperty Name="Board_ID" ColumnName="Board_ID" />
+          <ScalarProperty Name="Player_UserName" ColumnName="Player_UserName" />
+          <ScalarProperty Name="Player1_UserName" ColumnName="Player1_UserName" />
+          <ScalarProperty Name="Player2_UserName" ColumnName="Player2_UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="minesweeper_ShlomiOhana_YardenDananModel.Player">
+        <MappingFragment StoreEntitySet="Players">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="GamesWon" ColumnName="GamesWon" />
+          <ScalarProperty Name="GamesLost" ColumnName="GamesLost" />
+          <ScalarProperty Name="GamesTie" ColumnName="GamesTie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
