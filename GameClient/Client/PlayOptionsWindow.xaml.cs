@@ -46,7 +46,6 @@ namespace Client
         }
 
         private void Window_Closed(object sender, EventArgs e) {
-            MessageBox.Show("window closing event is fired");
             Client.ClientDisconnected(Username);
         }
     }
