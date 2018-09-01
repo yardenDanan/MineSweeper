@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Client.ServiceReference;
 
 namespace Client
@@ -25,14 +16,37 @@ namespace Client
             InitializeComponent();
         }
 
-        public GameServiceClient Client { get; internal set; }
-        public object Username { get; internal set; }
+        public GameServiceClient Client { get;  set; }
+        public string Username { get;  set; }
         public GameCallback CallBack { get; set; }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-          //  CallBack.updateConnectedClients += upda
+            BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow.png"));
         }
 
+        private void PlayOnlineClick(object sender, RoutedEventArgs e) {
+            PlayerVsPlayerWindow playOnlineWindow = new PlayerVsPlayerWindow();
+            playOnlineWindow.Client = Client;
+            playOnlineWindow.CallBack = CallBack;
+            playOnlineWindow.Username = Username;
+            this.Close();
+            playOnlineWindow.Show();
+        }
 
+        private void BackButton_MouseDown(object sender, MouseButtonEventArgs e) {
+            LoginWindow loginWindow = new LoginWindow();
+            this.Close();
+            loginWindow.Show();
+        }
+
+        private void PlayAloneClick(object sender, RoutedEventArgs e) {
+            PlayAloneConfigWindow configWindow = new PlayAloneConfigWindow();
+            this.Close();
+            configWindow.Show();
+        }
+
+        private void Window_Closed(object sender, EventArgs e) {
+            Client.ClientDisconnected(Username);
+        }
     }
 }

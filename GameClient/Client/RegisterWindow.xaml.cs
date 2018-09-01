@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Client.ServiceReference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +24,45 @@ namespace Client
         public RegisterWindow()
         {
             InitializeComponent();
+        }
+
+        private void BackButton_MouseDown(object sender, MouseButtonEventArgs e) {
+            LoginWindow loginWindow = new LoginWindow();
+            this.Close();
+            loginWindow.Show();
+        }
+
+        private bool CheckInput() {
+            if (!string.IsNullOrEmpty(UserNameTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Password)) {
+                return true;
+            }
+            MessageBox.Show("You need to enter user name and password!");
+            return false;
+        }
+
+        private void Register(string userName, string password) {
+            GameCallback callback = new GameCallback();
+            try {
+                GameServiceClient client = new GameServiceClient(new InstanceContext(callback));
+                client.RegisterClient(userName, password);
+                PlayOptionsWindow optionWindow = new PlayOptionsWindow();
+                optionWindow.Client = client;
+                optionWindow.CallBack = callback;
+                optionWindow.Username = userName;
+                optionWindow.Title = userName;
+                this.Close();
+                optionWindow.Show();
+            } catch (FaultException<UserExistsFault> ex) { MessageBox.Show(ex.Detail.Message); } catch (FaultException ex) { MessageBox.Show(ex.Message); } catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e) {
+            if (CheckInput()) {
+                Register(UserNameTextBox.Text, PasswordTextBox.Password);
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow.png"));
         }
     }
 }

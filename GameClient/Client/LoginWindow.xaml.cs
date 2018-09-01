@@ -46,27 +46,9 @@ namespace Client {
         }
 
         private void RegisterClick(object sender, RoutedEventArgs e) {
-            if (CheckInput()) {
-                Register(UserNameTextBox.Text, PasswordTextBox.Password);
-            }
-        }
-
-        private void Register(string userName, string password) {
-            GameCallback callback = new GameCallback();
-            try {
-                GameServiceClient client = new GameServiceClient(new InstanceContext(callback));
-                client.RegisterClient(userName, password);
-                PlayOptionsWindow optionWindow = new PlayOptionsWindow();
-                optionWindow.Client = client;
-                optionWindow.CallBack = callback;
-                optionWindow.Username = userName;
-                optionWindow.Title = userName;
-                this.Close();
-                optionWindow.Show();
-            } 
-            catch (FaultException<UserExistsFault> ex) { MessageBox.Show(ex.Detail.Message); }
-            catch (FaultException ex) { MessageBox.Show(ex.Message); }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            RegisterWindow registerWindow = new RegisterWindow();
+            this.Close();
+            registerWindow.Show();
         }
     }
 }

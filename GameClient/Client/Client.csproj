@@ -74,6 +74,9 @@
     <Compile Include="IncomingInvitationWindow.xaml.cs">
       <DependentUpon>IncomingInvitationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlayAloneConfigWindow.xaml.cs">
+      <DependentUpon>PlayAloneConfigWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PlayOptionsWindow.xaml.cs">
       <DependentUpon>PlayOptionsWindow.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PlayAloneConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
