@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
-        Title="Minesweeper" Height="520" Width="800" Background="White">
+        Closed="Window_Closed"
+        Title="Minesweeper" Height="540" Width="800" Background="White">
 
-    <Grid Margin="10,0,10,10">
+    <Grid Margin="10,0,10,30">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -28,7 +30,7 @@
         </Grid.RowDefinitions>
 
 
-        <Label  Content="Online Players:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
+        <Label  Content="Online Players:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
         <Border CornerRadius="5" BorderThickness="1" BorderBrush="DimGray" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="10,10,10,10">
             <ListBox Background="AliceBlue" Name="lbUsers" Margin="10,10,10,10"  />
         </Border>
@@ -43,13 +45,13 @@
 
         <TextBox Background="GhostWhite" Name="tbMassage" Margin="70,0,10,0" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="3" VerticalContentAlignment="Center"/>
 
-        <GroupBox Grid.Column="2" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Row="4" Header="Player Statistics"  HorizontalAlignment="Left" Height="160" Margin="10.4,6,0,0" VerticalAlignment="Top" Width="444" Grid.RowSpan="3">
-            <Grid>
+        <GroupBox  Grid.Column="2" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Row="4" Header="Player Statistics"  HorizontalAlignment="Left" Height="160" Margin="10.4,6,0,0" VerticalAlignment="Top" Width="444" Grid.RowSpan="3">
+            <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <GroupBox Grid.Column="0" Margin="10" Header="Percentage">
+                <GroupBox Background="AliceBlue" Grid.Column="0" Margin="10" Header="Percentage">
                     <Grid Margin="10,0,-3,-1.6">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -61,7 +63,7 @@
                         <Label  Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
                     </Grid>
                 </GroupBox>
-                <GroupBox Grid.Column="1" Margin="10" Header="Numbers">
+                <GroupBox Background="AliceBlue" Grid.Column="1" Margin="10" Header="Numbers">
                     <Grid Margin="10,0,-3,-1.6">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -77,6 +79,7 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <Button  x:Name="btChoosePlayer_Copy" Content="Play Alone" Margin="10.4,0.2,9.6,15.8" Grid.Row="6"  Grid.ColumnSpan="3" Background="#FF24B8F0" Foreground="#FFF6F2F2" Grid.Column="2" Grid.RowSpan="2" Click="btChoosePlayer_Copy_Click"/>
+        <Button  Name="PlatAloneButton" Content="Play Alone" Margin="10.4,0.2,9.6,15.8" Grid.Row="6"  Grid.ColumnSpan="3" Background="#FF24B8F0" Foreground="#FFF6F2F2" Grid.Column="2" Grid.RowSpan="2"/>
+        <Image Name="BackButton" HorizontalAlignment="Left" Height="47" Margin="10,4.8,0,-35" Grid.Row="7" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.031,0.255"/>
     </Grid>
 </Window>

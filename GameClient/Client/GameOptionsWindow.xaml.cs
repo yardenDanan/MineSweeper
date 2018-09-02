@@ -28,11 +28,16 @@ namespace Client {
         public string Username { get;  set; }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+            BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow.png"));
             CallBack.updateConnectedClients += UpdateClients;
         }
 
         private void UpdateClients(List<string> clients) {
             lbUsers.ItemsSource = clients;
+        }
+
+        private void Window_Closed(object sender, EventArgs e) {
+            Client.ClientDisconnected(Username);
         }
     }
 }
