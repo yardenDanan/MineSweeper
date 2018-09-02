@@ -45,7 +45,7 @@ namespace Client
             try {
                 GameServiceClient client = new GameServiceClient(new InstanceContext(callback));
                 client.RegisterClient(userName, password);
-                PlayOptionsWindow optionWindow = new PlayOptionsWindow();
+                GameOptionsWindow optionWindow = new GameOptionsWindow();
                 optionWindow.Client = client;
                 optionWindow.CallBack = callback;
                 optionWindow.Username = userName;

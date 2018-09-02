@@ -75,11 +75,9 @@ C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\bin\Debug\GameServ
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\bin\Debug\WpfAnimatedGif.xml
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\bin\Debug\EntityFramework.xml
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
-C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\PlayerVsPlayerWindow.baml
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\GameInvitationWindow.g.cs
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\IncomingInvitationWindow.g.cs
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\LoginWindow.g.cs
-C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\PlayerVsPlayerWindow.g.cs
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\PlayOptionsWindow.g.cs
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\RegisterWindow.g.cs
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\WaitForOpponentWindow.g.cs
@@ -101,3 +99,5 @@ C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\Client.e
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\Client.pdb
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\PlayAloneConfigWindow.g.cs
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\PlayAloneConfigWindow.baml
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\GameOptionsWindow.baml
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\GameOptionsWindow.g.cs

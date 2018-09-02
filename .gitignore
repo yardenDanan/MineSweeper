@@ -1,5 +1,7 @@
-.exe
-.baml
-.cache
-.pdb
-.suo
+*.[exe]
+*.baml
+*.cache
+*.pdb
+*.suo
+*.ide-wal
+*.ide-shm

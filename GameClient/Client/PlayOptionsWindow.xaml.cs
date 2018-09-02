@@ -23,9 +23,8 @@ namespace Client
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow.png"));
         }
-
         private void PlayOnlineClick(object sender, RoutedEventArgs e) {
-            PlayerVsPlayerWindow playOnlineWindow = new PlayerVsPlayerWindow();
+            GameOptionsWindow playOnlineWindow = new GameOptionsWindow();
             playOnlineWindow.Client = Client;
             playOnlineWindow.CallBack = CallBack;
             playOnlineWindow.Username = Username;
@@ -46,7 +45,7 @@ namespace Client
         }
 
         private void Window_Closed(object sender, EventArgs e) {
-            Client.ClientDisconnected(Username);
+            //Client.ClientDisconnected(Username);
         }
     }
 }

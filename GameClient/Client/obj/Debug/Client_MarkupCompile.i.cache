@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\App.xaml
-8-1291638585
+8-1596680783
 
-18-1779771424
+18-2023406106
 17-404507909
-GameInvitationWindow.xaml;IncomingInvitationWindow.xaml;LoginWindow.xaml;PlayAloneConfigWindow.xaml;PlayerVsPlayerWindow.xaml;PlayOptionsWindow.xaml;RegisterWindow.xaml;WaitForOpponentWindow.xaml;
+GameInvitationWindow.xaml;IncomingInvitationWindow.xaml;LoginWindow.xaml;PlayAloneConfigWindow.xaml;GameOptionsWindow.xaml;PlayOptionsWindow.xaml;RegisterWindow.xaml;WaitForOpponentWindow.xaml;
 
-True
+False
 
