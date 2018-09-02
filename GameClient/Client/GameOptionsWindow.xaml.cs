@@ -18,13 +18,21 @@ namespace Client {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class PlayerVsPlayerWindow : Window {
-        public PlayerVsPlayerWindow() {
+    public partial class GameOptionsWindow : Window {
+        public GameOptionsWindow() {
             InitializeComponent();
         }
 
-        public GameServiceClient Client { get; internal set; }
-        public GameCallback CallBack { get; internal set; }
-        public string Username { get; internal set; }
+        public GameServiceClient Client { get;  set; }
+        public GameCallback CallBack { get;  set; }
+        public string Username { get;  set; }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            CallBack.updateConnectedClients += UpdateClients;
+        }
+
+        private void UpdateClients(List<string> clients) {
+            lbUsers.ItemsSource = clients;
+        }
     }
 }
