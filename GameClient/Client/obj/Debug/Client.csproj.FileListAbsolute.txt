@@ -136,3 +136,5 @@ C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\Client.exe
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\Client.pdb
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\LeaderBoardWindow.g.cs
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\LeaderBoardWindow.baml

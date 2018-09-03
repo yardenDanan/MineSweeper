@@ -33,7 +33,7 @@
             <Menu DockPanel.Dock="Top" Background="AliceBlue" FontWeight="Bold">
                 <MenuItem Header="_Show">
                     <Separator />
-                    <MenuItem Header="_Players statistics..." />
+                    <MenuItem Header="Leaderboard"  Click="Leaderboard_Click"/>
                     <MenuItem Header="_Games statistics..." />
                     <MenuItem Header="_Live games..." />
                 </MenuItem>

@@ -114,5 +114,22 @@ namespace GamesServer {
             }
             return games;
         }
+
+        public List<PlayerDTO> GetAllPlayers()
+        {
+            List<PlayerDTO> toRet = new List<PlayerDTO>();
+            List<Player> players = new List<Player>();
+            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+            {
+                players = (from p in ctx.Players
+                           select p).ToList();   
+            }
+
+            foreach(Player player in players)
+            {
+                toRet.Add(new PlayerDTO(player));
+            }
+            return toRet;
+        }
     }
 }

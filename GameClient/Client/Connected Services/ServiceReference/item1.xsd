@@ -31,4 +31,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GameDTO" nillable="true" type="tns:GameDTO" />
+  <xs:complexType name="ArrayOfPlayerDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerDTO" nillable="true" type="tns:PlayerDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerDTO" nillable="true" type="tns:ArrayOfPlayerDTO" />
 </xs:schema>

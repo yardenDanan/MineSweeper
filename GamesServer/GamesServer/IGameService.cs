@@ -21,6 +21,8 @@ namespace GamesServer {
         PlayerDTO GetPlayerDetailes(string username);
         [OperationContract]
         List<GameDTO> GetAllGamesPlayed();
+        [OperationContract]
+        List<PlayerDTO> GetAllPlayers();
     }
 
     public interface IGameServiceCallback {

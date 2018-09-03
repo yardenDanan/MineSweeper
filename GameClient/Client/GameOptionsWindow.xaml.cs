@@ -95,5 +95,12 @@ namespace Client {
             tiesPercentage.Content = "Ties: " + tiesAsPercentage + "%";
             losesPercentage.Content = "Lost: " + losesAsPercentage + "%";
         }
+
+        private void Leaderboard_Click(object sender, RoutedEventArgs e)
+        {
+            LeaderBoardWindow leadrboardWindow = new LeaderBoardWindow();
+            leadrboardWindow.Client = Client;
+            leadrboardWindow.ShowDialog();
+        }
     }
 }
