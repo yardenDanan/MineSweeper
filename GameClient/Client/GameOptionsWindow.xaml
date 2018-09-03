@@ -27,10 +27,11 @@
             <RowDefinition Height="0.85*"/>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
 
 
-        <Label  Content="Online Players:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
+        <Label  Content="Online Players:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
         <Border CornerRadius="5" BorderThickness="1" BorderBrush="DimGray" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="10,10,10,10">
             <ListBox Background="AliceBlue" Name="lbUsers" Margin="10,10,10,10"  />
         </Border>
@@ -80,6 +81,8 @@
             </Grid>
         </GroupBox>
         <Button  Name="PlatAloneButton" Content="Play Alone" Margin="10.4,0.2,9.6,15.8" Grid.Row="6"  Grid.ColumnSpan="3" Background="#FF24B8F0" Foreground="#FFF6F2F2" Grid.Column="2" Grid.RowSpan="2"/>
-        <Image Name="BackButton" HorizontalAlignment="Left" Height="47" Margin="10,4.8,0,-35" Grid.Row="7" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.031,0.255"/>
+        <Image MouseDown="BackButton_MouseDown" Name="BackButton" HorizontalAlignment="Left" Height="47" Margin="9,4.8,0,-35" Grid.Row="7" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.031,0.255"/>
+        <Label Content="© MineSweeper 2018 Yarden Danan and Shlomi Ohana All Rights Reserved"
+               Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

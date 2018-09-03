@@ -28,7 +28,7 @@ namespace Client {
         public string Username { get;  set; }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow.png"));
+            BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow4.png"));
             CallBack.updateConnectedClients += UpdateClients;
         }
 
@@ -38,6 +38,12 @@ namespace Client {
 
         private void Window_Closed(object sender, EventArgs e) {
             Client.ClientDisconnected(Username);
+        }
+
+        private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+             new LoginWindow().Show();
+             this.Close();
         }
     }
 }
