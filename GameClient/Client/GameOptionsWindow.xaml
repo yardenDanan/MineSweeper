@@ -29,7 +29,21 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
-
+        <DockPanel Grid.ColumnSpan="5" Margin="-10,0">
+            <Menu DockPanel.Dock="Top" Background="AliceBlue" FontWeight="Bold">
+                <MenuItem Header="_Show">
+                    <Separator />
+                    <MenuItem Header="_Players statistics..." />
+                    <MenuItem Header="_Games statistics..." />
+                    <MenuItem Header="_Live games..." />
+                </MenuItem>
+                <MenuItem Header="_Options">
+                    <MenuItem Header="_Change Background Color" />
+                    <MenuItem Header="_Change Password..." />
+                    <MenuItem Header="_Delete Account..." />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
 
         <Label  Content="Online Players:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
         <Border CornerRadius="5" BorderThickness="1" BorderBrush="DimGray" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="10,10,10,10">
@@ -85,4 +99,5 @@
         <Label Content="© MineSweeper 2018 Yarden Danan and Shlomi Ohana All Rights Reserved"
                Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3"/>
     </Grid>
+    
 </Window>
