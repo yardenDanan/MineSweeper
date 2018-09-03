@@ -53,19 +53,18 @@ namespace Client {
             if (lbUsers.SelectedIndex == -1)
             {
                 MessageBox.Show("In order to invite player you need to choose player first.",
-                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Error occurred!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             String selectedUser = lbUsers.SelectedItem.ToString();
             if (selectedUser.Equals(Username))
             {
                 MessageBox.Show("You cant invite yourself, choose other player.",
-                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Error occurred!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             GameInvitationWindow invitationWindow = new GameInvitationWindow();
             invitationWindow.InviteReciverName = selectedUser;
-            MessageBox.Show(selectedUser);
             invitationWindow.ShowDialog();
         }
 

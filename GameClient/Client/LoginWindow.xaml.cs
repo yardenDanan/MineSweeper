@@ -24,7 +24,8 @@ namespace Client {
             if (!string.IsNullOrEmpty(UserNameTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Password)) {
                 return true;
             }
-            MessageBox.Show("You need to enter user name and password!");
+            MessageBox.Show("You need to enter user name and password!",
+                "Error occurred!", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
 
@@ -41,9 +42,9 @@ namespace Client {
                 this.Close();
                 optionWindow.Show();
             } 
-            catch (FaultException<UserExistsFault> ex) { MessageBox.Show(ex.Detail.Message); }
-            catch (FaultException ex) { MessageBox.Show(ex.Message); }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (FaultException<UserExistsFault> ex) { MessageBox.Show(ex.Detail.Message, "Oops!", MessageBoxButton.OK, MessageBoxImage.Information); }
+            catch (FaultException ex) { MessageBox.Show(ex.Message, "Error occurred!", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error occurred!", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void RegisterClick(object sender, RoutedEventArgs e) {
