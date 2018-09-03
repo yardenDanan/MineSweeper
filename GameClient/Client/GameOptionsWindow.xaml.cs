@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Client.ServiceReference;
+using GameServer;
 
 namespace Client {
     /// <summary>
@@ -66,6 +67,30 @@ namespace Client {
             invitationWindow.InviteReciverName = selectedUser;
             MessageBox.Show(selectedUser);
             invitationWindow.ShowDialog();
+        }
+
+        private void PlatAloneButton_Click(object sender, RoutedEventArgs e)
+        {
+            PlayAloneConfigWindow configWindow = new PlayAloneConfigWindow();
+            configWindow.ShowDialog();
+        }
+
+        private void lbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbUsers.SelectedIndex == -1) return;
+            string username = lbUsers.SelectedItem.ToString();
+            PlayerDTO player = Client.GetPlayerDetailes(username);
+            int totalGames = player.GamesLost + player.GamesTie + player.GamesWon;
+            winsNumber.Content = "Wins: " + player.GamesWon;
+            tiesNumber.Content = "Ties: " + player.GamesTie;
+            losesNumber.Content = "Loses: " + player.GamesLost;
+            totalNumber.Content = "Total Games: " + totalGames;
+            double winsAsPercentage = Convert.ToDouble(player.GamesWon) / Convert.ToDouble(totalGames) * 100d;
+            double tiesAsPercentage = Convert.ToDouble(player.GamesTie) / Convert.ToDouble(totalGames) * 100d;
+            double losesAsPercentage = Convert.ToDouble(player.GamesLost) / Convert.ToDouble(totalGames) * 100d;
+            winsPercentage.Content = "Wins: " + winsAsPercentage + "%";
+            tiesPercentage.Content = "Ties: " + tiesAsPercentage + "%";
+            losesPercentage.Content = "Lost: " + losesAsPercentage + "%";
         }
     }
 }

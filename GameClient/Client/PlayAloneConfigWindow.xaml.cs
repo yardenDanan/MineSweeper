@@ -20,5 +20,10 @@ namespace Client {
         public PlayAloneConfigWindow() {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
+        }
     }
 }

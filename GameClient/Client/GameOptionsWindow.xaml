@@ -33,7 +33,7 @@
 
         <Label  Content="Online Players:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
         <Border CornerRadius="5" BorderThickness="1" BorderBrush="DimGray" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="10,10,10,10">
-            <ListBox Background="AliceBlue" Name="lbUsers" Margin="10,10,10,10"  />
+            <ListBox SelectionChanged="lbUsers_SelectionChanged" Background="AliceBlue" Name="lbUsers" Margin="10,10,10,10"  />
         </Border>
         <Button Click="btInvitePlayer_Click"  Name="btInvitePlayer" Content="Invite Player" Margin="10,0,10,0" Grid.Row="6"  Grid.ColumnSpan="2" Background="#FF24B8F0" Foreground="#FFF6F2F2"/>
 
@@ -59,9 +59,9 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="1"  Content="Ties: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
+                        <Label Name="winsPercentage"  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>
+                        <Label Name="tiesPercentage"  Grid.Row="1"  Content="Ties: " VerticalAlignment="Center"/>
+                        <Label Name="losesPercentage" Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
                     </Grid>
                 </GroupBox>
                 <GroupBox Background="AliceBlue" Grid.Column="1" Margin="10" Header="Numbers">
@@ -72,15 +72,15 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="1"  Content="Ties: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="3"  Content="Total Games: " VerticalAlignment="Center"/>
+                        <Label Name="winsNumber"  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>
+                        <Label Name="tiesNumber" Grid.Row="1"  Content="Ties: " VerticalAlignment="Center"/>
+                        <Label Name="losesNumber"  Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
+                        <Label Name="totalNumber" Grid.Row="3"  Content="Total Games: " VerticalAlignment="Center"/>
                     </Grid>
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <Button  Name="PlatAloneButton" Content="Play Alone" Margin="10.4,0.2,9.6,15.8" Grid.Row="6"  Grid.ColumnSpan="3" Background="#FF24B8F0" Foreground="#FFF6F2F2" Grid.Column="2" Grid.RowSpan="2"/>
+        <Button Click="PlatAloneButton_Click"  Name="PlatAloneButton" Content="Play Alone" Margin="10.4,0.2,9.6,15.8" Grid.Row="6"  Grid.ColumnSpan="3" Background="#FF24B8F0" Foreground="#FFF6F2F2" Grid.Column="2" Grid.RowSpan="2"/>
         <Image MouseDown="BackButton_MouseDown" Name="BackButton" HorizontalAlignment="Left" Height="47" Margin="9,4.8,0,-35" Grid.Row="7" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.031,0.255"/>
         <Label Content="© MineSweeper 2018 Yarden Danan and Shlomi Ohana All Rights Reserved"
                Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3"/>

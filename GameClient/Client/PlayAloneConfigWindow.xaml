@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         ResizeMode="NoResize"
+        Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
         Title="Minesweeper" Height="420" Width="500">
     <Grid>
@@ -19,7 +20,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <GroupBox Header="Game Options" HorizontalAlignment="Left" Height="201" Margin="32,110,0,0" VerticalAlignment="Top" Width="403">
+        <GroupBox Header="Game Options" HorizontalAlignment="Left" Height="201" Margin="30,98,0,0" VerticalAlignment="Top" Width="404">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -82,7 +83,7 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <Button Content="Start Game" HorizontalAlignment="Left" Margin="105,345,0,0" VerticalAlignment="Top" Width="261" Height="35" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
+        <Button Content="Start Game" HorizontalAlignment="Left" Margin="102,326,0,0" VerticalAlignment="Top" Width="261" Height="34" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
 
 
     </Grid>
