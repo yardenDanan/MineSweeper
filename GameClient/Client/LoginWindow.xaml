@@ -22,7 +22,7 @@
         </Label>
         <TextBox Name="UserNameTextBox" HorizontalAlignment="Left" Height="32" Margin="46,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201"  RenderTransformOrigin="0.488,0.206" Background="#FFE0DEDE" BorderBrush="#FFFAFAFB"/>
         <PasswordBox Name="PasswordTextBox"  HorizontalAlignment="Left" Margin="46,120,0,0" VerticalAlignment="Top"  Width="201" Height="32" Background="#FFE0DEDE" BorderBrush="#FFF5F6F7"/>
-        <Button Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="46,174,0,0" VerticalAlignment="Top" Width="201" Height="25" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFF7F5F5" FontSize="14" Foreground="#FFF9F7F7" Click="LoginClick"/>
+        <Button IsDefault="True" Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="46,174,0,0" VerticalAlignment="Top" Width="201" Height="25" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFF7F5F5" FontSize="14" Foreground="#FFF9F7F7" Click="LoginClick"/>
         <Button Name="RegisterButton" Content="Register" HorizontalAlignment="Left" Margin="46,204,0,0" VerticalAlignment="Top" Width="201" Height="25" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1" Click="RegisterClick"/>
         <Label Content="User Name:" HorizontalAlignment="Left" Margin="46,42,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="-0.203,-0.174" FontWeight="Bold"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="46,97,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="-0.203,-0.174" FontWeight="Bold"/>
