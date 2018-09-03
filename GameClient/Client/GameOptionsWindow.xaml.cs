@@ -28,6 +28,7 @@ namespace Client {
         public string Username { get;  set; }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
             BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow4.png"));
             CallBack.updateConnectedClients += UpdateClients;
         }

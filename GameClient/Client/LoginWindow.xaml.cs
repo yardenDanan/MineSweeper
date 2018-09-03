@@ -2,7 +2,7 @@
 using System;
 using System.ServiceModel;
 using System.Windows;
-
+using System.Windows.Media.Imaging;
 
 namespace Client {
     /// <summary>
@@ -49,6 +49,11 @@ namespace Client {
             RegisterWindow registerWindow = new RegisterWindow();
             this.Close();
             registerWindow.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
         }
     }
 }
