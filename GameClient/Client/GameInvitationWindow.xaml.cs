@@ -19,6 +19,8 @@ namespace Client
     /// </summary>
     public partial class GameInvitationWindow : Window
     {
+        public String InviteReciverName { get; set; }
+
         public GameInvitationWindow()
         {
             InitializeComponent();
@@ -30,6 +32,12 @@ namespace Client
 
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e) {
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
+            competitorLabel.Content += InviteReciverName; 
         }
     }
 }
