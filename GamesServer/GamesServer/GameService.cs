@@ -56,7 +56,7 @@ namespace GamesServer {
             if (callbacks.ContainsKey(username)) {
                 throw new FaultException<UserExistsFault>(
                     new UserExistsFault {
-                        Message = username + " already Loged in"
+                        Message = username + " User name is already exist!"
                     });
             }
             try {

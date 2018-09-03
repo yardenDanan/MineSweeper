@@ -84,9 +84,13 @@ namespace Client {
             tiesNumber.Content = "Ties: " + player.GamesTie;
             losesNumber.Content = "Loses: " + player.GamesLost;
             totalNumber.Content = "Total Games: " + totalGames;
-            double winsAsPercentage = Convert.ToDouble(player.GamesWon) / Convert.ToDouble(totalGames) * 100d;
-            double tiesAsPercentage = Convert.ToDouble(player.GamesTie) / Convert.ToDouble(totalGames) * 100d;
-            double losesAsPercentage = Convert.ToDouble(player.GamesLost) / Convert.ToDouble(totalGames) * 100d;
+            double winsAsPercentage = 0, tiesAsPercentage = 0, losesAsPercentage = 0;
+            if(totalGames != 0)
+            {
+             winsAsPercentage = Convert.ToDouble(player.GamesWon) / Convert.ToDouble(totalGames) * 100d;
+             tiesAsPercentage = Convert.ToDouble(player.GamesTie) / Convert.ToDouble(totalGames) * 100d;
+             losesAsPercentage = Convert.ToDouble(player.GamesLost) / Convert.ToDouble(totalGames) * 100d;
+            }
             winsPercentage.Content = "Wins: " + winsAsPercentage + "%";
             tiesPercentage.Content = "Ties: " + tiesAsPercentage + "%";
             losesPercentage.Content = "Lost: " + losesAsPercentage + "%";

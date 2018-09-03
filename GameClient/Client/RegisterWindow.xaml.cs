@@ -36,7 +36,7 @@ namespace Client
             if (!string.IsNullOrEmpty(UserNameTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Password)) {
                 return true;
             }
-            MessageBox.Show("You need to enter user name and password!");
+            MessageBox.Show("You need to enter user name and password!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Information);
             return false;
         }
 
