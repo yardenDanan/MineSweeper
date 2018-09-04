@@ -32,17 +32,22 @@ namespace Client
             loginWindow.Show();
         }
 
-        private bool CheckInput() {
-            if (!string.IsNullOrEmpty(UserNameTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Password)) {
-                return true;
+        private bool CheckInput()
+        {
+            if (!string.IsNullOrEmpty(UserNameTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Password)
+                && !string.IsNullOrEmpty(ConfirmPasswordTextBox.Password))
+            {
+                if (ConfirmPasswordTextBox.Password == PasswordTextBox.Password) return true;
             }
-            MessageBox.Show("You need to enter user name and password!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("You need to enter user name, password and confirm it!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Information);
             return false;
         }
 
-        private void Register(string userName, string password) {
+        private void Register(string userName, string password)
+        {
             GameCallback callback = new GameCallback();
-            try {
+            try
+            {
                 GameServiceClient client = new GameServiceClient(new InstanceContext(callback));
                 client.RegisterClient(userName, password);
                 GameOptionsWindow optionWindow = new GameOptionsWindow();
@@ -52,15 +57,19 @@ namespace Client
                 optionWindow.Title = userName;
                 this.Close();
                 optionWindow.Show();
-            } catch (FaultException<UserExistsFault> ex) { MessageBox.Show(ex.Detail.Message, "Oops!", MessageBoxButton.OK, MessageBoxImage.Information); } catch (FaultException ex) { MessageBox.Show(ex.Message, "Error occurred", MessageBoxButton.OK, MessageBoxImage.Error); } catch (Exception ex) { MessageBox.Show(ex.Message, "Error occurred", MessageBoxButton.OK, MessageBoxImage.Error); }
+            }
+            catch (FaultException<UserExistsFault> ex) { MessageBox.Show(ex.Detail.Message, "Oops!", MessageBoxButton.OK, MessageBoxImage.Information); }
+            catch (FaultException ex) { MessageBox.Show(ex.Message, "Error occurred", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error occurred", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
-        private void RegisterButton_Click(object sender, RoutedEventArgs e) {
-            if (CheckInput()) {
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckInput())
+            {
                 Register(UserNameTextBox.Text, PasswordTextBox.Password);
             }
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow4.png"));
             this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));

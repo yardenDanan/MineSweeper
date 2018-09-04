@@ -37,4 +37,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfPlayerDTO" nillable="true" type="tns:ArrayOfPlayerDTO" />
+  <xs:complexType name="UserFaultException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserFaultException" nillable="true" type="tns:UserFaultException" />
 </xs:schema>

@@ -32,6 +32,11 @@ namespace GamesServer {
 
         [OperationContract(IsOneWay = true)]
         void SendMessage(string message, string fromClient, string toClient);
+
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        void ChangeClientPassword(string userName, string oldPassword, string newPassword);
+
     }
 
     public interface IGameServiceCallback {

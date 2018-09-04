@@ -141,5 +141,33 @@ namespace GamesServer {
                 sendThread.Start();
             }
         }
+
+        public void ChangeClientPassword(string userName, string oldPassword, string newPassword)
+        {
+            Player passClient = new Player
+            {
+                UserName = userName,
+                Password = oldPassword
+            };
+
+            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+            {
+                try
+                {
+                    var passChange = (from c in ctx.Players
+                                      where c.UserName == passClient.UserName && c.Password == passClient.Password
+                                      select c).FirstOrDefault();
+                    if (passChange == null) throw new Exception();
+                    else passChange.Password = newPassword;
+                    ctx.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    UserFaultException fault = new UserFaultException()
+                    { Message = "Password change failed" };
+                    throw new FaultException<UserFaultException>(fault);
+                }
+            }
+        }
     }
 }

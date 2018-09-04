@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Client.ServiceReference;
 using GameServer;
+using System.ServiceModel;
 
 namespace Client {
     /// <summary>
@@ -95,6 +96,26 @@ namespace Client {
             GameInvitationWindow invitationWindow = new GameInvitationWindow();
             invitationWindow.InviteReciverName = selectedUser;
             invitationWindow.ShowDialog();
+        }
+
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            changePasswordWindow.Show();
+            changePasswordWindow.passwordChange += ChangePassword;
+        }
+
+        private void ChangePassword(string oldPassword, string newPassword)
+        {
+            try
+            {
+                Client.ChangeClientPassword(Username, oldPassword, newPassword);
+                MessageBox.Show("Password changed successfuly","Notice", MessageBoxButton.OK,MessageBoxImage.Information);
+            }
+            catch (FaultException<UserFaultException> ex)
+            {
+                MessageBox.Show(ex.Detail.Message,"Error!",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
         }
 
         private void PlatAloneButton_Click(object sender, RoutedEventArgs e)

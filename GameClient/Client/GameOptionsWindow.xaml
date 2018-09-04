@@ -39,7 +39,7 @@
                 </MenuItem>
                 <MenuItem Header="_Options">
                     <MenuItem Header="_Change Background Color" />
-                    <MenuItem Header="_Change Password..." />
+                    <MenuItem Header="_Change Password" Click="ChangePassword_Click" />
                     <MenuItem Header="_Delete Account..." />
                 </MenuItem>
             </Menu>
