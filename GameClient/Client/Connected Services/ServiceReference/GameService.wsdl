@@ -287,6 +287,29 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_RegisterClient_UserFaultExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_GetPlayerDetailes_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -618,6 +641,9 @@
   <wsdl:message name="IGameService_RegisterClient_UserExistsFaultFault_FaultMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q2:UserExistsFault" />
   </wsdl:message>
+  <wsdl:message name="IGameService_RegisterClient_UserFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q3:UserFaultException" />
+  </wsdl:message>
   <wsdl:message name="IGameService_GetPlayerDetailes_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerDetailes" />
   </wsdl:message>
@@ -625,7 +651,7 @@
     <wsdl:part name="parameters" element="tns:GetPlayerDetailesResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_GetPlayerDetailes_UserExistsFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q3:UserExistsFault" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q4:UserExistsFault" />
   </wsdl:message>
   <wsdl:message name="IGameService_GetAllGamesPlayed_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllGamesPlayed" />
@@ -649,7 +675,7 @@
     <wsdl:part name="parameters" element="tns:ChangeClientPasswordResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_ChangeClientPassword_UserFaultExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q4:UserFaultException" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q5:UserFaultException" />
   </wsdl:message>
   <wsdl:message name="IGameService_UpdateClientsList_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UpdateClientsList" />
@@ -671,6 +697,7 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RegisterClient" message="tns:IGameService_RegisterClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RegisterClientResponse" message="tns:IGameService_RegisterClient_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/RegisterClientUserExistsFaultFault" name="UserExistsFaultFault" message="tns:IGameService_RegisterClient_UserExistsFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/RegisterClientUserFaultExceptionFault" name="UserFaultExceptionFault" message="tns:IGameService_RegisterClient_UserFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPlayerDetailes">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetPlayerDetailes" message="tns:IGameService_GetPlayerDetailes_InputMessage" />
@@ -742,6 +769,10 @@
       <wsdl:fault name="UserExistsFaultFault">
         <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_RegisterClient_UserExistsFaultFault_Fault" />
         <soap12:fault use="literal" name="UserExistsFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="UserFaultExceptionFault">
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_RegisterClient_UserFaultExceptionFault_Fault" />
+        <soap12:fault use="literal" name="UserFaultExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetPlayerDetailes">

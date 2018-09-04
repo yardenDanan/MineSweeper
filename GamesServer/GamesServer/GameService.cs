@@ -4,111 +4,156 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace GamesServer {
+namespace GamesServer
+{
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
     ConcurrencyMode = ConcurrencyMode.Multiple)]
-    public class GameService : IGameService {
+    public class GameService : IGameService
+    {
 
         SortedDictionary<string, IGameServiceCallback> callbacks
             = new SortedDictionary<string, IGameServiceCallback>();
-        public void ClientConnected(string username, string password) {
-            if (callbacks.ContainsKey(username)) {
+        public void ClientConnected(string username, string password)
+        {
+            if (callbacks.ContainsKey(username))
+            {
                 throw new FaultException<UserExistsFault>(
-                    new UserExistsFault {
+                    new UserExistsFault
+                    {
                         Message = username + " already Loged in"
                     });
             }
-            else {
-                try {
+            else
+            {
+                try
+                {
                     Player player = GetPlayerFromDB(username);
-                    if (player.Password != password) {
+                    if (player.Password != password)
+                    {
                         throw new FaultException("Incorrect Password, Try again");
                     }
                     IGameServiceCallback callback =
                     OperationContext.Current.GetCallbackChannel<IGameServiceCallback>();
                     callbacks.Add(username, callback);
                     UpdateUsersList();
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     throw new FaultException(ex.Message);
                 }
             }
         }
 
-        private void UpdateUsersList() {
-            Thread updateListThread = new Thread(() => {
-                foreach (var callback in callbacks.Values) {
+        private void UpdateUsersList()
+        {
+            Thread updateListThread = new Thread(() =>
+            {
+                foreach (var callback in callbacks.Values)
+                {
                     callback.UpdateClientsList(callbacks.Keys);
                 }
             });
             updateListThread.Start();
         }
 
-        public void ClientDisconnected(string username) {
+        public void ClientDisconnected(string username)
+        {
             callbacks.Remove(username);
             UpdateUsersList();
         }
 
 
-        public void RegisterClient(string username, string password) {
-            if (callbacks.ContainsKey(username)) {
+        public void RegisterClient(string username, string password)
+        {
+            if (callbacks.ContainsKey(username))
+            {
                 throw new FaultException<UserExistsFault>(
-                    new UserExistsFault {
+                    new UserExistsFault
+                    {
                         Message = username + " User name is already exist!"
                     });
             }
-            try {
+            try
+            {
                 RegisterNewPlayer(username, password);
                 IGameServiceCallback callback =
                     OperationContext.Current.GetCallbackChannel
                     <IGameServiceCallback>();
                 callbacks.Add(username, callback);
                 UpdateUsersList();
-            } catch (Exception ex) {
+            }
+            catch(FaultException<UserFaultException> ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
                 throw new FaultException(ex.Message);
             }
         }
 
-        public PlayerDTO GetPlayerDetailes(string username) {
+        public PlayerDTO GetPlayerDetailes(string username)
+        {
             return new PlayerDTO(GetPlayerFromDB(username));
         }
 
-        private void RegisterNewPlayer(string username, string password) {
-            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities()) {
-                ctx.Players.Add(new Player() {
+        private void RegisterNewPlayer(string username, string password)
+        {
+            if (!IsValidPassword(password))
+            {
+                throw new FaultException<UserFaultException>(
+                new UserFaultException(), new FaultReason("Password can contains only letters and numbers, 6-15 characters."));
+            }
+            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+            {
+                ctx.Players.Add(new Player()
+                {
                     UserName = username,
                     Password = password
                 });
-                try {
+                try
+                {
                     ctx.SaveChanges();
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     throw new FaultException<UserExistsFault>(
-                    new UserExistsFault {
+                    new UserExistsFault
+                    {
                         Message = username + " already exists\n"
                     });
                 }
             }
         }
 
-        private Player GetPlayerFromDB(string username) {
+        private Player GetPlayerFromDB(string username)
+        {
             Player player = null;
-            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities()) {
-                try {
+            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+            {
+                try
+                {
                     player = (from p in ctx.Players
                               where p.UserName == username
                               select p).First();
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     throw new FaultException("Such user dosen\'t seem to exist");
                 }
             }
             return player;
         }
 
-        public List<GameDTO> GetAllGamesPlayed() {
+        public List<GameDTO> GetAllGamesPlayed()
+        {
             List<GameDTO> games = null;
-            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities()) {
+            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+            {
                 var games_db = from g in ctx.Games select new GameDTO(g);
                 games = games_db.ToList();
             }
@@ -122,10 +167,10 @@ namespace GamesServer {
             using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
             {
                 players = (from p in ctx.Players
-                           select p).ToList();   
+                           select p).ToList();
             }
 
-            foreach(Player player in players)
+            foreach (Player player in players)
             {
                 toRet.Add(new PlayerDTO(player));
             }
@@ -144,6 +189,11 @@ namespace GamesServer {
 
         public void ChangeClientPassword(string userName, string oldPassword, string newPassword)
         {
+            if (!IsValidPassword(newPassword))
+            {
+                throw new FaultException<UserFaultException>(
+                new UserFaultException(), new FaultReason("Password can contains only letters and numbers, 6-15 characters."));
+            }
             Player passClient = new Player
             {
                 UserName = userName,
@@ -168,6 +218,11 @@ namespace GamesServer {
                     throw new FaultException<UserFaultException>(fault);
                 }
             }
+        }
+
+        private bool IsValidPassword(string password)
+        {
+            return Regex.IsMatch(password, @"^[A-Za-z0-9]{6,15}$");
         }
     }
 }

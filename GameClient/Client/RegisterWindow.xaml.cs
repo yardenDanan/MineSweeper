@@ -59,7 +59,7 @@ namespace Client
                 optionWindow.Show();
             }
             catch (FaultException<UserExistsFault> ex) { MessageBox.Show(ex.Detail.Message, "Oops!", MessageBoxButton.OK, MessageBoxImage.Information); }
-            catch (FaultException ex) { MessageBox.Show(ex.Message, "Error occurred", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (FaultException<UserFaultException> ex) { MessageBox.Show(ex.Message, "Error occurred", MessageBoxButton.OK, MessageBoxImage.Error); }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error occurred", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 

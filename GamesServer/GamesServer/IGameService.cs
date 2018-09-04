@@ -18,6 +18,7 @@ namespace GamesServer {
 
         [OperationContract]
         [FaultContract(typeof(UserExistsFault))]
+        [FaultContract(typeof(UserFaultException))]
         void RegisterClient(string username, string password);
 
         [OperationContract]
