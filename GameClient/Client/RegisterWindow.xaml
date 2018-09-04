@@ -26,6 +26,6 @@
         <Label Content="Confirm Password:" HorizontalAlignment="Left" Margin="46,152,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="-0.203,-0.174" FontWeight="Bold"/>
         <PasswordBox Name="ConfirmPasswordTextBox" HorizontalAlignment="Left" Margin="46,175,0,0" VerticalAlignment="Top"  Width="201" Height="32" Background="#FFE0DEDE" BorderBrush="#FFF5F6F7"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="46,97,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="-0.203,-0.174" FontWeight="Bold"/>
-        <Image MouseDown="BackButton_MouseDown" Name="BackButton"  HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="43" RenderTransformOrigin="0.109,-0.311" Margin="23,257,0,0"/>
+        <Image MouseDown="BackButton_MouseDown" Name="BackButton"  HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="43" RenderTransformOrigin="0.109,-0.311" Margin="10,252,0,0"/>
     </Grid>
 </Window>

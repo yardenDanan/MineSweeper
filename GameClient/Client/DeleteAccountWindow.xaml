@@ -1,0 +1,28 @@
+﻿<Window x:Class="Client.DeleteAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="MineSweeper" Height="280" Width="300" Loaded="Window_Loaded">
+    <Grid>
+        <Label Content="Delete Account" HorizontalAlignment="Left" Margin="53,19,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.077" Width="208" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.071"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <PasswordBox Name="PasswordTextBox" HorizontalAlignment="Left" Margin="46,88,0,0" VerticalAlignment="Top"  Width="201" Height="32" Background="#FFE0DEDE" BorderBrush="#FFF5F6F7"/>
+        <Button Click="DeleteButton_Click" Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="46,209,0,0" VerticalAlignment="Top" Width="201" Height="32" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
+        <Label Content="Confirm Password:" HorizontalAlignment="Left" Margin="46,125,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="-0.203,-0.174" FontWeight="Bold"/>
+        <PasswordBox Name="ConfirmPasswordTextBox" HorizontalAlignment="Left" Margin="46,153,0,0" VerticalAlignment="Top"  Width="201" Height="32" Background="#FFE0DEDE" BorderBrush="#FFF5F6F7"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="46,60,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="-0.203,-0.174" FontWeight="Bold"/>
+    </Grid>
+</Window>

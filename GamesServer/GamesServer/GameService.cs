@@ -108,6 +108,11 @@ namespace GamesServer
                 throw new FaultException<UserFaultException>(
                 new UserFaultException(), new FaultReason("Password can contains only letters and numbers, 6-15 characters."));
             }
+            if (!IsValidName(username))
+            {
+                throw new FaultException<UserFaultException>(
+                 new UserFaultException(), new FaultReason("User Name can contains only letters and numbers, 3-15 characters."));
+            }
             using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
             {
                 ctx.Players.Add(new Player()
@@ -223,6 +228,33 @@ namespace GamesServer
         private bool IsValidPassword(string password)
         {
             return Regex.IsMatch(password, @"^[A-Za-z0-9]{6,15}$");
+        }
+
+        private bool IsValidName(string name)
+        {
+            return Regex.IsMatch(name, @"^[A-Za-z0-9]{3,15}$");
+        }
+
+        public void DeleteAccount(string userName, string password)
+        {
+            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+            {
+                Player playerToRemove = ctx.Players.Where
+                    (p => p.UserName.Equals(userName) &&
+                     p.Password.Equals(password)).FirstOrDefault();
+                if(playerToRemove != null)
+                {
+                    ctx.Players.Remove(playerToRemove);
+                    ctx.SaveChanges();
+                    Thread update = new Thread(UpdateUsersList);
+                    update.Start();
+                }
+                else
+                {
+                    throw new FaultException<UserFaultException>(
+                    new UserFaultException(), new FaultReason("Password is Incorrect"));
+                }
+            }
         }
     }
 }

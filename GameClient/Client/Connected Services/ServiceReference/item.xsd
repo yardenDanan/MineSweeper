@@ -101,6 +101,19 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="DeleteAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAccountResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateClientsList">
     <xs:complexType>
       <xs:sequence>

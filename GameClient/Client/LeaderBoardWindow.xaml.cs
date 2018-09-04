@@ -36,19 +36,21 @@ namespace Client
             DataColumn winnings = new DataColumn("Winnings",typeof(int));
             DataColumn ties = new DataColumn("Ties",typeof(int));
             DataColumn loses = new DataColumn("Losses",typeof(int));
+            DataColumn totalGames = new DataColumn("Total Games", typeof(int));
             DataColumn winRate = new DataColumn("Winnings Rate",typeof(string));
             dataTable.Columns.Add(rank);
             dataTable.Columns.Add(userName);
             dataTable.Columns.Add(winnings);
             dataTable.Columns.Add(ties);
             dataTable.Columns.Add(loses);
+            dataTable.Columns.Add(totalGames);
             dataTable.Columns.Add(winRate);
 
             List<PlayerDTO> players = Client.GetAllPlayers();
             players.Sort(
                 delegate (PlayerDTO first, PlayerDTO second)
                  {
-                     return first.GamesWon.CompareTo(second.GamesWon);
+                     return second.GamesWon.CompareTo(first.GamesWon);
                  }
                 );
             int rankCount = 1;
@@ -60,14 +62,15 @@ namespace Client
                 row[2] = player.GamesWon;
                 row[3] = player.GamesTie;
                 row[4] = player.GamesLost;
-                int totalGames = player.GamesWon + player.GamesTie + player.GamesLost;
-                if(totalGames != 0)
+                int total = player.GamesWon + player.GamesTie + player.GamesLost;
+                row[5] = total;
+                if (total != 0)
                 {
-                    row[5] = (Convert.ToDouble(player.GamesWon) / Convert.ToDouble(totalGames) * 100d) + "%";
+                    row[6] = (Convert.ToDouble(player.GamesWon) / Convert.ToDouble(total) * 100d) + "%";
                 }
                 else
                 {
-                    row[5] = 0;
+                    row[6] = 0;
                 }
                 dataTable.Rows.Add(row);
             }

@@ -20,7 +20,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <DataGrid Name="table" HorizontalAlignment="Left" Height="310" Margin="23,91,0,0" VerticalAlignment="Top" Width="443"/>
+        <DataGrid Name="table" HorizontalAlignment="Left" Height="310" Margin="42,91,0,0" VerticalAlignment="Top" Width="405"/>
         <Image Name="leftCrown" HorizontalAlignment="Left" Height="64" Margin="50,10,0,0" VerticalAlignment="Top" Width="79"/>
         <Image Name="rightCrown" HorizontalAlignment="Left" Height="64" Margin="352,10,0,0" VerticalAlignment="Top" Width="79"/>
 

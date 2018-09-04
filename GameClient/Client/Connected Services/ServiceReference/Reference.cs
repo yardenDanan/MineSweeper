@@ -361,6 +361,13 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ChangeClientPassword", ReplyAction="http://tempuri.org/IGameService/ChangeClientPasswordResponse")]
         System.Threading.Tasks.Task ChangeClientPasswordAsync(string userName, string oldPassword, string newPassword);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/DeleteAccount", ReplyAction="http://tempuri.org/IGameService/DeleteAccountResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/DeleteAccountUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        void DeleteAccount(string userName, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/DeleteAccount", ReplyAction="http://tempuri.org/IGameService/DeleteAccountResponse")]
+        System.Threading.Tasks.Task DeleteAccountAsync(string userName, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -463,6 +470,14 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task ChangeClientPasswordAsync(string userName, string oldPassword, string newPassword) {
             return base.Channel.ChangeClientPasswordAsync(userName, oldPassword, newPassword);
+        }
+        
+        public void DeleteAccount(string userName, string password) {
+            base.Channel.DeleteAccount(userName, password);
+        }
+        
+        public System.Threading.Tasks.Task DeleteAccountAsync(string userName, string password) {
+            return base.Channel.DeleteAccountAsync(userName, password);
         }
     }
 }

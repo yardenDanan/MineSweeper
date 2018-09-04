@@ -38,6 +38,9 @@ namespace GamesServer {
         [FaultContract(typeof(UserFaultException))]
         void ChangeClientPassword(string userName, string oldPassword, string newPassword);
 
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        void DeleteAccount(string userName, string password);
     }
 
     public interface IGameServiceCallback {
