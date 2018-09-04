@@ -30,7 +30,7 @@
         </Grid.RowDefinitions>
 
 
-        <Label  Content="Online Players:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
+        <Label  Content="Online Players:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
         <Border CornerRadius="5" BorderThickness="1" BorderBrush="DimGray" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="10,10,10,10">
             <ListBox Background="AliceBlue" Name="lbUsers" Margin="10,10,10,10"  />
         </Border>
