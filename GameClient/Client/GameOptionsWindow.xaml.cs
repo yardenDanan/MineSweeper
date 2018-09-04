@@ -32,6 +32,35 @@ namespace Client {
             this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
             BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow4.png"));
             CallBack.updateConnectedClients += UpdateClients;
+            CallBack.displayMessage += DisplayMessage;
+            Client.SendMessage("Welcome to MineSweeper!", "God", Username);
+        }
+
+        private void SendMessageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbMassage.Text) && lbUsers.SelectedItem != null)
+            {
+                if(!Username.Equals(lbUsers.SelectedItem as string))
+                {
+                 Client.SendMessage(tbMassage.Text, Username, lbUsers.SelectedItem as string);
+                 DisplayMessage(tbMassage.Text,"Me to " + lbUsers.SelectedItem as string);
+                 tbMassage.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("You cant send message to yourslef!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        private void DisplayMessage(string message, string fromClient)
+        {
+            tbConversation.Text += GetCurrentTime() + " " + fromClient + ": " + message + "\n";
+        }
+
+        private string GetCurrentTime()
+        {
+            return DateTime.Now.ToString("HH:mm");
         }
 
         private void UpdateClients(List<string> clients) {

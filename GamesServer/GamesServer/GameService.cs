@@ -131,5 +131,15 @@ namespace GamesServer {
             }
             return toRet;
         }
+
+        public void SendMessage(string message, string fromClient, string toClient)
+        {
+            if (callbacks.ContainsKey(toClient))
+            {
+                Thread sendThread = new Thread(() =>
+                        callbacks[toClient].SendMessageToClient(message, fromClient));
+                sendThread.Start();
+            }
+        }
     }
 }

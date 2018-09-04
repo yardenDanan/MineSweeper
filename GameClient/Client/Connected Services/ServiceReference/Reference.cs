@@ -302,6 +302,12 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetAllPlayers", ReplyAction="http://tempuri.org/IGameService/GetAllPlayersResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<Client.ServiceReference.PlayerDTO>> GetAllPlayersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/SendMessage")]
+        void SendMessage(string message, string fromClient, string toClient);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/SendMessage")]
+        System.Threading.Tasks.Task SendMessageAsync(string message, string fromClient, string toClient);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -309,6 +315,9 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/UpdateClientsList")]
         void UpdateClientsList(System.Collections.Generic.List<string> clients);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/SendMessageToClient")]
+        void SendMessageToClient(string message, string fromClient);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -385,6 +394,14 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<Client.ServiceReference.PlayerDTO>> GetAllPlayersAsync() {
             return base.Channel.GetAllPlayersAsync();
+        }
+        
+        public void SendMessage(string message, string fromClient, string toClient) {
+            base.Channel.SendMessage(message, fromClient, toClient);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageAsync(string message, string fromClient, string toClient) {
+            return base.Channel.SendMessageAsync(message, fromClient, toClient);
         }
     }
 }

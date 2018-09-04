@@ -10,9 +10,15 @@ namespace Client {
 
         public delegate void UpdateConnectedClientListDelegate(List<string> clients);
         public event UpdateConnectedClientListDelegate updateConnectedClients;
-
         public void UpdateClientsList(List<string> clients) {
             updateConnectedClients(clients);
+        }
+
+        public delegate void DisplaymessageDelegate(string message, string fromClient);
+        public event DisplaymessageDelegate displayMessage;
+        public void SendMessageToClient(string message, string fromClient)
+        {
+            displayMessage(message, fromClient);
         }
     }
 }
