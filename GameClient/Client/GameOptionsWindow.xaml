@@ -53,7 +53,7 @@
 
         <Label Content="Chat:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
         <Border CornerRadius="5" BorderThickness="1" BorderBrush="DimGray" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Margin="10,10,10,10">
-            <TextBox Background="AliceBlue" Name="tbConversation" Margin="10,10,10,10" />
+            <TextBox Background="AliceBlue" Name="tbConversation" Margin="10,10,10,10" IsReadOnly="true"/>
         </Border>
 
         <Button Margin="10,0,0,0" Content="Send"  Name="sendMessageButton" Grid.Column="2" Grid.Row="3" Width="50" HorizontalAlignment="Left" Background="#FF24B8F0"  Foreground="#FFFAF7F7"/>

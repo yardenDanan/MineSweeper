@@ -67,7 +67,7 @@ namespace GamesServer {
                 callbacks.Add(username, callback);
                 UpdateUsersList();
             } catch (Exception ex) {
-                throw new FaultException(ex.Message);
+                throw new FaultException(ex.Message + " this one");
             }
         }
 

@@ -21,3 +21,15 @@ C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.csproj.CoreCompileInputs.cache
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.dll
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.pdb
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\bin\Debug\GamesServer.dll.config
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\bin\Debug\GamesServer.dll
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\bin\Debug\GamesServer.pdb
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\bin\Debug\EntityFramework.dll
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\bin\Debug\EntityFramework.xml
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.csprojResolveAssemblyReference.cache
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.csproj.CoreCompileInputs.cache
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.csproj.CopyComplete
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.dll
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.pdb
