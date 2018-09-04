@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\obj\Debug\
 Client
 none
 false
 DEBUG;TRACE
-C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\App.xaml
+C:\Users\Alpha\Documents\GitHub\MineSweeper\GameClient\Client\App.xaml
 9-99125950
 
-15-1608732864
-17-1122390442
+19-1230148843
+17-404507909
 GameInvitationWindow.xaml;IncomingInvitationWindow.xaml;LeaderBoardWindow.xaml;LoginWindow.xaml;PlayAloneConfigWindow.xaml;GameOptionsWindow.xaml;PlayOptionsWindow.xaml;RegisterWindow.xaml;WaitForOpponentWindow.xaml;
 
-False
+True
 
