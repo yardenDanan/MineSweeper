@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\App.xaml
-101360856466
+11-750430483
 
-162147328912
+17-56083385
 17-1122390442
-ChangePasswordWindow.xaml;GameInvitationWindow.xaml;IncomingInvitationWindow.xaml;LeaderBoardWindow.xaml;LoginWindow.xaml;PlayAloneConfigWindow.xaml;GameOptionsWindow.xaml;PlayOptionsWindow.xaml;RegisterWindow.xaml;WaitForOpponentWindow.xaml;
+ChangePasswordWindow.xaml;DeleteAccountWindow.xaml;GameInvitationWindow.xaml;IncomingInvitationWindow.xaml;LeaderBoardWindow.xaml;LoginWindow.xaml;PlayAloneConfigWindow.xaml;GameOptionsWindow.xaml;PlayOptionsWindow.xaml;RegisterWindow.xaml;WaitForOpponentWindow.xaml;
 
 False
 

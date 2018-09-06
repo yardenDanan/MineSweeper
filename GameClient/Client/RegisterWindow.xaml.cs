@@ -38,6 +38,12 @@ namespace Client
                 && !string.IsNullOrEmpty(ConfirmPasswordTextBox.Password))
             {
                 if (ConfirmPasswordTextBox.Password == PasswordTextBox.Password) return true;
+
+                else
+                {
+                    MessageBox.Show("Password not confirmed", "Oops!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return false;
+                }
             }
             MessageBox.Show("You need to enter user name, password and confirm it!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Information);
             return false;

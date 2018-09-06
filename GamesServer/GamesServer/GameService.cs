@@ -103,16 +103,18 @@ namespace GamesServer
 
         private void RegisterNewPlayer(string username, string password)
         {
-            if (!IsValidPassword(password))
-            {
-                throw new FaultException<UserFaultException>(
-                new UserFaultException(), new FaultReason("Password can contains only letters and numbers, 6-15 characters."));
-            }
             if (!IsValidName(username))
             {
                 throw new FaultException<UserFaultException>(
                  new UserFaultException(), new FaultReason("User Name can contains only letters and numbers, 3-15 characters."));
             }
+
+            if (!IsValidPassword(password))
+            {
+                throw new FaultException<UserFaultException>(
+                new UserFaultException(), new FaultReason("Password can contains only letters and numbers, 6-15 characters."));
+            }
+            
             using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
             {
                 ctx.Players.Add(new Player()
@@ -246,8 +248,7 @@ namespace GamesServer
                 {
                     ctx.Players.Remove(playerToRemove);
                     ctx.SaveChanges();
-                    Thread update = new Thread(UpdateUsersList);
-                    update.Start();
+                    UpdateUsersList();
                 }
                 else
                 {

@@ -54,6 +54,32 @@ namespace Client {
             }
         }
 
+        private void DeleteAccount(string password)
+        {
+            MessageBoxResult userChoice = MessageBox.Show("Are you sure you want to delete your account?",
+            "No way back", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (userChoice.Equals(MessageBoxResult.Yes))
+             {
+                try
+                {
+                  Client.DeleteAccount(Username, password);
+                    MessageBox.Show("Account has been deleted successfully.", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                    new LoginWindow().Show();
+                }
+                catch (FaultException<UserFaultException> ex)
+                {
+                    MessageBox.Show(ex.Message, "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+             }
+             else
+             {
+               return;
+             }
+            
+        }
+
         private void DisplayMessage(string message, string fromClient)
         {
             tbConversation.Text += GetCurrentTime() + " " + fromClient + ": " + message + "\n";
@@ -151,6 +177,13 @@ namespace Client {
             LeaderBoardWindow leadrboardWindow = new LeaderBoardWindow();
             leadrboardWindow.Client = Client;
             leadrboardWindow.ShowDialog();
+        }
+
+        private void DeleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteAccountWindow deleteAccountWindow = new DeleteAccountWindow();
+            deleteAccountWindow.deleteAccount += DeleteAccount;
+            deleteAccountWindow.Show();
         }
     }
 }

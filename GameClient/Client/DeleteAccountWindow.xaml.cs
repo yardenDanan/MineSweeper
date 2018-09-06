@@ -20,41 +20,41 @@ namespace Client
     /// </summary>
     public partial class DeleteAccountWindow : Window
     {
-
-        public string UserName { get; set; }
-        public GameServiceClient Client { get; set; }
-
         public DeleteAccountWindow()
         {
             InitializeComponent();
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        public delegate void DeleteDelegate(string password);
+        public event DeleteDelegate deleteAccount;
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(PasswordTextBox.Password) &&
-                !string.IsNullOrEmpty(ConfirmPasswordTextBox.Password))
+            if (!string.IsNullOrEmpty(PasswordTextBox.Password)
+                && !string.IsNullOrEmpty(ConfirmPasswordTextBox.Password))
             {
                 if (PasswordTextBox.Password.Equals(ConfirmPasswordTextBox.Password))
                 {
-                    MessageBoxResult userChoice = MessageBox.Show("Are you sure you want to delete your account?",
-                    "No way back", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (userChoice.Equals(MessageBoxResult.Yes))
-                    {
-                        Client.DeleteAccount(UserName,PasswordTextBox.Password);
-                    }
-                    else
-                    {
-                        return;
-                    }
+                   deleteAccount(PasswordTextBox.Password);
+                   this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("You need to enter your password and confirm it.", "Notice",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
+                    MessageBox.Show("Password not confirmed", "Notice",
+                               MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                this.Close();
             }
+            else
+            {
+                MessageBox.Show("You need to enter your password and confirm it.", "Notice",
+                                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
         }
     }
 }

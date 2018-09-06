@@ -140,3 +140,5 @@ C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\LeaderBoardWindow.baml
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\ChangePasswordWindow.g.cs
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\ChangePasswordWindow.baml
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\DeleteAccountWindow.g.cs
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\DeleteAccountWindow.baml

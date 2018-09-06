@@ -70,6 +70,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DeleteAccountWindow.xaml.cs">
+      <DependentUpon>DeleteAccountWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCallback.cs" />
     <Compile Include="GameInvitationWindow.xaml.cs">
       <DependentUpon>GameInvitationWindow.xaml</DependentUpon>
@@ -93,6 +96,10 @@
       <DependentUpon>WaitForOpponentWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="ChangePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteAccountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
