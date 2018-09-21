@@ -114,10 +114,26 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetRandomGrid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="rows" type="xs:int" />
+        <xs:element minOccurs="0" name="columns" type="xs:int" />
+        <xs:element minOccurs="0" name="mines" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRandomGridResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="GetRandomGridResult" nillable="true" type="q4:MinesweeperGrid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateClientsList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="clients" nillable="true" type="q4:ArrayOfstring" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="clients" nillable="true" type="q5:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-namespace Client
-{
 
-    class MinesweeperGrid
+namespace GamesServer
+{
+    [DataContract]
+    public class MinesweeperGrid
     {
         //this event will be raised when a new item (cell) will be added
         public event MinesweeperItemAdded itemAdded;
@@ -33,12 +35,17 @@ namespace Client
         public delegate void MinesweeperError(Exception ex);
 
         //returns the number of grid rows (this attribute will be set on the constructor)
+        [DataMember]
         public int rows { get; protected set; }
+
         //returns the number of grid cols (this attribute will be set on the constructor)
+        [DataMember]
         public int cols { get; protected set; }
         //returns then number of max mines for the games (this attribute will be set on the constructor)
+        [DataMember]
         public int maxMines { get; protected set; }
         //returns a list of MinesweeperItem: it represents all items (cells) of the game grid
+        [DataMember]
         public List<MinesweeperItem> items { get; protected set; }
 
         //class constructors

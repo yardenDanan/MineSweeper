@@ -103,208 +103,6 @@ namespace Client.ServiceReference {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerDTO", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
-    [System.SerializableAttribute()]
-    public partial class PlayerDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int GamesLostField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int GamesTieField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int GamesWonField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserNameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int GamesLost {
-            get {
-                return this.GamesLostField;
-            }
-            set {
-                if ((this.GamesLostField.Equals(value) != true)) {
-                    this.GamesLostField = value;
-                    this.RaisePropertyChanged("GamesLost");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int GamesTie {
-            get {
-                return this.GamesTieField;
-            }
-            set {
-                if ((this.GamesTieField.Equals(value) != true)) {
-                    this.GamesTieField = value;
-                    this.RaisePropertyChanged("GamesTie");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int GamesWon {
-            get {
-                return this.GamesWonField;
-            }
-            set {
-                if ((this.GamesWonField.Equals(value) != true)) {
-                    this.GamesWonField = value;
-                    this.RaisePropertyChanged("GamesWon");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserName {
-            get {
-                return this.UserNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
-                    this.UserNameField = value;
-                    this.RaisePropertyChanged("UserName");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameDTO", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
-    [System.SerializableAttribute()]
-    public partial class GameDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime DateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int GameIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserName1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserName2Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string WinnerField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Date {
-            get {
-                return this.DateField;
-            }
-            set {
-                if ((this.DateField.Equals(value) != true)) {
-                    this.DateField = value;
-                    this.RaisePropertyChanged("Date");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int GameID {
-            get {
-                return this.GameIDField;
-            }
-            set {
-                if ((this.GameIDField.Equals(value) != true)) {
-                    this.GameIDField = value;
-                    this.RaisePropertyChanged("GameID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserName1 {
-            get {
-                return this.UserName1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserName1Field, value) != true)) {
-                    this.UserName1Field = value;
-                    this.RaisePropertyChanged("UserName1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserName2 {
-            get {
-                return this.UserName2Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserName2Field, value) != true)) {
-                    this.UserName2Field = value;
-                    this.RaisePropertyChanged("UserName2");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Winner {
-            get {
-                return this.WinnerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.WinnerField, value) != true)) {
-                    this.WinnerField = value;
-                    this.RaisePropertyChanged("Winner");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IGameService", CallbackContract=typeof(Client.ServiceReference.IGameServiceCallback))]
     public interface IGameService {
@@ -332,22 +130,22 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetPlayerDetailes", ReplyAction="http://tempuri.org/IGameService/GetPlayerDetailesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserExistsFault), Action="http://tempuri.org/IGameService/GetPlayerDetailesUserExistsFaultFault", Name="UserExistsFault", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
-        Client.ServiceReference.PlayerDTO GetPlayerDetailes(string username);
+        GamesServer.PlayerDTO GetPlayerDetailes(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetPlayerDetailes", ReplyAction="http://tempuri.org/IGameService/GetPlayerDetailesResponse")]
-        System.Threading.Tasks.Task<Client.ServiceReference.PlayerDTO> GetPlayerDetailesAsync(string username);
+        System.Threading.Tasks.Task<GamesServer.PlayerDTO> GetPlayerDetailesAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetAllGamesPlayed", ReplyAction="http://tempuri.org/IGameService/GetAllGamesPlayedResponse")]
-        System.Collections.Generic.List<Client.ServiceReference.GameDTO> GetAllGamesPlayed();
+        System.Collections.Generic.List<GamesServer.GameDTO> GetAllGamesPlayed();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetAllGamesPlayed", ReplyAction="http://tempuri.org/IGameService/GetAllGamesPlayedResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<Client.ServiceReference.GameDTO>> GetAllGamesPlayedAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<GamesServer.GameDTO>> GetAllGamesPlayedAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetAllPlayers", ReplyAction="http://tempuri.org/IGameService/GetAllPlayersResponse")]
-        System.Collections.Generic.List<Client.ServiceReference.PlayerDTO> GetAllPlayers();
+        System.Collections.Generic.List<GamesServer.PlayerDTO> GetAllPlayers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetAllPlayers", ReplyAction="http://tempuri.org/IGameService/GetAllPlayersResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<Client.ServiceReference.PlayerDTO>> GetAllPlayersAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<GamesServer.PlayerDTO>> GetAllPlayersAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/SendMessage")]
         void SendMessage(string message, string fromClient, string toClient);
@@ -368,6 +166,12 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/DeleteAccount", ReplyAction="http://tempuri.org/IGameService/DeleteAccountResponse")]
         System.Threading.Tasks.Task DeleteAccountAsync(string userName, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetRandomGrid", ReplyAction="http://tempuri.org/IGameService/GetRandomGridResponse")]
+        GamesServer.MinesweeperGrid GetRandomGrid(int rows, int columns, int mines);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetRandomGrid", ReplyAction="http://tempuri.org/IGameService/GetRandomGridResponse")]
+        System.Threading.Tasks.Task<GamesServer.MinesweeperGrid> GetRandomGridAsync(int rows, int columns, int mines);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -432,27 +236,27 @@ namespace Client.ServiceReference {
             return base.Channel.RegisterClientAsync(username, password);
         }
         
-        public Client.ServiceReference.PlayerDTO GetPlayerDetailes(string username) {
+        public GamesServer.PlayerDTO GetPlayerDetailes(string username) {
             return base.Channel.GetPlayerDetailes(username);
         }
         
-        public System.Threading.Tasks.Task<Client.ServiceReference.PlayerDTO> GetPlayerDetailesAsync(string username) {
+        public System.Threading.Tasks.Task<GamesServer.PlayerDTO> GetPlayerDetailesAsync(string username) {
             return base.Channel.GetPlayerDetailesAsync(username);
         }
         
-        public System.Collections.Generic.List<Client.ServiceReference.GameDTO> GetAllGamesPlayed() {
+        public System.Collections.Generic.List<GamesServer.GameDTO> GetAllGamesPlayed() {
             return base.Channel.GetAllGamesPlayed();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<Client.ServiceReference.GameDTO>> GetAllGamesPlayedAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<GamesServer.GameDTO>> GetAllGamesPlayedAsync() {
             return base.Channel.GetAllGamesPlayedAsync();
         }
         
-        public System.Collections.Generic.List<Client.ServiceReference.PlayerDTO> GetAllPlayers() {
+        public System.Collections.Generic.List<GamesServer.PlayerDTO> GetAllPlayers() {
             return base.Channel.GetAllPlayers();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<Client.ServiceReference.PlayerDTO>> GetAllPlayersAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<GamesServer.PlayerDTO>> GetAllPlayersAsync() {
             return base.Channel.GetAllPlayersAsync();
         }
         
@@ -478,6 +282,14 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task DeleteAccountAsync(string userName, string password) {
             return base.Channel.DeleteAccountAsync(userName, password);
+        }
+        
+        public GamesServer.MinesweeperGrid GetRandomGrid(int rows, int columns, int mines) {
+            return base.Channel.GetRandomGrid(rows, columns, mines);
+        }
+        
+        public System.Threading.Tasks.Task<GamesServer.MinesweeperGrid> GetRandomGridAsync(int rows, int columns, int mines) {
+            return base.Channel.GetRandomGridAsync(rows, columns, mines);
         }
     }
 }

@@ -257,5 +257,10 @@ namespace GamesServer
                 }
             }
         }
+
+        public MinesweeperGrid GetRandomGrid(int rows, int columns, int mines)
+        {
+            return new MinesweeperGrid(rows, columns, mines);
+        }
     }
 }

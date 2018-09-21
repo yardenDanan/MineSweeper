@@ -17,7 +17,7 @@ C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\bin
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\bin\Debug\EntityFramework.xml
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.csprojResolveAssemblyReference.cache
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.csproj.CoreCompileInputs.cache
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.dll
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.pdb
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GamesServer\GamesServer\obj\Debug\GamesServer.csprojResolveAssemblyReference.cache

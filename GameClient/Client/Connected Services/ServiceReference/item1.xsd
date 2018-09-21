@@ -43,4 +43,44 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfPlayerDTO" nillable="true" type="tns:ArrayOfPlayerDTO" />
+  <xs:complexType name="MinesweeperGrid">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cols" type="xs:int" />
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfMinesweeperItem" />
+      <xs:element minOccurs="0" name="maxMines" type="xs:int" />
+      <xs:element minOccurs="0" name="rows" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MinesweeperGrid" nillable="true" type="tns:MinesweeperGrid" />
+  <xs:complexType name="ArrayOfMinesweeperItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MinesweeperItem" nillable="true" type="tns:MinesweeperItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMinesweeperItem" nillable="true" type="tns:ArrayOfMinesweeperItem" />
+  <xs:complexType name="MinesweeperItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cell" nillable="true" type="tns:MinesweeperItemCellDefinition" />
+      <xs:element minOccurs="0" name="tag" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="type" type="tns:MinesweeperItemType" />
+      <xs:element minOccurs="0" name="value" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MinesweeperItem" nillable="true" type="tns:MinesweeperItem" />
+  <xs:complexType name="MinesweeperItemCellDefinition">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="col" type="xs:int" />
+      <xs:element minOccurs="0" name="row" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MinesweeperItemCellDefinition" nillable="true" type="tns:MinesweeperItemCellDefinition" />
+  <xs:simpleType name="MinesweeperItemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MinesweeperItemType_None" />
+      <xs:enumeration value="MinesweeperItem_Empty" />
+      <xs:enumeration value="MinesweeperItem_MineWarning" />
+      <xs:enumeration value="MinesweeperItem_Mine" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MinesweeperItemType" nillable="true" type="tns:MinesweeperItemType" />
 </xs:schema>

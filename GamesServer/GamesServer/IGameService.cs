@@ -41,6 +41,10 @@ namespace GamesServer {
         [OperationContract]
         [FaultContract(typeof(UserFaultException))]
         void DeleteAccount(string userName, string password);
+
+        [OperationContract]
+        MinesweeperGrid GetRandomGrid(int rows, int columns, int mines);
+
     }
 
     public interface IGameServiceCallback {

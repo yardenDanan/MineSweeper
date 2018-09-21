@@ -144,3 +144,6 @@ C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\DeleteAccountWindow.baml
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\GameBoardWindow.g.cs
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\GameBoardWindow.baml
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\bin\Debug\GamesServer.dll
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\bin\Debug\GamesServer.pdb
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\bin\Debug\GamesServer.dll.config

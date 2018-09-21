@@ -1,17 +1,11 @@
-﻿using System;
+﻿using Client.ServiceReference;
+using GamesServer;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Client
 {
@@ -20,33 +14,24 @@ namespace Client
     /// </summary>
     public partial class GameBoardWindow : Window
     {
+        GameCallback callback = new GameCallback();
+        private GameServiceClient Client;
         private const int MAX_ITEMS_NUMBER = 100;
         private const int CELL_SIDE = 35;
-        private GameParams gameParams;
         private MinesweeperGrid gameGrid;
 
         public GameBoardWindow()
         {
             InitializeComponent();
+            Client = new GameServiceClient(new InstanceContext(callback));
         }
 
         private void StartGame(object sender, RoutedEventArgs e)
         {
-
             try
             {
-                if (!gameParamsAreOk())
-                {
-                    return;
-                }
-
                 //creates an intance of MinesweeperGrid by using a GameParams instance (see gameParamsAreOk)
-                gameGrid = new MinesweeperGrid(
-                    gameParams.rows,
-                    gameParams.cols,
-                    gameParams.mines
-                    );
-
+                gameGrid = Client.GetRandomGrid(5, 5, 2);
                 //sets MinesweeperGrid event hanlder
                 gameGrid.itemAdded += gameGrid_itemAdded;
                 gameGrid.itemMineAdded += gameGrid_itemMineAdded;
@@ -56,8 +41,6 @@ namespace Client
                 gameGrid.gameOver += gameGrid_gameOver;
                 //makes game grid: it will raise a gameGrid_loadingCompleted() event
                 gameGrid.makeGrid();
-
-
             }
             catch (Exception ex)
             {
@@ -67,50 +50,7 @@ namespace Client
 
         }
 
-
-        private bool gameParamsAreOk()
-        {
-            int cols = 0;
-            int rows = 0;
-            int mines = 0;
-
-            try
-            {
-                //check columns number
-                Int32.TryParse(txtCols.Text, out cols);
-                if (cols < 1 || cols > MAX_ITEMS_NUMBER)
-                {
-                    MessageBox.Show("Please insert a vlid number of columns: 1-100", "Invalid input data", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return false;
-                }
-                //check rows number
-                Int32.TryParse(txtRows.Text, out rows);
-                if (rows < 1 || rows > MAX_ITEMS_NUMBER)
-                {
-                    MessageBox.Show("Please insert a vlid number of rows: 1-100", "Invalid input data", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return false;
-                }
-                //check mines number
-                Int32.TryParse(txtMines.Text, out mines);
-                if (mines < 1)
-                {
-                    MessageBox.Show("Please insert a vlid number of mines: >=1", "Invalid input data", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return false;
-                }
-
-                //creates an instance of GameParams
-                gameParams = new GameParams(rows, cols, mines);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                handleException(ex);
-                return false;
-            }
-
-
-
-        }
+        
         private void setFormLayout()
         {
             //main layout will be displayed as a grid of buttons
@@ -125,8 +65,8 @@ namespace Client
                 //arbitrary value
                 int sizeMargin = 100;
 
-                this.Width = (gameParams.cols * CELL_SIDE) + sizeMargin;
-                this.Height = (gameParams.rows * CELL_SIDE) + sizeMargin;
+                this.Width = (gameGrid.cols * CELL_SIDE) + sizeMargin;
+                this.Height = (gameGrid.rows * CELL_SIDE) + sizeMargin;
 
                 gamePanel.Width = this.Width - sizeMargin;
                 gamePanel.Height = this.Height - sizeMargin;

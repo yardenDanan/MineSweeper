@@ -77,7 +77,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GameModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GameParams.cs" />
     <Compile Include="IGameService.cs" />
+    <Compile Include="MinesweeperGrid.cs" />
+    <Compile Include="MinesweeperItem.cs" />
+    <Compile Include="MinesweeperItemCellDefinition.cs" />
+    <Compile Include="MinesweeperMineGenerator.cs" />
     <Compile Include="Player.cs">
       <DependentUpon>GameModel.tt</DependentUpon>
     </Compile>
