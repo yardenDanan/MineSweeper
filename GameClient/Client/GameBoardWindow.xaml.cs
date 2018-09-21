@@ -14,8 +14,8 @@ namespace Client
     /// </summary>
     public partial class GameBoardWindow : Window
     {
-        GameCallback callback = new GameCallback();
-        private GameServiceClient Client;
+        public GameServiceClient Client { get; set; }
+        public GameParams GameParams { get; set; }
         private const int MAX_ITEMS_NUMBER = 100;
         private const int CELL_SIDE = 35;
         private MinesweeperGrid gameGrid;
@@ -23,15 +23,15 @@ namespace Client
         public GameBoardWindow()
         {
             InitializeComponent();
-            Client = new GameServiceClient(new InstanceContext(callback));
+
         }
 
-        private void StartGame(object sender, RoutedEventArgs e)
+        private void StartGame()
         {
             try
             {
                 //creates an intance of MinesweeperGrid by using a GameParams instance (see gameParamsAreOk)
-                gameGrid = Client.GetRandomGrid(5, 5, 2);
+                gameGrid = Client.GetRandomGrid(GameParams.rows, GameParams.cols, GameParams.mines);
                 //sets MinesweeperGrid event hanlder
                 gameGrid.itemAdded += gameGrid_itemAdded;
                 gameGrid.itemMineAdded += gameGrid_itemMineAdded;
@@ -211,6 +211,11 @@ namespace Client
         private void handleException(Exception ex)
         {
             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            StartGame();
         }
     }
 }

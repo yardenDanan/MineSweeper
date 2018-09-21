@@ -140,6 +140,7 @@ namespace Client
         private void PlatAloneButton_Click(object sender, RoutedEventArgs e)
         {
             PlayAloneConfigWindow configWindow = new PlayAloneConfigWindow();
+            configWindow.Client = Client;
             configWindow.ShowDialog();
         }
 

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
       Title="Minesweeper" Height="380" Width="525" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,-0.351,0.039">
+    <Grid Margin="30,0,-0.351,0.039">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
@@ -17,18 +18,7 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Button Content="GO!" HorizontalAlignment="Left" Margin="11,7,0,0" VerticalAlignment="Top" Width="75" Click="StartGame" Height="23"/>
-
-        <Label Content="Rows" HorizontalAlignment="Left" Margin="97,7,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <TextBox x:Name="txtRows" HorizontalAlignment="Left" Height="23" Margin="138,7,0,0" TextWrapping="Wrap" Text="9" VerticalAlignment="Top" Width="54"/>
-
-        <Label  Content="Columns" HorizontalAlignment="Left" Margin="192,7,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <TextBox  x:Name="txtCols" HorizontalAlignment="Left" Height="23" Margin="4.39,7,-23.481,0" TextWrapping="Wrap" Text="9" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-
-        <Label  Content="Mines" HorizontalAlignment="Left" Margin="70.39,7,-51.416,0" VerticalAlignment="Top" Grid.Column="1" Grid.RowSpan="2"/>
-        <TextBox x:Name="txtMines" HorizontalAlignment="Left" Height="23" Margin="111.39,7,-77.494,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-
-        <UniformGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Columns="4" x:Name="gamePanel" VerticalAlignment="Top" HorizontalAlignment="Left" Height="268" Margin="10,0,0,0"  >
+        <UniformGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Columns="4" x:Name="gamePanel" VerticalAlignment="Center" HorizontalAlignment="Center" Height="268" Margin="10,0,0,0"  >
 
         </UniformGrid>
 

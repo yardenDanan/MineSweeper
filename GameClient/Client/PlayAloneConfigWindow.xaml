@@ -28,22 +28,22 @@
                 </Grid.ColumnDefinitions>
                 <GroupBox Grid.Column="0" Margin="10" Header="Levels">
                     <StackPanel HorizontalAlignment="Left" Height="116" Margin="0,10,0,0" VerticalAlignment="Top" Orientation="Vertical" Width="155">
-                        <CheckBox Content="Begginer"   Margin="0,15,0.2,0">
+                        <CheckBox Checked="BegginerCheckBox_Checked" Name="BegginerCheckBox" Content="Begginer"   Margin="0,15,0.2,0">
                             <CheckBox.ToolTip>
                                 <TextBlock>Board size: 8X8 \n Bombs: 10</TextBlock>
                             </CheckBox.ToolTip>
                         </CheckBox>
-                        <CheckBox Content="Intermediate" Margin="0,10,0.2,0">
+                        <CheckBox Checked="IntermediateCheckBox_Checked" Name="IntermediateCheckBox" Content="Intermediate" Margin="0,10,0.2,0">
                             <CheckBox.ToolTip>
                                 <TextBlock>Board size: 16X16 \n Bombs: 40</TextBlock>
                             </CheckBox.ToolTip>
                         </CheckBox>
-                        <CheckBox Content="Expert" Margin="0,10,0.2,0">
+                        <CheckBox Checked="ExpertCheckBox_Checked" Name="ExpertCheckBox" Content="Expert" Margin="0,10,0.2,0">
                             <CheckBox.ToolTip>
                                 <TextBlock>Board size: 16X30 \n Bombs: 99</TextBlock>
                             </CheckBox.ToolTip>
                         </CheckBox>
-                        <CheckBox Content="Custom" Margin="0,10,0.2,0">
+                        <CheckBox Checked="CustomCheckBox_Checked" Name="CustomCheckBox" Content="Custom" Margin="0,10,0.2,0">
                             <CheckBox.ToolTip>
                                 <TextBlock>Fill the custom fields</TextBlock>
                             </CheckBox.ToolTip>
@@ -64,17 +64,17 @@
                         <Label  Grid.Row="0" Grid.Column="0" Content="Height: " VerticalAlignment="Center"/>
                         <Label  Grid.Row="1" Grid.Column="0" Content="Width: " VerticalAlignment="Center"/>
                         <Label  Grid.Row="2" Grid.Column="0" Content="Bombs: " VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0.2,12,10.4,12.4">
+                        <TextBox Name="CustomHeight" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0.2,12,10.4,12.4">
                             <TextBox.ToolTip>
                                 <TextBlock>Between 1-100</TextBlock>
                             </TextBox.ToolTip>
                         </TextBox>
-                        <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0.2,12,10.4,12.4">
+                        <TextBox Name="CustomWidth" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0.2,12,10.4,12.4">
                             <TextBox.ToolTip>
                                 <TextBlock>Between 1-100</TextBlock>
                             </TextBox.ToolTip>
                         </TextBox>
-                        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0.2,12,10.4,12.4">
+                        <TextBox Name="CustomBombs" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0.2,12,10.4,12.4">
                             <TextBox.ToolTip>
                                 <TextBlock>Max 1/3 0f total squares</TextBlock>
                             </TextBox.ToolTip>
@@ -83,7 +83,7 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <Button Content="Start Game" HorizontalAlignment="Left" Margin="102,326,0,0" VerticalAlignment="Top" Width="261" Height="34" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
+        <Button Click="Button_Click" Content="Start Game" HorizontalAlignment="Left" Margin="102,326,0,0" VerticalAlignment="Top" Width="261" Height="34" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
 
 
     </Grid>

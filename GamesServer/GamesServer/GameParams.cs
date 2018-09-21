@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GamesServer
 {
-    class GameParams
+    public class GameParams
     {
         public int rows { get; set; }
         public int cols { get; set; }
