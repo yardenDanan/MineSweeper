@@ -45,6 +45,10 @@ namespace GamesServer {
         [OperationContract]
         MinesweeperGrid GetRandomGrid(int rows, int columns, int mines);
 
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        void sendInvitation(string senderName, string reciverName, GameParams parameters,PlayerStats playerStats);
+
     }
 
     public interface IGameServiceCallback {
@@ -54,5 +58,8 @@ namespace GamesServer {
 
         [OperationContract(IsOneWay = true)]
         void SendMessageToClient(string message, string fromClient);
+
+        [OperationContract(IsOneWay = true)]
+        void ShowSentInvitation(string sender, GameParams parameters, PlayerStats playerStats);
     }
 }

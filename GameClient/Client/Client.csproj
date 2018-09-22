@@ -207,9 +207,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Spin-1.5s-80px.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>

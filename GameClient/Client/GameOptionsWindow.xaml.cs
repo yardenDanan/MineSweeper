@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using Client.ServiceReference;
 using System.ServiceModel;
 using GamesServer;
+using System.Threading;
 
 namespace Client
 {
@@ -20,6 +21,7 @@ namespace Client
 
         public GameServiceClient Client { get;  set; }
         public GameCallback CallBack { get;  set; }
+        public PlayerStats PlayerStats { get; set; }
         public string Username { get;  set; }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -27,7 +29,33 @@ namespace Client
             BackButton.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/back-arrow4.png"));
             CallBack.updateConnectedClients += UpdateClients;
             CallBack.displayMessage += DisplayMessage;
+            CallBack.showInvitation += ShowReciveInviation;
             Client.SendMessage("Welcome to MineSweeper!", "God", Username);
+            Thread setPlayerStats = new Thread(() => SetPlayerStats());
+            setPlayerStats.Start();
+        }
+
+        private void SetPlayerStats()
+        {
+            PlayerDTO player = Client.GetPlayerDetailes(Username);
+            PlayerStats = new PlayerStats();
+            int totalGames = player.GamesLost + player.GamesTie + player.GamesWon;
+            PlayerStats.TotalGames = totalGames;
+            PlayerStats.Wins = player.GamesWon;
+            PlayerStats.Ties = player.GamesTie;
+            PlayerStats.Loses = player.GamesLost;
+        }
+
+        private void ShowReciveInviation(string senderName, GameParams parameters, PlayerStats senderStats)
+        {
+            IncomingInvitationWindow incomingInvitationWindow = new IncomingInvitationWindow();
+            incomingInvitationWindow.Client = Client;
+            incomingInvitationWindow.SenderName = senderName;
+            incomingInvitationWindow.GameParams = parameters;
+            incomingInvitationWindow.Username = Username;
+            incomingInvitationWindow.SenderStats = senderStats;
+            incomingInvitationWindow.ReciverStats = PlayerStats;
+            incomingInvitationWindow.Show();
         }
 
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
@@ -114,6 +142,9 @@ namespace Client
             }
             GameInvitationWindow invitationWindow = new GameInvitationWindow();
             invitationWindow.InviteReciverName = selectedUser;
+            invitationWindow.Client = Client;
+            invitationWindow.Username = Username;
+            invitationWindow.PlayerStats = PlayerStats;
             invitationWindow.ShowDialog();
         }
 
@@ -161,9 +192,9 @@ namespace Client
              tiesAsPercentage = Convert.ToDouble(player.GamesTie) / Convert.ToDouble(totalGames) * 100d;
              losesAsPercentage = Convert.ToDouble(player.GamesLost) / Convert.ToDouble(totalGames) * 100d;
             }
-            winsPercentage.Content = "Wins: " + winsAsPercentage + "%";
-            tiesPercentage.Content = "Ties: " + tiesAsPercentage + "%";
-            losesPercentage.Content = "Lost: " + losesAsPercentage + "%";
+            winsPercentage.Content = "Wins: " + System.Math.Round(winsAsPercentage, 2) + "%";
+            tiesPercentage.Content = "Ties: " + System.Math.Round(tiesAsPercentage, 2) + "%";
+            losesPercentage.Content = "Lost: " + System.Math.Round(losesAsPercentage, 2) + "%";
         }
 
         private void Leaderboard_Click(object sender, RoutedEventArgs e)

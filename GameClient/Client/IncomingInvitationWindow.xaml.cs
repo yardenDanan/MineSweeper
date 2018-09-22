@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Client.ServiceReference;
+using GamesServer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,13 +22,35 @@ namespace Client
     /// </summary>
     public partial class IncomingInvitationWindow : Window
     {
+        public GameServiceClient Client { get; set; }
+        public GameParams GameParams { get; set; }
+        public PlayerStats SenderStats { get; set; }
+        public PlayerStats ReciverStats { get; set; }
+        public string SenderName { get; set; }
+        public string Username { get; set; }
+
         public IncomingInvitationWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
+            SenderNameText.Content += SenderName;
+            BoardSize.Content += GameParams.rows + " X " + GameParams.cols;
+            BombsNumber.Content += GameParams.mines.ToString();
 
+            SenderWinsNumber.Content = "Wins: " + SenderStats.Wins;
+            SenderTiesNumber.Content = "Ties: " + SenderStats.Ties;
+            SenderLosesNumber.Content = "Loses: " + SenderStats.Loses;
+            SenderTotalNumber.Content = "Total Games: " + SenderStats.TotalGames;
+
+            ReciverWinsNumber.Content = "Wins: " + ReciverStats.Wins;
+            ReciverTiesNumber.Content = "Ties: " + ReciverStats.Ties;
+            ReciverLosesNumber.Content = "Loses: " + ReciverStats.Loses;
+            ReciverTotalNumber.Content = "Total Games: " + ReciverStats.TotalGames;
         }
+
     }
 }

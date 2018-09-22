@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         ResizeMode="NoResize"
+        Loaded="Window_Loaded"
        Title="Minesweeper" Height="400" Width="500">
     <Grid>
         <Label Content="Incoming Invitation" HorizontalAlignment="Left" Margin="144,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.077" Width="191" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0">
@@ -18,7 +19,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label Content="You invited to play with: " HorizontalAlignment="Left" Height="27" Margin="32,65,0,0" VerticalAlignment="Top" Width="403" FontWeight="Bold"/>
+        <Label Name="SenderNameText" Content="You invited to play with: " HorizontalAlignment="Left" Height="27" Margin="32,65,0,0" VerticalAlignment="Top" Width="403" FontWeight="Bold"/>
         <GroupBox Header="Statistics Comparison" HorizontalAlignment="Left" Height="182" Margin="32,131,0,0" VerticalAlignment="Top" Width="430">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -34,10 +35,10 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="1"  Content="Ties: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="3"  Content="Total Games: " VerticalAlignment="Center"/>
+                        <Label Name="ReciverWinsNumber"  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>
+                        <Label Name="ReciverTiesNumber"  Grid.Row="1"  Content="Ties: " VerticalAlignment="Center"/>
+                        <Label Name="ReciverLosesNumber"  Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
+                        <Label Name="ReciverTotalNumber"  Grid.Row="3"  Content="Total Games: " VerticalAlignment="Center"/>
                     </Grid>
                 </GroupBox>
                 <GroupBox Grid.Column="2" Margin="10.2,10,9.6,9.8" Header="Opponent">
@@ -48,18 +49,18 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="1"  Content="Ties: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
-                        <Label  Grid.Row="3"  Content="Total Games: " VerticalAlignment="Center"/>
+                        <Label Name="SenderWinsNumber"  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>
+                        <Label Name="SenderTiesNumber"  Grid.Row="1"  Content="Ties: " VerticalAlignment="Center"/>
+                        <Label Name="SenderLosesNumber" Grid.Row="2"  Content="Loses: " VerticalAlignment="Center"/>
+                        <Label Name="SenderTotalNumber"  Grid.Row="3"  Content="Total Games: " VerticalAlignment="Center"/>
                     </Grid>
                 </GroupBox>
             </Grid>
         </GroupBox>
         <Button Content="Accept" HorizontalAlignment="Left" Margin="252,318,0,0" VerticalAlignment="Top" Width="210" Height="35" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="32,318,0,0" VerticalAlignment="Top" Width="210" Height="35" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1" Click="Button_Click"/>
-        <Label Content="Board Size: " HorizontalAlignment="Left" Height="27" Margin="32,97,0,0" VerticalAlignment="Top" Width="213" FontWeight="Bold"/>
-        <Label Content="Number of bombs: " HorizontalAlignment="Left" Height="27" Margin="245,97,0,0" VerticalAlignment="Top" Width="213" FontWeight="Bold"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="32,318,0,0" VerticalAlignment="Top" Width="210" Height="35" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1" />
+        <Label Name="BoardSize" Content="Board Size: " HorizontalAlignment="Left" Height="27" Margin="32,97,0,0" VerticalAlignment="Top" Width="213" FontWeight="Bold"/>
+        <Label Name="BombsNumber" Content="Number of bombs: " HorizontalAlignment="Left" Height="27" Margin="245,97,0,0" VerticalAlignment="Top" Width="213" FontWeight="Bold"/>
 
     </Grid>
 </Window>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,9 +20,17 @@ namespace Client
     /// </summary>
     public partial class WaitForOpponentWindow : Window
     {
+        public string OpponentName { get; set; }
         public WaitForOpponentWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
+            GifImage.Source = new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/Spin-1.5s-80px.gif");
+            titleText.Content = "Waiting for " + OpponentName + " response";
         }
     }
 }

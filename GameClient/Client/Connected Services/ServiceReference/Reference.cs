@@ -172,6 +172,13 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetRandomGrid", ReplyAction="http://tempuri.org/IGameService/GetRandomGridResponse")]
         System.Threading.Tasks.Task<GamesServer.MinesweeperGrid> GetRandomGridAsync(int rows, int columns, int mines);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/sendInvitation", ReplyAction="http://tempuri.org/IGameService/sendInvitationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/sendInvitationUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        void sendInvitation(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/sendInvitation", ReplyAction="http://tempuri.org/IGameService/sendInvitationResponse")]
+        System.Threading.Tasks.Task sendInvitationAsync(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -182,6 +189,9 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/SendMessageToClient")]
         void SendMessageToClient(string message, string fromClient);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ShowSentInvitation")]
+        void ShowSentInvitation(string sender, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -290,6 +300,14 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task<GamesServer.MinesweeperGrid> GetRandomGridAsync(int rows, int columns, int mines) {
             return base.Channel.GetRandomGridAsync(rows, columns, mines);
+        }
+        
+        public void sendInvitation(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats) {
+            base.Channel.sendInvitation(senderName, reciverName, parameters, playerStats);
+        }
+        
+        public System.Threading.Tasks.Task sendInvitationAsync(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats) {
+            return base.Channel.sendInvitationAsync(senderName, reciverName, parameters, playerStats);
         }
     }
 }

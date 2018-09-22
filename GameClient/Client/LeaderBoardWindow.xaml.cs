@@ -67,7 +67,7 @@ namespace Client
                 row[5] = total;
                 if (total != 0)
                 {
-                    row[6] = (Convert.ToDouble(player.GamesWon) / Convert.ToDouble(total) * 100d) + "%";
+                    row[6] = System.Math.Round((Convert.ToDouble(player.GamesWon) / Convert.ToDouble(total) * 100d), 2) + "%";
                 }
                 else
                 {

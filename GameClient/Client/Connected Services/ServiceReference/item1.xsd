@@ -83,4 +83,21 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MinesweeperItemType" nillable="true" type="tns:MinesweeperItemType" />
+  <xs:complexType name="GameParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cols" type="xs:int" />
+      <xs:element minOccurs="0" name="mines" type="xs:int" />
+      <xs:element minOccurs="0" name="rows" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameParams" nillable="true" type="tns:GameParams" />
+  <xs:complexType name="PlayerStats">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Loses" type="xs:int" />
+      <xs:element minOccurs="0" name="Ties" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalGames" type="xs:int" />
+      <xs:element minOccurs="0" name="Wins" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerStats" nillable="true" type="tns:PlayerStats" />
 </xs:schema>

@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Client
 {
@@ -215,6 +216,7 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
             StartGame();
         }
     }

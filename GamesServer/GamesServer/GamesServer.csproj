@@ -87,6 +87,7 @@
       <DependentUpon>GameModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PlayerDTO.cs" />
+    <Compile Include="PlayerStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="UserExistsFault.cs" />
