@@ -8,9 +8,9 @@ using GamesServer;
 using System.ServiceModel;
 
 namespace Client {
+    [CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class GameCallback : ServiceReference.IGameServiceCallback
     {
-
         public delegate void UpdateConnectedClientListDelegate(List<string> clients);
         public event UpdateConnectedClientListDelegate updateConnectedClients;
         public void UpdateClientsList(List<string> clients) {
@@ -29,6 +29,13 @@ namespace Client {
         public void ShowSentInvitation(string senderName, GameParams parameters, PlayerStats playerStats)
         {
             showInvitation(senderName, parameters, playerStats);
+        }
+
+        public delegate void CancelSenderInvitationDelegate();
+        public event CancelSenderInvitationDelegate cancelInvitation;
+        public void CancelSenderInvitation()
+        {
+            cancelInvitation();
         }
     }
 }

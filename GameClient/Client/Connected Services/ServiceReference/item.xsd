@@ -130,7 +130,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="sendInvitation">
+  <xs:element name="SendInvitation">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="senderName" nillable="true" type="xs:string" />
@@ -140,7 +140,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="sendInvitationResponse">
+  <xs:element name="SendInvitationResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelInvitation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="senderName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelInvitationResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -167,6 +179,11 @@
         <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="parameters" nillable="true" type="q8:GameParams" />
         <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="playerStats" nillable="true" type="q9:PlayerStats" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelSenderInvitation">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

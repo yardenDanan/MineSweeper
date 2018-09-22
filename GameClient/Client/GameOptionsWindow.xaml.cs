@@ -145,6 +145,7 @@ namespace Client
             invitationWindow.Client = Client;
             invitationWindow.Username = Username;
             invitationWindow.PlayerStats = PlayerStats;
+            invitationWindow.CallBack = CallBack;
             invitationWindow.ShowDialog();
         }
 

@@ -3,6 +3,7 @@ using GamesServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,5 +53,22 @@ namespace Client
             ReciverTotalNumber.Content = "Total Games: " + ReciverStats.TotalGames;
         }
 
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+            Client.CancelInvitation(SenderName);
+            }
+            catch (FaultException<UserFaultException> ex)
+            {
+                MessageBox.Show(ex.Detail.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            this.Close();
+        }
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

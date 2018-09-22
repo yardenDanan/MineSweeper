@@ -57,8 +57,8 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <Button Content="Accept" HorizontalAlignment="Left" Margin="252,318,0,0" VerticalAlignment="Top" Width="210" Height="35" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="32,318,0,0" VerticalAlignment="Top" Width="210" Height="35" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1" />
+        <Button Click="AcceptButton_Click" Name="AcceptButton" Content="Accept" HorizontalAlignment="Left" Margin="252,318,0,0" VerticalAlignment="Top" Width="210" Height="35" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1"/>
+        <Button Click="CancelButton_Click" Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="32,318,0,0" VerticalAlignment="Top" Width="210" Height="35" RenderTransformOrigin="0.473,0" Background="#FF24B8F0" BorderBrush="#FFFDFDFD" FontSize="14" Foreground="#FFF5F1F1" />
         <Label Name="BoardSize" Content="Board Size: " HorizontalAlignment="Left" Height="27" Margin="32,97,0,0" VerticalAlignment="Top" Width="213" FontWeight="Bold"/>
         <Label Name="BombsNumber" Content="Number of bombs: " HorizontalAlignment="Left" Height="27" Margin="245,97,0,0" VerticalAlignment="Top" Width="213" FontWeight="Bold"/>
 

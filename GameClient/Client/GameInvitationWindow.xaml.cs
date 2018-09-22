@@ -24,6 +24,7 @@ namespace Client
         public string Username { get; set; }
         public String InviteReciverName { get; set; }
         public GameServiceClient Client { get; set; }
+        public GameCallback CallBack { get; set; }
         public PlayerStats PlayerStats { get;  set; }
 
         public GameInvitationWindow()
@@ -149,7 +150,7 @@ namespace Client
             }
             try
             {
-            Client.sendInvitation(Username, InviteReciverName, gameParams,PlayerStats);             
+            Client.SendInvitation(Username, InviteReciverName, gameParams,PlayerStats);             
             }
             catch (Exception ex)
             {
@@ -157,6 +158,7 @@ namespace Client
             }
             WaitForOpponentWindow waitForOpponentWindow = new WaitForOpponentWindow();
             waitForOpponentWindow.OpponentName = InviteReciverName;
+            waitForOpponentWindow.CallBack = CallBack;
             waitForOpponentWindow.Show();
             this.Close();
         }

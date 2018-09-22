@@ -173,12 +173,19 @@ namespace Client.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetRandomGrid", ReplyAction="http://tempuri.org/IGameService/GetRandomGridResponse")]
         System.Threading.Tasks.Task<GamesServer.MinesweeperGrid> GetRandomGridAsync(int rows, int columns, int mines);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/sendInvitation", ReplyAction="http://tempuri.org/IGameService/sendInvitationResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/sendInvitationUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
-        void sendInvitation(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/SendInvitation", ReplyAction="http://tempuri.org/IGameService/SendInvitationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/SendInvitationUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        void SendInvitation(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/sendInvitation", ReplyAction="http://tempuri.org/IGameService/sendInvitationResponse")]
-        System.Threading.Tasks.Task sendInvitationAsync(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/SendInvitation", ReplyAction="http://tempuri.org/IGameService/SendInvitationResponse")]
+        System.Threading.Tasks.Task SendInvitationAsync(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/CancelInvitation", ReplyAction="http://tempuri.org/IGameService/CancelInvitationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/CancelInvitationUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        void CancelInvitation(string senderName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/CancelInvitation", ReplyAction="http://tempuri.org/IGameService/CancelInvitationResponse")]
+        System.Threading.Tasks.Task CancelInvitationAsync(string senderName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -192,6 +199,9 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ShowSentInvitation")]
         void ShowSentInvitation(string sender, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/CancelSenderInvitation")]
+        void CancelSenderInvitation();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -302,12 +312,20 @@ namespace Client.ServiceReference {
             return base.Channel.GetRandomGridAsync(rows, columns, mines);
         }
         
-        public void sendInvitation(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats) {
-            base.Channel.sendInvitation(senderName, reciverName, parameters, playerStats);
+        public void SendInvitation(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats) {
+            base.Channel.SendInvitation(senderName, reciverName, parameters, playerStats);
         }
         
-        public System.Threading.Tasks.Task sendInvitationAsync(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats) {
-            return base.Channel.sendInvitationAsync(senderName, reciverName, parameters, playerStats);
+        public System.Threading.Tasks.Task SendInvitationAsync(string senderName, string reciverName, GamesServer.GameParams parameters, GamesServer.PlayerStats playerStats) {
+            return base.Channel.SendInvitationAsync(senderName, reciverName, parameters, playerStats);
+        }
+        
+        public void CancelInvitation(string senderName) {
+            base.Channel.CancelInvitation(senderName);
+        }
+        
+        public System.Threading.Tasks.Task CancelInvitationAsync(string senderName) {
+            return base.Channel.CancelInvitationAsync(senderName);
         }
     }
 }

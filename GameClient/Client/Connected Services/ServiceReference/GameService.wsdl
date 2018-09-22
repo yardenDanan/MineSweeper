@@ -678,7 +678,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_sendInvitation_Input_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_SendInvitation_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -701,7 +701,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_sendInvitation_output_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_SendInvitation_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -724,7 +724,76 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_sendInvitation_UserFaultExceptionFault_Fault">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_SendInvitation_UserFaultExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_CancelInvitation_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_CancelInvitation_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_CancelInvitation_UserFaultExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -794,6 +863,29 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_ShowSentInvitation_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_CancelSenderInvitation_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -899,14 +991,23 @@
   <wsdl:message name="IGameService_GetRandomGrid_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRandomGridResponse" />
   </wsdl:message>
-  <wsdl:message name="IGameService_sendInvitation_InputMessage">
-    <wsdl:part name="parameters" element="tns:sendInvitation" />
+  <wsdl:message name="IGameService_SendInvitation_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendInvitation" />
   </wsdl:message>
-  <wsdl:message name="IGameService_sendInvitation_OutputMessage">
-    <wsdl:part name="parameters" element="tns:sendInvitationResponse" />
+  <wsdl:message name="IGameService_SendInvitation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendInvitationResponse" />
   </wsdl:message>
-  <wsdl:message name="IGameService_sendInvitation_UserFaultExceptionFault_FaultMessage">
+  <wsdl:message name="IGameService_SendInvitation_UserFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q7:UserFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_CancelInvitation_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelInvitation" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_CancelInvitation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelInvitationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_CancelInvitation_UserFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q8:UserFaultException" />
   </wsdl:message>
   <wsdl:message name="IGameService_UpdateClientsList_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UpdateClientsList" />
@@ -916,6 +1017,9 @@
   </wsdl:message>
   <wsdl:message name="IGameService_ShowSentInvitation_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShowSentInvitation" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_CancelSenderInvitation_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:CancelSenderInvitation" />
   </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="ClientConnected">
@@ -963,10 +1067,15 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetRandomGrid" message="tns:IGameService_GetRandomGrid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetRandomGridResponse" message="tns:IGameService_GetRandomGrid_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="sendInvitation">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/sendInvitation" message="tns:IGameService_sendInvitation_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/sendInvitationResponse" message="tns:IGameService_sendInvitation_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/sendInvitationUserFaultExceptionFault" name="UserFaultExceptionFault" message="tns:IGameService_sendInvitation_UserFaultExceptionFault_FaultMessage" />
+    <wsdl:operation name="SendInvitation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/SendInvitation" message="tns:IGameService_SendInvitation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/SendInvitationResponse" message="tns:IGameService_SendInvitation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/SendInvitationUserFaultExceptionFault" name="UserFaultExceptionFault" message="tns:IGameService_SendInvitation_UserFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelInvitation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/CancelInvitation" message="tns:IGameService_CancelInvitation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/CancelInvitationResponse" message="tns:IGameService_CancelInvitation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/CancelInvitationUserFaultExceptionFault" name="UserFaultExceptionFault" message="tns:IGameService_CancelInvitation_UserFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateClientsList">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/UpdateClientsList" message="tns:IGameService_UpdateClientsList_OutputCallbackMessage" />
@@ -976,6 +1085,9 @@
     </wsdl:operation>
     <wsdl:operation name="ShowSentInvitation">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ShowSentInvitation" message="tns:IGameService_ShowSentInvitation_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelSenderInvitation">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/CancelSenderInvitation" message="tns:IGameService_CancelSenderInvitation_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSDualHttpBinding_IGameService" type="tns:IGameService">
@@ -1111,18 +1223,33 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="sendInvitation">
-      <soap12:operation soapAction="http://tempuri.org/IGameService/sendInvitation" style="document" />
+    <wsdl:operation name="SendInvitation">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/SendInvitation" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_sendInvitation_Input_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_SendInvitation_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_sendInvitation_output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_SendInvitation_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="UserFaultExceptionFault">
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_sendInvitation_UserFaultExceptionFault_Fault" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_SendInvitation_UserFaultExceptionFault_Fault" />
+        <soap12:fault use="literal" name="UserFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CancelInvitation">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/CancelInvitation" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_CancelInvitation_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_CancelInvitation_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="UserFaultExceptionFault">
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_CancelInvitation_UserFaultExceptionFault_Fault" />
         <soap12:fault use="literal" name="UserFaultExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
@@ -1144,6 +1271,13 @@
       <soap12:operation soapAction="http://tempuri.org/IGameService/ShowSentInvitation" style="document" />
       <wsdl:output>
         <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_ShowSentInvitation_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelSenderInvitation">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/CancelSenderInvitation" style="document" />
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_CancelSenderInvitation_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

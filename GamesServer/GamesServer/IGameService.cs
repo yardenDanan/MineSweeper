@@ -47,8 +47,11 @@ namespace GamesServer {
 
         [OperationContract]
         [FaultContract(typeof(UserFaultException))]
-        void sendInvitation(string senderName, string reciverName, GameParams parameters,PlayerStats playerStats);
+        void SendInvitation(string senderName, string reciverName, GameParams parameters,PlayerStats playerStats);
 
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        void CancelInvitation(string senderName);
     }
 
     public interface IGameServiceCallback {
@@ -61,5 +64,8 @@ namespace GamesServer {
 
         [OperationContract(IsOneWay = true)]
         void ShowSentInvitation(string sender, GameParams parameters, PlayerStats playerStats);
+
+        [OperationContract(IsOneWay = true)]
+        void CancelSenderInvitation();
     }
 }

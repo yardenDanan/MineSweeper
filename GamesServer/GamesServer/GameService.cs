@@ -263,11 +263,25 @@ namespace GamesServer
             return new MinesweeperGrid(rows, columns, mines);   
         }
 
-        public void sendInvitation(string senderName, string reciverName, GameParams parameters, PlayerStats playerStats)
+        public void SendInvitation(string senderName, string reciverName, GameParams parameters, PlayerStats playerStats)
         {
             if (callbacks.ContainsKey(reciverName))
             {
                 Thread sendThread = new Thread(() => callbacks[reciverName].ShowSentInvitation(senderName, parameters, playerStats));
+                sendThread.Start();
+            }
+            else
+            {
+                throw new FaultException<UserFaultException>(
+                   new UserFaultException(), new FaultReason("Not found such user."));
+            }
+        }
+
+        public void CancelInvitation(string senderName)
+        {
+            if (callbacks.ContainsKey(senderName))
+            {
+                Thread sendThread = new Thread(() => callbacks[senderName].CancelSenderInvitation());
                 sendThread.Start();
             }
             else
