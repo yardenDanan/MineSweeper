@@ -17,6 +17,7 @@ namespace GamesServer
 
         SortedDictionary<string, IGameServiceCallback> callbacks
             = new SortedDictionary<string, IGameServiceCallback>();
+        List<LiveMatch> LiveMatches = new List<LiveMatch>();
         public void ClientConnected(string username, string password)
         {
             if (callbacks.ContainsKey(username))
@@ -288,6 +289,41 @@ namespace GamesServer
             {
                 throw new FaultException<UserFaultException>(
                    new UserFaultException(), new FaultReason("Not found such user."));
+            }
+        }
+
+        public void AcceptInvitation(string senderName, string reciverName, GameParams gameParams)
+        {
+            if (callbacks.ContainsKey(senderName))
+            {
+                LiveMatch newMatch = new LiveMatch();
+                newMatch.GameParams = new GameParams(gameParams.rows, gameParams.cols, gameParams.mines);
+                newMatch.Board = new MinesweeperGrid(gameParams.rows, gameParams.cols, gameParams.mines);
+                newMatch.HomePlayer = senderName;
+                newMatch.AwayPlayer = reciverName;
+                LiveMatches.Add(newMatch);
+                Thread sendThread = new Thread(() => callbacks[senderName].AcceptSenderInvitation(newMatch));
+                sendThread.Start();
+            }
+            else
+            {
+                throw new FaultException<UserFaultException>(
+                   new UserFaultException(), new FaultReason("Not found such user."));
+            }
+        }
+
+        public LiveMatch GetSameGridAsOpponent(string senderName, string reciverName)
+        {
+            LiveMatch match = LiveMatches.Find(m => (m.HomePlayer == senderName)
+            && (m.AwayPlayer == reciverName));
+            if (match != null)
+            {
+                return match;
+            }
+            else
+            {
+                throw new FaultException<UserFaultException>(
+                  new UserFaultException(), new FaultReason("Something went wrong, match not found."));
             }
         }
     }

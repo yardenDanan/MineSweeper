@@ -52,6 +52,15 @@ namespace GamesServer {
         [OperationContract]
         [FaultContract(typeof(UserFaultException))]
         void CancelInvitation(string senderName);
+
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        void AcceptInvitation(string senderName,string reciverName, GameParams gameParams);
+
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        LiveMatch GetSameGridAsOpponent(string senderName, string reciverName);
+
     }
 
     public interface IGameServiceCallback {
@@ -67,5 +76,8 @@ namespace GamesServer {
 
         [OperationContract(IsOneWay = true)]
         void CancelSenderInvitation();
+
+        [OperationContract(IsOneWay = true)]
+        void AcceptSenderInvitation(LiveMatch match);
     }
 }

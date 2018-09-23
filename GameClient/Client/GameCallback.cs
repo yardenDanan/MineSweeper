@@ -37,5 +37,12 @@ namespace Client {
         {
             cancelInvitation();
         }
+
+        public delegate void AcceptSenderInvitationDelegate(ServiceReference.LiveMatch match);
+        public event AcceptSenderInvitationDelegate acceptInvitation;
+        public void AcceptSenderInvitation(ServiceReference.LiveMatch match)
+        {
+            acceptInvitation(match);
+        }
     }
 }

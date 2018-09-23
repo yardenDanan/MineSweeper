@@ -19,7 +19,7 @@ namespace Client
         public GameParams GameParams { get; set; }
         private const int MAX_ITEMS_NUMBER = 100;
         private const int CELL_SIDE = 35;
-        private MinesweeperGrid gameGrid;
+        public ServiceReference.LiveMatch Match { get; set; }
 
         public GameBoardWindow()
         {
@@ -32,16 +32,16 @@ namespace Client
             try
             {
                 //creates an intance of MinesweeperGrid by using a GameParams instance (see gameParamsAreOk)
-                gameGrid = Client.GetRandomGrid(GameParams.rows, GameParams.cols, GameParams.mines);
+                Match.Board = Client.GetRandomGrid(GameParams.rows, GameParams.cols, GameParams.mines);
                 //sets MinesweeperGrid event hanlder
-                gameGrid.itemAdded += gameGrid_itemAdded;
-                gameGrid.itemMineAdded += gameGrid_itemMineAdded;
-                gameGrid.loadingCompleted += gameGrid_loadingCompleted;
-                gameGrid.errorOccurred += gameGrid_errorOccurred;
-                gameGrid.cellOpeningCompleted += gameGrid_cellOpeningCompleted;
-                gameGrid.gameOver += gameGrid_gameOver;
+                Match.Board.itemAdded += gameGrid_itemAdded;
+                Match.Board.itemMineAdded += gameGrid_itemMineAdded;
+                Match.Board.loadingCompleted += gameGrid_loadingCompleted;
+                Match.Board.errorOccurred += gameGrid_errorOccurred;
+                Match.Board.cellOpeningCompleted += gameGrid_cellOpeningCompleted;
+                Match.Board.gameOver += gameGrid_gameOver;
                 //makes game grid: it will raise a gameGrid_loadingCompleted() event
-                gameGrid.makeGrid();
+                Match.Board.makeGrid();
             }
             catch (Exception ex)
             {
@@ -66,8 +66,8 @@ namespace Client
                 //arbitrary value
                 int sizeMargin = 100;
 
-                this.Width = (gameGrid.cols * CELL_SIDE) + sizeMargin;
-                this.Height = (gameGrid.rows * CELL_SIDE) + sizeMargin;
+                this.Width = (Match.Board.cols * CELL_SIDE) + sizeMargin;
+                this.Height = (Match.Board.rows * CELL_SIDE) + sizeMargin;
 
                 gamePanel.Width = this.Width - sizeMargin;
                 gamePanel.Height = this.Height - sizeMargin;
@@ -90,12 +90,12 @@ namespace Client
                 setFormLayout();
 
                 //sets cols and rows from the UniformGrid container
-                gamePanel.Columns = gameGrid.cols;
-                gamePanel.Rows = gameGrid.rows;
+                gamePanel.Columns = Match.Board.cols;
+                gamePanel.Rows = Match.Board.rows;
                 //clear all items from the UniformGrid container
                 gamePanel.Children.Clear();
                 //for each grid item add a button on panel form 
-                List<MinesweeperItem> items = gameGrid.items;
+                List<MinesweeperItem> items = Match.Board.items;
                 foreach (MinesweeperItem item in items)
                 {
                     gamePanel.Children.Add(getGridButton(item));
@@ -139,7 +139,7 @@ namespace Client
             {
                 Button button = (Button)sender;
                 MinesweeperItem item = (MinesweeperItem)button.Tag;
-                gameGrid.evaluateItem(item);
+                Match.Board.evaluateItem(item);
             }
             catch (Exception ex)
             {

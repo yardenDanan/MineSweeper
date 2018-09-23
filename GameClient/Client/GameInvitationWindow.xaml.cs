@@ -159,6 +159,7 @@ namespace Client
             WaitForOpponentWindow waitForOpponentWindow = new WaitForOpponentWindow();
             waitForOpponentWindow.OpponentName = InviteReciverName;
             waitForOpponentWindow.CallBack = CallBack;
+            waitForOpponentWindow.Client = Client;
             waitForOpponentWindow.Show();
             this.Close();
         }

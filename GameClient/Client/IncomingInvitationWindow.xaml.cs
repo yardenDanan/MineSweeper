@@ -68,7 +68,21 @@ namespace Client
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                Client.AcceptInvitation(SenderName,Username,GameParams);
+            }
+            catch (FaultException<UserFaultException> ex)
+            {
+                MessageBox.Show(ex.Detail.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            ServiceReference.LiveMatch match = Client.GetSameGridAsOpponent(SenderName, Username);
+            GameBoardWindow gameBoardWindow = new GameBoardWindow();
+            gameBoardWindow.Match = match;
+            gameBoardWindow.GameParams = match.GameParams;
+            gameBoardWindow.Client = Client;
+            this.Close();
+            gameBoardWindow.Show();
         }
     }
 }

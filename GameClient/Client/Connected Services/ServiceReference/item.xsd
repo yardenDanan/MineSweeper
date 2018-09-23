@@ -157,10 +157,39 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="AcceptInvitation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="senderName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reciverName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="gameParams" nillable="true" type="q7:GameParams" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptInvitationResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSameGridAsOpponent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="senderName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="reciverName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSameGridAsOpponentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="GetSameGridAsOpponentResult" nillable="true" type="q8:LiveMatch" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateClientsList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="clients" nillable="true" type="q7:ArrayOfstring" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="clients" nillable="true" type="q9:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -176,14 +205,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="sender" nillable="true" type="xs:string" />
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="parameters" nillable="true" type="q8:GameParams" />
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="playerStats" nillable="true" type="q9:PlayerStats" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="parameters" nillable="true" type="q10:GameParams" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="playerStats" nillable="true" type="q11:PlayerStats" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CancelSenderInvitation">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptSenderInvitation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="match" nillable="true" type="q12:LiveMatch" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

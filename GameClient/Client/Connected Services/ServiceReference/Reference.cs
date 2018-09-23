@@ -103,6 +103,99 @@ namespace Client.ServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LiveMatch", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+    [System.SerializableAttribute()]
+    public partial class LiveMatch : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AwayPlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GamesServer.MinesweeperGrid BoardField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GamesServer.GameParams GameParamsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string HomePlayerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AwayPlayer {
+            get {
+                return this.AwayPlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AwayPlayerField, value) != true)) {
+                    this.AwayPlayerField = value;
+                    this.RaisePropertyChanged("AwayPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GamesServer.MinesweeperGrid Board {
+            get {
+                return this.BoardField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BoardField, value) != true)) {
+                    this.BoardField = value;
+                    this.RaisePropertyChanged("Board");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GamesServer.GameParams GameParams {
+            get {
+                return this.GameParamsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GameParamsField, value) != true)) {
+                    this.GameParamsField = value;
+                    this.RaisePropertyChanged("GameParams");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string HomePlayer {
+            get {
+                return this.HomePlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HomePlayerField, value) != true)) {
+                    this.HomePlayerField = value;
+                    this.RaisePropertyChanged("HomePlayer");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IGameService", CallbackContract=typeof(Client.ServiceReference.IGameServiceCallback))]
     public interface IGameService {
@@ -186,6 +279,20 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/CancelInvitation", ReplyAction="http://tempuri.org/IGameService/CancelInvitationResponse")]
         System.Threading.Tasks.Task CancelInvitationAsync(string senderName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/AcceptInvitation", ReplyAction="http://tempuri.org/IGameService/AcceptInvitationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/AcceptInvitationUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        void AcceptInvitation(string senderName, string reciverName, GamesServer.GameParams gameParams);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/AcceptInvitation", ReplyAction="http://tempuri.org/IGameService/AcceptInvitationResponse")]
+        System.Threading.Tasks.Task AcceptInvitationAsync(string senderName, string reciverName, GamesServer.GameParams gameParams);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetSameGridAsOpponent", ReplyAction="http://tempuri.org/IGameService/GetSameGridAsOpponentResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/GetSameGridAsOpponentUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        Client.ServiceReference.LiveMatch GetSameGridAsOpponent(string senderName, string reciverName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetSameGridAsOpponent", ReplyAction="http://tempuri.org/IGameService/GetSameGridAsOpponentResponse")]
+        System.Threading.Tasks.Task<Client.ServiceReference.LiveMatch> GetSameGridAsOpponentAsync(string senderName, string reciverName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -202,6 +309,9 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/CancelSenderInvitation")]
         void CancelSenderInvitation();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/AcceptSenderInvitation")]
+        void AcceptSenderInvitation(Client.ServiceReference.LiveMatch match);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -326,6 +436,22 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task CancelInvitationAsync(string senderName) {
             return base.Channel.CancelInvitationAsync(senderName);
+        }
+        
+        public void AcceptInvitation(string senderName, string reciverName, GamesServer.GameParams gameParams) {
+            base.Channel.AcceptInvitation(senderName, reciverName, gameParams);
+        }
+        
+        public System.Threading.Tasks.Task AcceptInvitationAsync(string senderName, string reciverName, GamesServer.GameParams gameParams) {
+            return base.Channel.AcceptInvitationAsync(senderName, reciverName, gameParams);
+        }
+        
+        public Client.ServiceReference.LiveMatch GetSameGridAsOpponent(string senderName, string reciverName) {
+            return base.Channel.GetSameGridAsOpponent(senderName, reciverName);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceReference.LiveMatch> GetSameGridAsOpponentAsync(string senderName, string reciverName) {
+            return base.Channel.GetSameGridAsOpponentAsync(senderName, reciverName);
         }
     }
 }

@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="GameParams.cs" />
     <Compile Include="IGameService.cs" />
+    <Compile Include="LiveMatch.cs" />
     <Compile Include="MinesweeperGrid.cs" />
     <Compile Include="MinesweeperItem.cs" />
     <Compile Include="MinesweeperItemCellDefinition.cs" />

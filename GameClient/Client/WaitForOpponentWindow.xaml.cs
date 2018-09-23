@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client.ServiceReference;
+using GamesServer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,7 @@ namespace Client
     {
         public string OpponentName { get; set; }
         public GameCallback CallBack { get; set; }
+        public GameServiceClient Client { get; set; }
 
         public WaitForOpponentWindow()
         {
@@ -34,12 +37,23 @@ namespace Client
             this.Close();
         }
 
+        private void RequestAccepted(ServiceReference.LiveMatch match)
+        {
+            GameBoardWindow gameBoardWindow = new GameBoardWindow();
+            gameBoardWindow.Match = match;
+            gameBoardWindow.GameParams = match.GameParams;
+            gameBoardWindow.Client = Client;
+            this.Close();
+            gameBoardWindow.Show();
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
             GifImage.Source = new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/Spin-1.5s-80px.gif");
             titleText.Content = "Waiting for " + OpponentName + " response";
             CallBack.cancelInvitation += RequestRejected;
+            CallBack.acceptInvitation += RequestAccepted;
         }
     }
 }
