@@ -51,5 +51,19 @@ namespace Client {
         {
             updateOpponentBoard(cell);
         }
+
+        public delegate void NotifyWinnerDelegate();
+        public event NotifyWinnerDelegate notifyWinner;
+        public void NotifyWinner()
+        {
+            notifyWinner();
+        }
+
+        public delegate void NotifyTieDelegate();
+        public event NotifyTieDelegate notifyTie;
+        public void NotifyTie()
+        {
+            notifyTie();
+        }
     }
 }

@@ -31,6 +31,7 @@ namespace Client
         private const int CELL_SIDE = 35;
         public LiveMatch Match { get; set; }
         public string UserName { get; set; }
+        private Boolean OpponentLost = false;
 
         public GameBoardWindow()
         {
@@ -148,6 +149,7 @@ namespace Client
 
         private void gridButton_Click(object sender, RoutedEventArgs e)
         {
+            OpponentLost = false;
             if (Mode == GameMode.Mode.Online)
             {
                 if (!IsMyTurn())
@@ -162,6 +164,11 @@ namespace Client
                 Thread notifyServer = new Thread(() => Client.FinishTurn(item.cell, Match.HomePlayer, Match.AwayPlayer, UserName));
                 notifyServer.Start();
                 Match.Board.evaluateItem(item);
+                if (isAllCellsOpened())
+                {
+                    Thread notifyServerAboutTie = new Thread(() => Client.GameFinishInTie(Match.HomePlayer,Match.AwayPlayer));
+                    notifyServerAboutTie.Start();
+                }
             }
             catch (Exception ex)
             {
@@ -171,7 +178,14 @@ namespace Client
 
         private void gameGrid_gameOver(MinesweeperItem item)
         {
-            MessageBox.Show("Oh no!\nI'm a mine :(", "GAME OVER", MessageBoxButton.OK, MessageBoxImage.Warning);
+            if (!OpponentLost)
+            {
+                Thread notifyServer = new Thread(() => Client.PlayerLose(Match.HomePlayer, Match.AwayPlayer, UserName));
+                notifyServer.Start();
+                MessageBox.Show("You lost the game :(", "Sorry", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+
+            }
         }
 
         private Boolean IsMyTurn()
@@ -179,7 +193,7 @@ namespace Client
             Boolean whosTurn = false;
             Thread turnCheck = new Thread(() => whosTurn = Client.WhosTurn(Match.HomePlayer, Match.AwayPlayer));
             turnCheck.Start();
-            Thread.Sleep(500);
+            Thread.Sleep(250);
             if (Type == PlayerType.Home && whosTurn == false)
             {
                 return false;
@@ -256,14 +270,40 @@ namespace Client
 
         private void performOpponentMove(MinesweeperItemCellDefinition cell)
         {
+            OpponentLost = true;
             MinesweeperItem item = Match.Board.findItemAt(cell);
             Match.Board.evaluateItem(item);
+        }
+
+        private void NotifyWinner()
+        {
+            MessageBox.Show("You are the Winner :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
+        }
+
+        private void NotifyTie()
+        {
+            MessageBox.Show("Game finish in a Tie -)", "Stretching Finish", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
+        }
+
+        private Boolean isAllCellsOpened()
+        {
+            int closeCells = 0;
+            foreach(MinesweeperItem item in Match.Board.items)
+            {
+                Button button = (Button)item.tag;
+                if (button.Content.Equals(".")) closeCells++;
+            }
+            return closeCells == Match.Board.maxMines;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
             CallBack.updateOpponentBoard += performOpponentMove;
+            CallBack.notifyWinner += NotifyWinner;
+            CallBack.notifyTie += NotifyTie;
             StartGame();
         }
     }

@@ -216,6 +216,33 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="PlayerLose">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="homePlayer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="awayPlayer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="player" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayerLoseResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GameFinishInTie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="homePlayer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="awayPlayer" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GameFinishInTieResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateClientsList">
     <xs:complexType>
       <xs:sequence>
@@ -257,6 +284,16 @@
       <xs:sequence>
         <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="cell" nillable="true" type="q14:MinesweeperItemCellDefinition" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyWinner">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyTie">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

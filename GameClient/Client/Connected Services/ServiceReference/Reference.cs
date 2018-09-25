@@ -214,6 +214,20 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/FinishTurn", ReplyAction="http://tempuri.org/IGameService/FinishTurnResponse")]
         System.Threading.Tasks.Task FinishTurnAsync(GamesServer.MinesweeperItemCellDefinition cell, string homePlayer, string awayPlayer, string playerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/PlayerLose", ReplyAction="http://tempuri.org/IGameService/PlayerLoseResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/PlayerLoseUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        void PlayerLose(string homePlayer, string awayPlayer, string player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/PlayerLose", ReplyAction="http://tempuri.org/IGameService/PlayerLoseResponse")]
+        System.Threading.Tasks.Task PlayerLoseAsync(string homePlayer, string awayPlayer, string player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GameFinishInTie", ReplyAction="http://tempuri.org/IGameService/GameFinishInTieResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/GameFinishInTieUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        void GameFinishInTie(string homePlayer, string awayPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GameFinishInTie", ReplyAction="http://tempuri.org/IGameService/GameFinishInTieResponse")]
+        System.Threading.Tasks.Task GameFinishInTieAsync(string homePlayer, string awayPlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -236,6 +250,12 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/UpdateOpponentBoard")]
         void UpdateOpponentBoard(GamesServer.MinesweeperItemCellDefinition cell);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/NotifyWinner")]
+        void NotifyWinner();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/NotifyTie")]
+        void NotifyTie();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -392,6 +412,22 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task FinishTurnAsync(GamesServer.MinesweeperItemCellDefinition cell, string homePlayer, string awayPlayer, string playerName) {
             return base.Channel.FinishTurnAsync(cell, homePlayer, awayPlayer, playerName);
+        }
+        
+        public void PlayerLose(string homePlayer, string awayPlayer, string player) {
+            base.Channel.PlayerLose(homePlayer, awayPlayer, player);
+        }
+        
+        public System.Threading.Tasks.Task PlayerLoseAsync(string homePlayer, string awayPlayer, string player) {
+            return base.Channel.PlayerLoseAsync(homePlayer, awayPlayer, player);
+        }
+        
+        public void GameFinishInTie(string homePlayer, string awayPlayer) {
+            base.Channel.GameFinishInTie(homePlayer, awayPlayer);
+        }
+        
+        public System.Threading.Tasks.Task GameFinishInTieAsync(string homePlayer, string awayPlayer) {
+            return base.Channel.GameFinishInTieAsync(homePlayer, awayPlayer);
         }
     }
 }

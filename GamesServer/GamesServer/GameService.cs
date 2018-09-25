@@ -9,7 +9,12 @@ using System.Threading;
 
 namespace GamesServer
 {
-
+    public enum GameResult
+    {
+        Lose = 0,
+        Win = 1,
+        Tie
+    }
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
     ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class GameService : IGameService
@@ -341,15 +346,8 @@ namespace GamesServer
             LiveMatch serverMatch = FindMatchByPlayerNames(homePlayer, awayPlayer);
             MinesweeperItem item = serverMatch.Board.findItemAt(cell);
             serverMatch.Board.evaluateItem(item);
-            string playerToNotfiy = "";
-            if (playerName.Equals(serverMatch.HomePlayer))
-            {
-                playerToNotfiy = serverMatch.AwayPlayer;
-            }
-            else
-            {
-                playerToNotfiy = serverMatch.HomePlayer;
-            }
+            string playerToNotfiy = playerName.Equals(serverMatch.HomePlayer) ?
+                serverMatch.AwayPlayer : serverMatch.HomePlayer;
 
             if (callbacks.ContainsKey(playerToNotfiy))
             {
@@ -378,6 +376,79 @@ namespace GamesServer
                 throw new FaultException<UserFaultException>(
                   new UserFaultException(), new FaultReason("Something went wrong, match not found."));
             }
+        }
+
+        public void PlayerLose(string homePlayer, string awayPlayer, string loser)
+        {
+            LiveMatch match = FindMatchByPlayerNames(homePlayer, awayPlayer);
+            string playerToNotify = homePlayer.Equals(loser) ? awayPlayer : homePlayer;
+            if (callbacks.ContainsKey(playerToNotify))
+            {
+                Thread notifyWinner = new Thread(() => callbacks[playerToNotify].NotifyWinner());
+                notifyWinner.Start();
+            }
+            UpdatePlayerStats(playerToNotify, GameResult.Win);
+            UpdatePlayerStats(loser, GameResult.Lose);
+            SaveGameToDB(match, playerToNotify);
+        }
+
+        private void UpdatePlayerStats(string playerName, GameResult result)
+        {
+            Player player = GetPlayerFromDB(playerName);
+
+                switch (result)
+            {
+                case GameResult.Lose:
+                    player.GamesLost++;
+                    break;
+                case GameResult.Win:
+                    player.GamesWon++;
+                    break;
+                case GameResult.Tie:
+                    player.GamesTie++;
+                    break;
+                default:
+                    break;
+            }
+            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+            {
+                ctx.Entry(player).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        private void SaveGameToDB(LiveMatch match,string winnerName)
+        {
+            Game game = new Game();
+            game.Winner = winnerName;
+            game.Player1_UserName = match.HomePlayer;
+            game.Player2_UserName = match.AwayPlayer;
+            game.Date =  DateTime.Now;
+            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+            {
+                ctx.Games.Add(game);
+                ctx.SaveChanges();
+            }
+            LiveMatches.Remove(match);
+        }
+
+        public void GameFinishInTie(string homePlayer, string awayPlayer)
+        {
+            LiveMatch match = FindMatchByPlayerNames(homePlayer, awayPlayer);
+            if (callbacks.ContainsKey(homePlayer))
+            {
+                Thread notifyWinner = new Thread(() => callbacks[homePlayer].NotifyTie());
+                notifyWinner.Start();
+            }
+            if (callbacks.ContainsKey(awayPlayer))
+            {
+                Thread notifyWinner = new Thread(() => callbacks[awayPlayer].NotifyTie());
+                notifyWinner.Start();
+            }
+
+            UpdatePlayerStats(homePlayer, GameResult.Tie);
+            UpdatePlayerStats(awayPlayer, GameResult.Tie);
+            SaveGameToDB(match, "Tie");
         }
     }
 }

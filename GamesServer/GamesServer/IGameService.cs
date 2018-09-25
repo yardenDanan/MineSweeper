@@ -68,6 +68,14 @@ namespace GamesServer {
         [OperationContract]
         [FaultContract(typeof(UserFaultException))]
         void FinishTurn(MinesweeperItemCellDefinition cell, string homePlayer, string awayPlayer, string playerName);
+
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        void PlayerLose(string homePlayer, string awayPlayer, string player);
+
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        void GameFinishInTie(string homePlayer, string awayPlayer);
     }
 
     public interface IGameServiceCallback {
@@ -89,5 +97,11 @@ namespace GamesServer {
 
         [OperationContract(IsOneWay = true)]
         void UpdateOpponentBoard(MinesweeperItemCellDefinition cell);
+
+        [OperationContract(IsOneWay = true)]
+        void NotifyWinner();
+
+        [OperationContract(IsOneWay = true)]
+        void NotifyTie();
     }
 }
