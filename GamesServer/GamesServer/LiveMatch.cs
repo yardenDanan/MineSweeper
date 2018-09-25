@@ -18,5 +18,8 @@ namespace GamesServer
         public string HomePlayer { get; set; }
         [DataMember]
         public string AwayPlayer { get; set; }
+        //Home turn (sender) = true, Away turn (reciver) = false
+        [DataMember]
+        public Boolean WhosTurn { get; set; }
     }
 }

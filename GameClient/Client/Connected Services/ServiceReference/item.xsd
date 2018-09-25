@@ -126,7 +126,7 @@
   <xs:element name="GetRandomGridResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="GetRandomGridResult" nillable="true" type="q4:MinesweeperGrid" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="GetRandomGridResult" nillable="true" type="q4:LiveMatch" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -186,10 +186,40 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="WhosTurn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="homePlayer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="awayPlayer" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WhosTurnResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="WhosTurnResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FinishTurn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="cell" nillable="true" type="q9:MinesweeperItemCellDefinition" />
+        <xs:element minOccurs="0" name="homePlayer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="awayPlayer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="playerName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FinishTurnResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateClientsList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="clients" nillable="true" type="q9:ArrayOfstring" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="clients" nillable="true" type="q10:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -205,8 +235,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="sender" nillable="true" type="xs:string" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="parameters" nillable="true" type="q10:GameParams" />
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="playerStats" nillable="true" type="q11:PlayerStats" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="parameters" nillable="true" type="q11:GameParams" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="playerStats" nillable="true" type="q12:PlayerStats" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -218,7 +248,14 @@
   <xs:element name="AcceptSenderInvitation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="match" nillable="true" type="q12:LiveMatch" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="match" nillable="true" type="q13:LiveMatch" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOpponentBoard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/GamesServer" minOccurs="0" name="cell" nillable="true" type="q14:MinesweeperItemCellDefinition" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

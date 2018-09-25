@@ -30,7 +30,7 @@ namespace Client
             CallBack.updateConnectedClients += UpdateClients;
             CallBack.displayMessage += DisplayMessage;
             CallBack.showInvitation += ShowReciveInviation;
-            Client.SendMessage("Welcome to MineSweeper!", "God", Username);
+            Client.SendMessage("Welcome to MineSweeper!", "Server", Username);
             Thread setPlayerStats = new Thread(() => SetPlayerStats());
             setPlayerStats.Start();
         }
@@ -50,6 +50,7 @@ namespace Client
         {
             IncomingInvitationWindow incomingInvitationWindow = new IncomingInvitationWindow();
             incomingInvitationWindow.Client = Client;
+            incomingInvitationWindow.CallBack = CallBack;
             incomingInvitationWindow.SenderName = senderName;
             incomingInvitationWindow.GameParams = parameters;
             incomingInvitationWindow.Username = Username;
@@ -173,6 +174,7 @@ namespace Client
         {
             PlayAloneConfigWindow configWindow = new PlayAloneConfigWindow();
             configWindow.Client = Client;
+            configWindow.CallBack = CallBack;
             configWindow.ShowDialog();
         }
 

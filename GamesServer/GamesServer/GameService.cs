@@ -259,9 +259,12 @@ namespace GamesServer
             }
         }
 
-        public MinesweeperGrid GetRandomGrid(int rows, int columns, int mines)
+        public LiveMatch GetRandomGrid(int rows, int columns, int mines)
         {
-            return new MinesweeperGrid(rows, columns, mines);   
+            MinesweeperGrid randomGrid =  new MinesweeperGrid(rows, columns, mines);
+            LiveMatch match = new LiveMatch();
+            match.Board = randomGrid;
+            return match;
         }
 
         public void SendInvitation(string senderName, string reciverName, GameParams parameters, PlayerStats playerStats)
@@ -301,6 +304,7 @@ namespace GamesServer
                 newMatch.Board = new MinesweeperGrid(gameParams.rows, gameParams.cols, gameParams.mines);
                 newMatch.HomePlayer = senderName;
                 newMatch.AwayPlayer = reciverName;
+                newMatch.WhosTurn = true;
                 LiveMatches.Add(newMatch);
                 Thread sendThread = new Thread(() => callbacks[senderName].AcceptSenderInvitation(newMatch));
                 sendThread.Start();
@@ -314,8 +318,57 @@ namespace GamesServer
 
         public LiveMatch GetSameGridAsOpponent(string senderName, string reciverName)
         {
-            LiveMatch match = LiveMatches.Find(m => (m.HomePlayer == senderName)
-            && (m.AwayPlayer == reciverName));
+            return FindMatchByPlayerNames(senderName, reciverName);
+        }
+
+        public bool WhosTurn(string homePlayer, string awayPlayer)
+        {
+            LiveMatch match = LiveMatches.Find(m => (m.HomePlayer == homePlayer)
+            && (m.AwayPlayer == awayPlayer));
+            if (match != null)
+            {
+                return match.WhosTurn;
+            }
+            else
+            {
+                throw new FaultException<UserFaultException>(
+                  new UserFaultException(), new FaultReason("Something went wrong, match not found."));
+            }
+        }
+
+        public void FinishTurn(MinesweeperItemCellDefinition cell, string homePlayer,string awayPlayer, string playerName)
+        {
+            LiveMatch serverMatch = FindMatchByPlayerNames(homePlayer, awayPlayer);
+            MinesweeperItem item = serverMatch.Board.findItemAt(cell);
+            serverMatch.Board.evaluateItem(item);
+            string playerToNotfiy = "";
+            if (playerName.Equals(serverMatch.HomePlayer))
+            {
+                playerToNotfiy = serverMatch.AwayPlayer;
+            }
+            else
+            {
+                playerToNotfiy = serverMatch.HomePlayer;
+            }
+
+            if (callbacks.ContainsKey(playerToNotfiy))
+            {
+                Thread sendThread = new Thread(() => callbacks[playerToNotfiy].UpdateOpponentBoard(cell));
+                sendThread.Start();
+            }
+            else
+            {
+                throw new FaultException<UserFaultException>(
+                   new UserFaultException(), new FaultReason("Opponent not found."));
+            }
+            serverMatch.WhosTurn = !serverMatch.WhosTurn;
+
+        }
+
+        private LiveMatch FindMatchByPlayerNames(string homePlayer, string awayPlayer)
+        {
+            LiveMatch match = LiveMatches.Find(m => (m.HomePlayer == homePlayer)
+                              && (m.AwayPlayer == awayPlayer));
             if (match != null)
             {
                 return match;

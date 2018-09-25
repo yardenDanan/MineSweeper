@@ -24,6 +24,7 @@ namespace Client
     public partial class IncomingInvitationWindow : Window
     {
         public GameServiceClient Client { get; set; }
+        public GameCallback CallBack { get; set; }
         public GameParams GameParams { get; set; }
         public PlayerStats SenderStats { get; set; }
         public PlayerStats ReciverStats { get; set; }
@@ -76,11 +77,15 @@ namespace Client
             {
                 MessageBox.Show(ex.Detail.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            ServiceReference.LiveMatch match = Client.GetSameGridAsOpponent(SenderName, Username);
+            LiveMatch match = Client.GetSameGridAsOpponent(SenderName, Username);
             GameBoardWindow gameBoardWindow = new GameBoardWindow();
+            gameBoardWindow.Mode = GameMode.Mode.Online;
             gameBoardWindow.Match = match;
             gameBoardWindow.GameParams = match.GameParams;
             gameBoardWindow.Client = Client;
+            gameBoardWindow.UserName = Username;
+            gameBoardWindow.CallBack = CallBack;
+            gameBoardWindow.Type = PlayerType.Away;
             this.Close();
             gameBoardWindow.Show();
         }

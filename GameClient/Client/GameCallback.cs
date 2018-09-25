@@ -38,11 +38,18 @@ namespace Client {
             cancelInvitation();
         }
 
-        public delegate void AcceptSenderInvitationDelegate(ServiceReference.LiveMatch match);
+        public delegate void AcceptSenderInvitationDelegate(LiveMatch match);
         public event AcceptSenderInvitationDelegate acceptInvitation;
-        public void AcceptSenderInvitation(ServiceReference.LiveMatch match)
+        public void AcceptSenderInvitation(LiveMatch match)
         {
             acceptInvitation(match);
+        }
+
+        public delegate void UpdateOpponentBoardDelegate(MinesweeperItemCellDefinition cell);
+        public event UpdateOpponentBoardDelegate updateOpponentBoard;
+        public void UpdateOpponentBoard(MinesweeperItemCellDefinition cell)
+        {
+            updateOpponentBoard(cell);
         }
     }
 }

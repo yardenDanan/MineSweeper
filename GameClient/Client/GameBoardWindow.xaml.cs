@@ -3,6 +3,7 @@ using GamesServer;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,13 +14,23 @@ namespace Client
     /// <summary>
     /// Interaction logic for GameBoardWindow.xaml
     /// </summary>
+    public enum PlayerType
+    {
+        Home = 0,
+        Away = 1
+    }
+
     public partial class GameBoardWindow : Window
     {
+        public GameMode.Mode Mode { get; set; }
+        public PlayerType Type { get; set; }
         public GameServiceClient Client { get; set; }
+        public GameCallback CallBack { get; set; }
         public GameParams GameParams { get; set; }
         private const int MAX_ITEMS_NUMBER = 100;
         private const int CELL_SIDE = 35;
-        public ServiceReference.LiveMatch Match { get; set; }
+        public LiveMatch Match { get; set; }
+        public string UserName { get; set; }
 
         public GameBoardWindow()
         {
@@ -31,8 +42,10 @@ namespace Client
         {
             try
             {
-                //creates an intance of MinesweeperGrid by using a GameParams instance (see gameParamsAreOk)
-                Match.Board = Client.GetRandomGrid(GameParams.rows, GameParams.cols, GameParams.mines);
+                if(Mode == GameMode.Mode.Alone)
+                {
+                Match = Client.GetRandomGrid(GameParams.rows, GameParams.cols, GameParams.mines);
+                }
                 //sets MinesweeperGrid event hanlder
                 Match.Board.itemAdded += gameGrid_itemAdded;
                 Match.Board.itemMineAdded += gameGrid_itemMineAdded;
@@ -135,10 +148,19 @@ namespace Client
 
         private void gridButton_Click(object sender, RoutedEventArgs e)
         {
+            if (Mode == GameMode.Mode.Online)
+            {
+                if (!IsMyTurn())
+                {
+                    return;
+                }
+            }
             try
             {
                 Button button = (Button)sender;
                 MinesweeperItem item = (MinesweeperItem)button.Tag;
+                Thread notifyServer = new Thread(() => Client.FinishTurn(item.cell, Match.HomePlayer, Match.AwayPlayer, UserName));
+                notifyServer.Start();
                 Match.Board.evaluateItem(item);
             }
             catch (Exception ex)
@@ -146,14 +168,32 @@ namespace Client
                 handleException(ex);
             }
         }
+
         private void gameGrid_gameOver(MinesweeperItem item)
         {
             MessageBox.Show("Oh no!\nI'm a mine :(", "GAME OVER", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+
+        private Boolean IsMyTurn()
+        {
+            Boolean whosTurn = false;
+            Thread turnCheck = new Thread(() => whosTurn = Client.WhosTurn(Match.HomePlayer, Match.AwayPlayer));
+            turnCheck.Start();
+            Thread.Sleep(500);
+            if (Type == PlayerType.Home && whosTurn == false)
+            {
+                return false;
+            }
+            if (Type == PlayerType.Away && whosTurn == true)
+            {
+                return false;
+            }
+            return true;
+        }
+
         private void gameGrid_cellOpeningCompleted(MinesweeperItem item)
         {
             //this event will be raised after calling setAdjacentCells() method
-
             try
             {
                 //gets the button from the item tag (see getGridButton method)
@@ -214,9 +254,16 @@ namespace Client
             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        private void performOpponentMove(MinesweeperItemCellDefinition cell)
+        {
+            MinesweeperItem item = Match.Board.findItemAt(cell);
+            Match.Board.evaluateItem(item);
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
+            CallBack.updateOpponentBoard += performOpponentMove;
             StartGame();
         }
     }

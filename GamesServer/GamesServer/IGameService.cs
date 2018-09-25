@@ -43,7 +43,7 @@ namespace GamesServer {
         void DeleteAccount(string userName, string password);
 
         [OperationContract]
-        MinesweeperGrid GetRandomGrid(int rows, int columns, int mines);
+        LiveMatch GetRandomGrid(int rows, int columns, int mines);
 
         [OperationContract]
         [FaultContract(typeof(UserFaultException))]
@@ -61,6 +61,13 @@ namespace GamesServer {
         [FaultContract(typeof(UserFaultException))]
         LiveMatch GetSameGridAsOpponent(string senderName, string reciverName);
 
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        Boolean WhosTurn(string homePlayer,string awayPlayer);
+
+        [OperationContract]
+        [FaultContract(typeof(UserFaultException))]
+        void FinishTurn(MinesweeperItemCellDefinition cell, string homePlayer, string awayPlayer, string playerName);
     }
 
     public interface IGameServiceCallback {
@@ -79,5 +86,8 @@ namespace GamesServer {
 
         [OperationContract(IsOneWay = true)]
         void AcceptSenderInvitation(LiveMatch match);
+
+        [OperationContract(IsOneWay = true)]
+        void UpdateOpponentBoard(MinesweeperItemCellDefinition cell);
     }
 }

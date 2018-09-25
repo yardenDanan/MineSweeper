@@ -43,6 +43,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfPlayerDTO" nillable="true" type="tns:ArrayOfPlayerDTO" />
+  <xs:complexType name="LiveMatch">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AwayPlayer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Board" nillable="true" type="tns:MinesweeperGrid" />
+      <xs:element minOccurs="0" name="GameParams" nillable="true" type="tns:GameParams" />
+      <xs:element minOccurs="0" name="HomePlayer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WhosTurn" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LiveMatch" nillable="true" type="tns:LiveMatch" />
   <xs:complexType name="MinesweeperGrid">
     <xs:sequence>
       <xs:element minOccurs="0" name="cols" type="xs:int" />
@@ -100,13 +110,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerStats" nillable="true" type="tns:PlayerStats" />
-  <xs:complexType name="LiveMatch">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AwayPlayer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Board" nillable="true" type="tns:MinesweeperGrid" />
-      <xs:element minOccurs="0" name="GameParams" nillable="true" type="tns:GameParams" />
-      <xs:element minOccurs="0" name="HomePlayer" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="LiveMatch" nillable="true" type="tns:LiveMatch" />
 </xs:schema>

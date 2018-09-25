@@ -23,6 +23,8 @@ namespace Client
     {
 
         public GameServiceClient Client { get; set; }
+        public GameCallback CallBack { get; set; }
+
         public PlayAloneConfigWindow()
         {
             InitializeComponent();
@@ -102,6 +104,7 @@ namespace Client
         {
             GameBoardWindow gameBoardWindow = new GameBoardWindow();
             gameBoardWindow.Client = Client;
+            gameBoardWindow.Mode = GameMode.Mode.Alone;
             GameParams gameParams = null;
             if (BegginerCheckBox.IsChecked == true)
             {
@@ -146,6 +149,7 @@ namespace Client
                 return;
             }
             gameBoardWindow.GameParams = gameParams;
+            gameBoardWindow.CallBack = CallBack;
             gameBoardWindow.ShowDialog();
             this.Close();
         }

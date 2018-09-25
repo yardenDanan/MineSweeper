@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
        Title="Minesweeper" Height="400" Width="500">
     <Grid>
         <Label Content="Incoming Invitation" HorizontalAlignment="Left" Margin="144,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.077" Width="191" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0">

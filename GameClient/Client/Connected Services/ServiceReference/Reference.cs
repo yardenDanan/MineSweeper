@@ -103,99 +103,6 @@ namespace Client.ServiceReference {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LiveMatch", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
-    [System.SerializableAttribute()]
-    public partial class LiveMatch : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AwayPlayerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GamesServer.MinesweeperGrid BoardField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GamesServer.GameParams GameParamsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string HomePlayerField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AwayPlayer {
-            get {
-                return this.AwayPlayerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AwayPlayerField, value) != true)) {
-                    this.AwayPlayerField = value;
-                    this.RaisePropertyChanged("AwayPlayer");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GamesServer.MinesweeperGrid Board {
-            get {
-                return this.BoardField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BoardField, value) != true)) {
-                    this.BoardField = value;
-                    this.RaisePropertyChanged("Board");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GamesServer.GameParams GameParams {
-            get {
-                return this.GameParamsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GameParamsField, value) != true)) {
-                    this.GameParamsField = value;
-                    this.RaisePropertyChanged("GameParams");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HomePlayer {
-            get {
-                return this.HomePlayerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.HomePlayerField, value) != true)) {
-                    this.HomePlayerField = value;
-                    this.RaisePropertyChanged("HomePlayer");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IGameService", CallbackContract=typeof(Client.ServiceReference.IGameServiceCallback))]
     public interface IGameService {
@@ -261,10 +168,10 @@ namespace Client.ServiceReference {
         System.Threading.Tasks.Task DeleteAccountAsync(string userName, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetRandomGrid", ReplyAction="http://tempuri.org/IGameService/GetRandomGridResponse")]
-        GamesServer.MinesweeperGrid GetRandomGrid(int rows, int columns, int mines);
+        GamesServer.LiveMatch GetRandomGrid(int rows, int columns, int mines);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetRandomGrid", ReplyAction="http://tempuri.org/IGameService/GetRandomGridResponse")]
-        System.Threading.Tasks.Task<GamesServer.MinesweeperGrid> GetRandomGridAsync(int rows, int columns, int mines);
+        System.Threading.Tasks.Task<GamesServer.LiveMatch> GetRandomGridAsync(int rows, int columns, int mines);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/SendInvitation", ReplyAction="http://tempuri.org/IGameService/SendInvitationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/SendInvitationUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
@@ -289,10 +196,24 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetSameGridAsOpponent", ReplyAction="http://tempuri.org/IGameService/GetSameGridAsOpponentResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/GetSameGridAsOpponentUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
-        Client.ServiceReference.LiveMatch GetSameGridAsOpponent(string senderName, string reciverName);
+        GamesServer.LiveMatch GetSameGridAsOpponent(string senderName, string reciverName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetSameGridAsOpponent", ReplyAction="http://tempuri.org/IGameService/GetSameGridAsOpponentResponse")]
-        System.Threading.Tasks.Task<Client.ServiceReference.LiveMatch> GetSameGridAsOpponentAsync(string senderName, string reciverName);
+        System.Threading.Tasks.Task<GamesServer.LiveMatch> GetSameGridAsOpponentAsync(string senderName, string reciverName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/WhosTurn", ReplyAction="http://tempuri.org/IGameService/WhosTurnResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/WhosTurnUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        bool WhosTurn(string homePlayer, string awayPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/WhosTurn", ReplyAction="http://tempuri.org/IGameService/WhosTurnResponse")]
+        System.Threading.Tasks.Task<bool> WhosTurnAsync(string homePlayer, string awayPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/FinishTurn", ReplyAction="http://tempuri.org/IGameService/FinishTurnResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference.UserFaultException), Action="http://tempuri.org/IGameService/FinishTurnUserFaultExceptionFault", Name="UserFaultException", Namespace="http://schemas.datacontract.org/2004/07/GamesServer")]
+        void FinishTurn(GamesServer.MinesweeperItemCellDefinition cell, string homePlayer, string awayPlayer, string playerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/FinishTurn", ReplyAction="http://tempuri.org/IGameService/FinishTurnResponse")]
+        System.Threading.Tasks.Task FinishTurnAsync(GamesServer.MinesweeperItemCellDefinition cell, string homePlayer, string awayPlayer, string playerName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -311,7 +232,10 @@ namespace Client.ServiceReference {
         void CancelSenderInvitation();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/AcceptSenderInvitation")]
-        void AcceptSenderInvitation(Client.ServiceReference.LiveMatch match);
+        void AcceptSenderInvitation(GamesServer.LiveMatch match);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/UpdateOpponentBoard")]
+        void UpdateOpponentBoard(GamesServer.MinesweeperItemCellDefinition cell);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -414,11 +338,11 @@ namespace Client.ServiceReference {
             return base.Channel.DeleteAccountAsync(userName, password);
         }
         
-        public GamesServer.MinesweeperGrid GetRandomGrid(int rows, int columns, int mines) {
+        public GamesServer.LiveMatch GetRandomGrid(int rows, int columns, int mines) {
             return base.Channel.GetRandomGrid(rows, columns, mines);
         }
         
-        public System.Threading.Tasks.Task<GamesServer.MinesweeperGrid> GetRandomGridAsync(int rows, int columns, int mines) {
+        public System.Threading.Tasks.Task<GamesServer.LiveMatch> GetRandomGridAsync(int rows, int columns, int mines) {
             return base.Channel.GetRandomGridAsync(rows, columns, mines);
         }
         
@@ -446,12 +370,28 @@ namespace Client.ServiceReference {
             return base.Channel.AcceptInvitationAsync(senderName, reciverName, gameParams);
         }
         
-        public Client.ServiceReference.LiveMatch GetSameGridAsOpponent(string senderName, string reciverName) {
+        public GamesServer.LiveMatch GetSameGridAsOpponent(string senderName, string reciverName) {
             return base.Channel.GetSameGridAsOpponent(senderName, reciverName);
         }
         
-        public System.Threading.Tasks.Task<Client.ServiceReference.LiveMatch> GetSameGridAsOpponentAsync(string senderName, string reciverName) {
+        public System.Threading.Tasks.Task<GamesServer.LiveMatch> GetSameGridAsOpponentAsync(string senderName, string reciverName) {
             return base.Channel.GetSameGridAsOpponentAsync(senderName, reciverName);
+        }
+        
+        public bool WhosTurn(string homePlayer, string awayPlayer) {
+            return base.Channel.WhosTurn(homePlayer, awayPlayer);
+        }
+        
+        public System.Threading.Tasks.Task<bool> WhosTurnAsync(string homePlayer, string awayPlayer) {
+            return base.Channel.WhosTurnAsync(homePlayer, awayPlayer);
+        }
+        
+        public void FinishTurn(GamesServer.MinesweeperItemCellDefinition cell, string homePlayer, string awayPlayer, string playerName) {
+            base.Channel.FinishTurn(cell, homePlayer, awayPlayer, playerName);
+        }
+        
+        public System.Threading.Tasks.Task FinishTurnAsync(GamesServer.MinesweeperItemCellDefinition cell, string homePlayer, string awayPlayer, string playerName) {
+            return base.Channel.FinishTurnAsync(cell, homePlayer, awayPlayer, playerName);
         }
     }
 }

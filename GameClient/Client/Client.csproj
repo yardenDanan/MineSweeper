@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GameServer">
-      <HintPath>..\..\GameServer\GameServer\bin\Debug\GameServer.dll</HintPath>
-    </Reference>
     <Reference Include="GamesServer">
       <HintPath>..\..\GamesServer\GamesServer\bin\Debug\GamesServer.dll</HintPath>
     </Reference>
@@ -83,6 +80,7 @@
     <Compile Include="GameInvitationWindow.xaml.cs">
       <DependentUpon>GameInvitationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameMode.cs" />
     <Compile Include="IncomingInvitationWindow.xaml.cs">
       <DependentUpon>IncomingInvitationWindow.xaml</DependentUpon>
     </Compile>
@@ -179,9 +177,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\ServiceReference\Client.ServiceReference.LiveMatch.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ServiceReference\GameService.wsdl" />
     <None Include="Connected Services\ServiceReference\item.xsd">
       <SubType>Designer</SubType>
@@ -197,6 +192,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\GamesServer.GameDTO.datasource" />
+    <None Include="Properties\DataSources\GamesServer.LiveMatch.datasource" />
     <None Include="Properties\DataSources\GamesServer.MinesweeperGrid.datasource" />
     <None Include="Properties\DataSources\GamesServer.PlayerDTO.datasource" />
     <None Include="Properties\Settings.settings">

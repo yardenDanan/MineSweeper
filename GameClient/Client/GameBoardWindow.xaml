@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Loaded="Window_Loaded"
-      Title="Minesweeper" Height="380" Width="525" WindowStartupLocation="CenterScreen">
+      Title="MineSweeper" Height="380" Width="525" WindowStartupLocation="CenterScreen">
     <Grid Margin="30,0,-0.351,0.039">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>

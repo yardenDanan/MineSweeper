@@ -160,6 +160,8 @@ namespace Client
             waitForOpponentWindow.OpponentName = InviteReciverName;
             waitForOpponentWindow.CallBack = CallBack;
             waitForOpponentWindow.Client = Client;
+            waitForOpponentWindow.UserName = Username;
+            waitForOpponentWindow.CallBack = CallBack;
             waitForOpponentWindow.Show();
             this.Close();
         }
