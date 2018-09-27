@@ -3,6 +3,7 @@ using GamesServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,10 +56,12 @@ namespace Client
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
-            GifImage.Source = new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/Spin-1.5s-80px.gif");
-            titleText.Content = "Waiting for " + OpponentName + " response";
-            CallBack.cancelInvitation += RequestRejected;
-            CallBack.acceptInvitation += RequestAccepted;
+            titleText.Content = "Waiting for " + OpponentName + "'s response";
+            if (CallBack.IsWaitForOpponentEventsAreNull())
+            {
+                CallBack.acceptInvitation += RequestAccepted;
+                CallBack.cancelInvitation += RequestRejected;
+            }
         }
     }
 }

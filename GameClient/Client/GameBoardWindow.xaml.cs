@@ -48,25 +48,25 @@ namespace Client
                 Match = Client.GetRandomGrid(GameParams.rows, GameParams.cols, GameParams.mines);
                 }
                 //sets MinesweeperGrid event hanlder
-                Match.Board.itemAdded += gameGrid_itemAdded;
-                Match.Board.itemMineAdded += gameGrid_itemMineAdded;
-                Match.Board.loadingCompleted += gameGrid_loadingCompleted;
-                Match.Board.errorOccurred += gameGrid_errorOccurred;
-                Match.Board.cellOpeningCompleted += gameGrid_cellOpeningCompleted;
-                Match.Board.gameOver += gameGrid_gameOver;
+                Match.Board.itemAdded += GameGrid_itemAdded;
+                Match.Board.itemMineAdded += GameGrid_itemMineAdded;
+                Match.Board.loadingCompleted += GameGrid_loadingCompleted;
+                Match.Board.errorOccurred += GameGrid_errorOccurred;
+                Match.Board.cellOpeningCompleted += GameGrid_cellOpeningCompleted;
+                Match.Board.gameOver += GameGrid_gameOver;
                 //makes game grid: it will raise a gameGrid_loadingCompleted() event
-                Match.Board.makeGrid();
+                Match.Board.MakeGrid();
             }
             catch (Exception ex)
             {
-                handleException(ex);
+                HandleException(ex);
             }
 
 
         }
 
         
-        private void setFormLayout()
+        private void SetFormLayout()
         {
             //main layout will be displayed as a grid of buttons
             //this procedure will resize main form anduniform grid, considering that
@@ -89,19 +89,19 @@ namespace Client
             }
             catch (Exception ex)
             {
-                handleException(ex);
+                HandleException(ex);
             }
         }
 
 
-        private void makeButtonsGrid()
+        private void MakeButtonsGrid()
         {
             //makeButtonsGrid will be invoked from gameGrid_loadingCompleted() event
 
             try
             {
                 //set layout
-                setFormLayout();
+                SetFormLayout();
 
                 //sets cols and rows from the UniformGrid container
                 gamePanel.Columns = Match.Board.cols;
@@ -109,19 +109,19 @@ namespace Client
                 //clear all items from the UniformGrid container
                 gamePanel.Children.Clear();
                 //for each grid item add a button on panel form 
-                List<MinesweeperItem> items = Match.Board.items;
+                List<MinesweeperItem> items = Match.Board.Items;
                 foreach (MinesweeperItem item in items)
                 {
-                    gamePanel.Children.Add(getGridButton(item));
+                    gamePanel.Children.Add(GetGridButton(item));
                 }
             }
             catch (Exception ex)
             {
-                handleException(ex);
+                HandleException(ex);
             }
 
         }
-        private Button getGridButton(MinesweeperItem item)
+        private Button GetGridButton(MinesweeperItem item)
         {
             try
             {
@@ -136,18 +136,18 @@ namespace Client
                 button.Height = CELL_SIDE;
                 button.FontSize = 16;
                 button.FontWeight = FontWeights.Bold;
-                button.Click += gridButton_Click;
+                button.Click += GridButton_Click;
                 return button;
             }
             catch (Exception ex)
             {
-                handleException(ex);
+                HandleException(ex);
                 return null;
             }
 
         }
 
-        private void gridButton_Click(object sender, RoutedEventArgs e)
+        private void GridButton_Click(object sender, RoutedEventArgs e)
         {
             OpponentLost = false;
             if (Mode == GameMode.Mode.Online)
@@ -163,8 +163,8 @@ namespace Client
                 MinesweeperItem item = (MinesweeperItem)button.Tag;
                 Thread notifyServer = new Thread(() => Client.FinishTurn(item.cell, Match.HomePlayer, Match.AwayPlayer, UserName));
                 notifyServer.Start();
-                Match.Board.evaluateItem(item);
-                if (isAllCellsOpened())
+                Match.Board.EvaluateItem(item);
+                if (IsAllCellsOpened())
                 {
                     Thread notifyServerAboutTie = new Thread(() => Client.GameFinishInTie(Match.HomePlayer,Match.AwayPlayer));
                     notifyServerAboutTie.Start();
@@ -172,11 +172,11 @@ namespace Client
             }
             catch (Exception ex)
             {
-                handleException(ex);
+                HandleException(ex);
             }
         }
 
-        private void gameGrid_gameOver(MinesweeperItem item)
+        private void GameGrid_gameOver(MinesweeperItem item)
         {
             if (!OpponentLost)
             {
@@ -205,7 +205,7 @@ namespace Client
             return true;
         }
 
-        private void gameGrid_cellOpeningCompleted(MinesweeperItem item)
+        private void GameGrid_cellOpeningCompleted(MinesweeperItem item)
         {
             //this event will be raised after calling setAdjacentCells() method
             try
@@ -234,45 +234,45 @@ namespace Client
                 //if items is opened, remove the click event handler from the button
                 if (item.type != MinesweeperItemType.MinesweeperItemType_None)
                 {
-                    button.Click -= gridButton_Click;
+                    button.Click -= GridButton_Click;
                 }
             }
             catch (Exception ex)
             {
-                handleException(ex);
+                HandleException(ex);
             }
 
         }
 
-        private void gameGrid_errorOccurred(Exception ex)
+        private void GameGrid_errorOccurred(Exception ex)
         {
             MessageBox.Show(ex.Message);
         }
-        private void gameGrid_loadingCompleted(List<MinesweeperItem> items)
+        private void GameGrid_loadingCompleted(List<MinesweeperItem> items)
         {
             //this event will be raised from the makeGrid method
-            makeButtonsGrid();
+            MakeButtonsGrid();
         }
 
-        private void gameGrid_itemMineAdded(MinesweeperItem item)
+        private void GameGrid_itemMineAdded(MinesweeperItem item)
         {
             //TODO
         }
 
-        private void gameGrid_itemAdded(MinesweeperItem item)
+        private void GameGrid_itemAdded(MinesweeperItem item)
         {
             //TODO
         }
-        private void handleException(Exception ex)
+        private void HandleException(Exception ex)
         {
             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void performOpponentMove(MinesweeperItemCellDefinition cell)
+        private void PerformOpponentMove(MinesweeperItemCellDefinition cell)
         {
             OpponentLost = true;
-            MinesweeperItem item = Match.Board.findItemAt(cell);
-            Match.Board.evaluateItem(item);
+            MinesweeperItem item = Match.Board.FindItemAt(cell);
+            Match.Board.EvaluateItem(item);
         }
 
         private void NotifyWinner()
@@ -287,10 +287,10 @@ namespace Client
             this.Close();
         }
 
-        private Boolean isAllCellsOpened()
+        private Boolean IsAllCellsOpened()
         {
             int closeCells = 0;
-            foreach(MinesweeperItem item in Match.Board.items)
+            foreach(MinesweeperItem item in Match.Board.Items)
             {
                 Button button = (Button)item.tag;
                 if (button.Content.Equals(".")) closeCells++;
@@ -301,9 +301,12 @@ namespace Client
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
-            CallBack.updateOpponentBoard += performOpponentMove;
-            CallBack.notifyWinner += NotifyWinner;
-            CallBack.notifyTie += NotifyTie;
+            if (CallBack.IsGameBoardEventsAreNull())
+            {
+                CallBack.updateOpponentBoard += PerformOpponentMove;
+                CallBack.notifyWinner += NotifyWinner;
+                CallBack.notifyTie += NotifyTie;
+            }
             StartGame();
         }
     }

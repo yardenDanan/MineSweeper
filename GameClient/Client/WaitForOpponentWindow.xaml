@@ -8,18 +8,9 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
-        Title="Minesweeper" Height="150" Width="400">
+        Title="Minesweeper" Height="120" Width="400">
     <Grid>
-        <Label Name="titleText" Content="Wait for opponent response" HorizontalAlignment="Left" Margin="55,9,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.077" Width="281" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.071"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <MediaElement  UnloadedBehavior="Play" Name="GifImage" HorizontalAlignment="Left" Height="55" Margin="155,56,0,0" VerticalAlignment="Top" Width="74"/>
-      </Grid>
+        <Label Name="titleText" Content="Wait for opponent response" HorizontalAlignment="Center"  VerticalAlignment="Top"  Width="351" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0" Margin="21,23,22,35"/>
+
+    </Grid>
 </Window>

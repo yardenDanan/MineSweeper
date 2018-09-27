@@ -40,9 +40,15 @@ namespace Client {
 
         public delegate void AcceptSenderInvitationDelegate(LiveMatch match);
         public event AcceptSenderInvitationDelegate acceptInvitation;
+
         public void AcceptSenderInvitation(LiveMatch match)
         {
             acceptInvitation(match);
+        }
+
+        public Boolean IsWaitForOpponentEventsAreNull()
+        {
+            return acceptInvitation == null && cancelInvitation == null;
         }
 
         public delegate void UpdateOpponentBoardDelegate(MinesweeperItemCellDefinition cell);
@@ -65,5 +71,12 @@ namespace Client {
         {
             notifyTie();
         }
+
+        public Boolean IsGameBoardEventsAreNull()
+        {
+            return updateOpponentBoard == null && notifyWinner == null
+                && notifyTie == null;
+        }
+
     }
 }

@@ -11,42 +11,42 @@ namespace GamesServer
     public class MinesweeperGrid
     {
         //this event will be raised when a new item (cell) will be added
-        public event MinesweeperItemAdded itemAdded;
+        public event MinesweeperItemAdded ItemAdded;
         public delegate void MinesweeperItemAdded(MinesweeperItem item);
 
         //this event will be raised when a "mine" item will be added (randomly, see MinesweeperMineGenerator)
-        public event MinesweeperItemMineAdded itemMineAdded;
+        public event MinesweeperItemMineAdded ItemMineAdded;
         public delegate void MinesweeperItemMineAdded(MinesweeperItem item);
 
         //this event will be raised when the grid game will be completely loaded
-        public event MinesweeperLoadingCompleted loadingCompleted;
+        public event MinesweeperLoadingCompleted LoadingCompleted;
         public delegate void MinesweeperLoadingCompleted(List<MinesweeperItem> items);
 
         //this event will be raised when a new item will be open as empty cell or mine cell
-        public event MinesweeperCellOpeningCompleted cellOpeningCompleted;
+        public event MinesweeperCellOpeningCompleted CellOpeningCompleted;
         public delegate void MinesweeperCellOpeningCompleted(MinesweeperItem item);
 
         //this event will be raised when item is a mine
-        public event MinesweeperGameOver gameOver;
+        public event MinesweeperGameOver GameOver;
         public delegate void MinesweeperGameOver(MinesweeperItem item);
 
         //this event will be raised when an error occurs
-        public event MinesweeperError errorOccurred;
+        public event MinesweeperError ErrorOccurred;
         public delegate void MinesweeperError(Exception ex);
 
         //returns the number of grid rows (this attribute will be set on the constructor)
         [DataMember]
-        public int rows { get; protected set; }
+        public int Rows { get; protected set; }
 
         //returns the number of grid cols (this attribute will be set on the constructor)
         [DataMember]
-        public int cols { get; protected set; }
+        public int Cols { get; protected set; }
         //returns then number of max mines for the games (this attribute will be set on the constructor)
         [DataMember]
-        public int maxMines { get; protected set; }
+        public int MaxMines { get; protected set; }
         //returns a list of MinesweeperItem: it represents all items (cells) of the game grid
         [DataMember]
-        public List<MinesweeperItem> items { get; protected set; }
+        public List<MinesweeperItem> Items { get; protected set; }
 
         //class constructors
         public MinesweeperGrid(int rows, int cols) : this(rows, cols, 0) { }
@@ -56,59 +56,59 @@ namespace GamesServer
             {
                 //here will set and initialize some class attributes
 
-                this.rows = rows;
-                this.cols = cols;
-                this.maxMines = maxMines;
+                this.Rows = rows;
+                this.Cols = cols;
+                this.MaxMines = maxMines;
                 //if the constructor maxMines param is not valid or zero,
                 //maxMines will be set equal row-1 (arbitrary value)
                 //however in a more complex solution we can suppose, 
                 //to implement a calculation algorithm for this value, for instance 
                 //based on the number of the cell (matrix rows*cols)
-                if (this.maxMines <= 0 || maxMines > (rows * cols))
+                if (this.MaxMines <= 0 || maxMines > (rows * cols))
                 {
-                    this.maxMines = this.rows - 1;
+                    this.MaxMines = this.Rows - 1;
                 }
-                this.items = new List<MinesweeperItem>();
+                this.Items = new List<MinesweeperItem>();
             }
             catch (Exception e)
             {
-                hanldeError(e);
+                HanldeError(e);
             }
         }
 
-        public void makeGrid()
+        public void MakeGrid()
         {
             //it makes the game grid by adding and item for each cell (rox,cols)
             //and at the end of this process defines randmly the mine positions (mine cells)
             try
             {
-                for (int r = 0; r < this.rows; r++)
+                for (int r = 0; r < this.Rows; r++)
                 {
-                    for (int c = 0; c < this.cols; c++)
+                    for (int c = 0; c < this.Cols; c++)
                     {
                         MinesweeperItem item = new MinesweeperItem(new MinesweeperItemCellDefinition(r, c));
-                        this.items.Add(item);
-                        if (itemAdded != null)
+                        this.Items.Add(item);
+                        if (ItemAdded != null)
                         {
-                            itemAdded(item);
+                            ItemAdded(item);
                         }
                     }
                 }
                 //it places mines on the grid
-                placeMines();
+                PlaceMines();
 
                 //raise event
-                if (loadingCompleted != null)
+                if (LoadingCompleted != null)
                 {
-                    loadingCompleted(this.items);
+                    LoadingCompleted(this.Items);
                 }
             }
             catch (Exception e)
             {
-                hanldeError(e);
+                HanldeError(e);
             }
         }
-        private void placeMines()
+        private void PlaceMines()
         {
 
             try
@@ -116,21 +116,21 @@ namespace GamesServer
                 int mineCounter = 0;
                 int itemIndex = 0;
                 //MinesweeperMineGenerator is an helper class that, randomly, choose a cell in a matrix of rows*cols
-                MinesweeperMineGenerator mineGenerator = new MinesweeperMineGenerator(this.rows * this.cols);
+                MinesweeperMineGenerator mineGenerator = new MinesweeperMineGenerator(this.Rows * this.Cols);
 
                 //performs a loop untli the number of mines placed on the grid will be equal the
                 //maxMines chosen for the game
-                while (mineCounter < this.maxMines)
+                while (mineCounter < this.MaxMines)
                 {
                     //get randomly a number (cell index) of a matrix rows*cols
                     itemIndex = mineGenerator.make();
-                    if (this.items[itemIndex].type != MinesweeperItemType.MinesweeperItem_Mine)
+                    if (this.Items[itemIndex].type != MinesweeperItemType.MinesweeperItem_Mine)
                     {
                         //marks item as mine
-                        this.items[itemIndex].type = MinesweeperItemType.MinesweeperItem_Mine;
-                        if (itemMineAdded != null)
+                        this.Items[itemIndex].type = MinesweeperItemType.MinesweeperItem_Mine;
+                        if (ItemMineAdded != null)
                         {
-                            itemMineAdded(this.items[itemIndex]);
+                            ItemMineAdded(this.Items[itemIndex]);
                         }
                         mineCounter++;
                     }
@@ -138,20 +138,20 @@ namespace GamesServer
             }
             catch (Exception e)
             {
-                hanldeError(e);
+                HanldeError(e);
             }
 
         }
-        public void openAllCells()
+        public void OpenAllCells()
         {
             //this method is useful when we are in a "game over" mode
             //it will "open" all cells with a proper value (empty, mine number warning, mine)
-            foreach (MinesweeperItem item in this.items)
+            foreach (MinesweeperItem item in this.Items)
             {
-                setAdjacentCells(item);
+                SetAdjacentCells(item);
             }
         }
-        public void evaluateItem(MinesweeperItem item)
+        public void EvaluateItem(MinesweeperItem item)
         {
             //with this method you can implement all the game behavior
             //because if the item will be a mine, then will be raised a game over event
@@ -161,26 +161,26 @@ namespace GamesServer
             {
                 if (item.type == MinesweeperItemType.MinesweeperItem_Mine)
                 {
-                    openAllCells();
+                    OpenAllCells();
                     //raise event game over
-                    if (gameOver != null)
+                    if (GameOver != null)
                     {
-                        gameOver(item);
+                        GameOver(item);
                     }
                 }
                 else
                 {
-                    setAdjacentCells(item);
+                    SetAdjacentCells(item);
                 }
             }
             catch (Exception ex)
             {
-                hanldeError(ex);
+                HanldeError(ex);
             }
 
 
         }
-        private List<MinesweeperItem> getAdjacentCells(int row, int col)
+        private List<MinesweeperItem> GetAdjacentCells(int row, int col)
         {
 
             //this method returns all the adjacent items (cells) around the (X,Y)item
@@ -212,35 +212,35 @@ namespace GamesServer
                 MinesweeperItem adjacentItem = null;
                 //X - 1, Y - 1
                 adjacentCell = new MinesweeperItemCellDefinition(row - 1, col - 1);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 if (adjacentItem != null) ret.Add(adjacentItem);
                 //X, Y - 1
                 adjacentCell = new MinesweeperItemCellDefinition(row, col - 1);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 if (adjacentItem != null) ret.Add(adjacentItem);
                 //X + 1, Y - 1
                 adjacentCell = new MinesweeperItemCellDefinition(row + 1, col - 1);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 if (adjacentItem != null) ret.Add(adjacentItem);
                 //X - 1, Y 
                 adjacentCell = new MinesweeperItemCellDefinition(row - 1, col);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 if (adjacentItem != null) ret.Add(adjacentItem);
                 //X + 1, Y 
                 adjacentCell = new MinesweeperItemCellDefinition(row + 1, col);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 if (adjacentItem != null) ret.Add(adjacentItem);
                 //X - 1, Y + 1
                 adjacentCell = new MinesweeperItemCellDefinition(row - 1, col + 1);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 if (adjacentItem != null) ret.Add(adjacentItem);
                 //X , Y + 1
                 adjacentCell = new MinesweeperItemCellDefinition(row, col + 1);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 if (adjacentItem != null) ret.Add(adjacentItem);
                 //X + 1, Y + 1
                 adjacentCell = new MinesweeperItemCellDefinition(row + 1, col + 1);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 if (adjacentItem != null) ret.Add(adjacentItem);
 
 
@@ -248,12 +248,12 @@ namespace GamesServer
             }
             catch (Exception ex)
             {
-                hanldeError(ex);
+                HanldeError(ex);
                 return null;
             }
         }
 
-        public void setAdjacentCells(MinesweeperItem item)
+        public void SetAdjacentCells(MinesweeperItem item)
         {
 
             try
@@ -267,12 +267,12 @@ namespace GamesServer
                     //2) An empty item: recursively will be raised a cellOpeningCompleted event until an item will have an empty adjacent item
 
                     //gets all adjacent cells for te input item
-                    List<MinesweeperItem> adjacentCells = getAdjacentCells(item.cell.row, item.cell.col);
+                    List<MinesweeperItem> adjacentCells = GetAdjacentCells(item.cell.row, item.cell.col);
                     //loop thorugh all adjacent cells to calculate adjacent mines.
                     //adjacentMines could be zero or greater than zero
                     foreach (MinesweeperItem adjacentCell in adjacentCells)
                     {
-                        if (cellIsTypeOf(adjacentCell.cell.row, adjacentCell.cell.col, MinesweeperItemType.MinesweeperItem_Mine))
+                        if (CellIsTypeOf(adjacentCell.cell.row, adjacentCell.cell.col, MinesweeperItemType.MinesweeperItem_Mine))
                         {
                             adjacentMines++;
                         }
@@ -291,34 +291,34 @@ namespace GamesServer
                         foreach (MinesweeperItem adjacentCell in adjacentCells)
                         {
                             MinesweeperItem adjacentItem = null;
-                            cellIsTypeOf(adjacentCell.cell.row, adjacentCell.cell.col, MinesweeperItemType.MinesweeperItemType_None, out adjacentItem);
+                            CellIsTypeOf(adjacentCell.cell.row, adjacentCell.cell.col, MinesweeperItemType.MinesweeperItemType_None, out adjacentItem);
                             //here we implement a recursive behaviour to find all empty blocks
-                            if (adjacentItem != null) setAdjacentCells(adjacentItem);
+                            if (adjacentItem != null) SetAdjacentCells(adjacentItem);
                         }
                     }
 
                 }
                 //raise event
-                if (cellOpeningCompleted != null)
+                if (CellOpeningCompleted != null)
                 {
-                    cellOpeningCompleted(item);
+                    CellOpeningCompleted(item);
                 }
 
             }
             catch (Exception e)
             {
-                hanldeError(e);
+                HanldeError(e);
 
             }
         }
 
 
-        public MinesweeperItem findItemAt(MinesweeperItemCellDefinition cell)
+        public MinesweeperItem FindItemAt(MinesweeperItemCellDefinition cell)
         {
             try
             {
                 //find an item by coordinate (row,col)
-                return this.items.Find(x => (x.cell.col == cell.col && x.cell.row == cell.row));
+                return this.Items.Find(x => (x.cell.col == cell.col && x.cell.row == cell.row));
 
                 //if you prefer a Linq select on the items collection to find the item you can uss this:
                 /*
@@ -329,20 +329,20 @@ namespace GamesServer
             }
             catch (Exception e)
             {
-                hanldeError(e);
+                HanldeError(e);
                 return null;
             }
 
 
         }
 
-        private bool cellIsTypeOf(int row, int col, MinesweeperItemType type)
+        private bool CellIsTypeOf(int row, int col, MinesweeperItemType type)
         {
             MinesweeperItem item = null;
-            return cellIsTypeOf(row, col, type, out item);
+            return CellIsTypeOf(row, col, type, out item);
         }
 
-        private bool cellIsTypeOf(int row, int col, MinesweeperItemType type, out MinesweeperItem item)
+        private bool CellIsTypeOf(int row, int col, MinesweeperItemType type, out MinesweeperItem item)
         {
             try
             {
@@ -352,7 +352,7 @@ namespace GamesServer
                 MinesweeperItemCellDefinition adjacentCell = null;
                 MinesweeperItem adjacentItem = null;
                 adjacentCell = new MinesweeperItemCellDefinition(row, col);
-                adjacentItem = findItemAt(adjacentCell);
+                adjacentItem = FindItemAt(adjacentCell);
                 item = adjacentItem;
                 if (adjacentItem != null)
                 {
@@ -362,17 +362,17 @@ namespace GamesServer
             }
             catch (Exception e)
             {
-                hanldeError(e);
+                HanldeError(e);
                 item = null;
                 return false;
             }
         }
 
-        private void hanldeError(Exception ex)
+        private void HanldeError(Exception ex)
         {
-            if (errorOccurred != null)
+            if (ErrorOccurred != null)
             {
-                errorOccurred(ex);
+                ErrorOccurred(ex);
             }
         }
     }

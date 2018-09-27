@@ -344,8 +344,8 @@ namespace GamesServer
         public void FinishTurn(MinesweeperItemCellDefinition cell, string homePlayer,string awayPlayer, string playerName)
         {
             LiveMatch serverMatch = FindMatchByPlayerNames(homePlayer, awayPlayer);
-            MinesweeperItem item = serverMatch.Board.findItemAt(cell);
-            serverMatch.Board.evaluateItem(item);
+            MinesweeperItem item = serverMatch.Board.FindItemAt(cell);
+            serverMatch.Board.EvaluateItem(item);
             string playerToNotfiy = playerName.Equals(serverMatch.HomePlayer) ?
                 serverMatch.AwayPlayer : serverMatch.HomePlayer;
 
