@@ -213,5 +213,12 @@ namespace Client
             deleteAccountWindow.deleteAccount += DeleteAccount;
             deleteAccountWindow.Show();
         }
+
+        private void GameStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            GameStatisticsWindow gameStatsWindow = new GameStatisticsWindow();
+            gameStatsWindow.Client = Client;
+            gameStatsWindow.ShowDialog();
+        }
     }
 }

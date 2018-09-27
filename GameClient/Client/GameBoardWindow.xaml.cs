@@ -48,12 +48,12 @@ namespace Client
                 Match = Client.GetRandomGrid(GameParams.rows, GameParams.cols, GameParams.mines);
                 }
                 //sets MinesweeperGrid event hanlder
-                Match.Board.itemAdded += GameGrid_itemAdded;
-                Match.Board.itemMineAdded += GameGrid_itemMineAdded;
-                Match.Board.loadingCompleted += GameGrid_loadingCompleted;
-                Match.Board.errorOccurred += GameGrid_errorOccurred;
-                Match.Board.cellOpeningCompleted += GameGrid_cellOpeningCompleted;
-                Match.Board.gameOver += GameGrid_gameOver;
+                Match.Board.ItemAdded += GameGrid_itemAdded;
+                Match.Board.ItemMineAdded += GameGrid_itemMineAdded;
+                Match.Board.LoadingCompleted += GameGrid_loadingCompleted;
+                Match.Board.ErrorOccurred += GameGrid_errorOccurred;
+                Match.Board.CellOpeningCompleted += GameGrid_cellOpeningCompleted;
+                Match.Board.GameOver += GameGrid_gameOver;
                 //makes game grid: it will raise a gameGrid_loadingCompleted() event
                 Match.Board.MakeGrid();
             }
@@ -80,8 +80,8 @@ namespace Client
                 //arbitrary value
                 int sizeMargin = 100;
 
-                this.Width = (Match.Board.cols * CELL_SIDE) + sizeMargin;
-                this.Height = (Match.Board.rows * CELL_SIDE) + sizeMargin;
+                this.Width = (Match.Board.Cols * CELL_SIDE) + sizeMargin;
+                this.Height = (Match.Board.Rows * CELL_SIDE) + sizeMargin;
 
                 gamePanel.Width = this.Width - sizeMargin;
                 gamePanel.Height = this.Height - sizeMargin;
@@ -104,8 +104,8 @@ namespace Client
                 SetFormLayout();
 
                 //sets cols and rows from the UniformGrid container
-                gamePanel.Columns = Match.Board.cols;
-                gamePanel.Rows = Match.Board.rows;
+                gamePanel.Columns = Match.Board.Cols;
+                gamePanel.Rows = Match.Board.Rows;
                 //clear all items from the UniformGrid container
                 gamePanel.Children.Clear();
                 //for each grid item add a button on panel form 
@@ -295,7 +295,7 @@ namespace Client
                 Button button = (Button)item.tag;
                 if (button.Content.Equals(".")) closeCells++;
             }
-            return closeCells == Match.Board.maxMines;
+            return closeCells == Match.Board.MaxMines;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

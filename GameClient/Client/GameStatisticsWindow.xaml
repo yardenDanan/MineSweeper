@@ -1,16 +1,16 @@
-﻿<Window x:Class="Client.LeaderBoardWindow"
+﻿<Window x:Class="Client.GameStatisticsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        ResizeMode="NoResize"
+          ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
         Title="MineSweeper" Height="450" Width="500">
     <Grid>
-        <Label Content="Leaderboard" HorizontalAlignment="Left" Margin="170,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.077" Width="135" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0">
+        <Label Content="Game Statistics" HorizontalAlignment="Left" Margin="151,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.077" Width="154" FontFamily="Rockwell" FontSize="20" Foreground="ForestGreen">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -20,8 +20,8 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <DataGrid Name="table" HorizontalAlignment="Left" Height="310" Margin="42,91,0,0" VerticalAlignment="Top" Width="405"/>
-        <Image Name="leftCrown" HorizontalAlignment="Left" Height="64" Margin="50,10,0,0" VerticalAlignment="Top" Width="79"/>
-        <Image Name="rightCrown" HorizontalAlignment="Left" Height="64" Margin="352,10,0,0" VerticalAlignment="Top" Width="79"/>
+        <DataGrid Name="table" HorizontalAlignment="Left" Height="310" Margin="50,91,0,0" VerticalAlignment="Top" Width="393"/>
+        <Image Name="leftBars" HorizontalAlignment="Left" Height="64" Margin="50,10,0,0" VerticalAlignment="Top" Width="79"/>
+        <Image Name="rightBars" HorizontalAlignment="Left" Height="64" Margin="352,10,0,0" VerticalAlignment="Top" Width="79"/>
     </Grid>
 </Window>

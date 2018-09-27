@@ -164,13 +164,20 @@ namespace GamesServer
 
         public List<GameDTO> GetAllGamesPlayed()
         {
-            List<GameDTO> games = null;
+            List<GameDTO> toRet = new List<GameDTO>();
+            List<Game> games = new List<Game>();
             using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
             {
-                var games_db = from g in ctx.Games select new GameDTO(g);
-                games = games_db.ToList();
+                games = (from g in ctx.Games
+                           select g).ToList();
             }
-            return games;
+
+            foreach (Game game in games)
+            {
+                toRet.Add(new GameDTO(game));
+            }
+
+            return toRet.Count == 0 ? null : toRet;
         }
 
         public List<PlayerDTO> GetAllPlayers()

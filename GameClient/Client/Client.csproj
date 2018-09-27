@@ -81,6 +81,9 @@
       <DependentUpon>GameInvitationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameMode.cs" />
+    <Compile Include="GameStatisticsWindow.xaml.cs">
+      <DependentUpon>GameStatisticsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IncomingInvitationWindow.xaml.cs">
       <DependentUpon>IncomingInvitationWindow.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameInvitationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameStatisticsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
