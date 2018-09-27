@@ -234,6 +234,12 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GameFinishInTie", ReplyAction="http://tempuri.org/IGameService/GameFinishInTieResponse")]
         System.Threading.Tasks.Task GameFinishInTieAsync(string homePlayer, string awayPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/FlipTurnImage", ReplyAction="http://tempuri.org/IGameService/FlipTurnImageResponse")]
+        void FlipTurnImage(string playerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/FlipTurnImage", ReplyAction="http://tempuri.org/IGameService/FlipTurnImageResponse")]
+        System.Threading.Tasks.Task FlipTurnImageAsync(string playerName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -262,6 +268,9 @@ namespace Client.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/NotifyTie")]
         void NotifyTie();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/FlipTurnImageNotify")]
+        void FlipTurnImageNotify();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -442,6 +451,14 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task GameFinishInTieAsync(string homePlayer, string awayPlayer) {
             return base.Channel.GameFinishInTieAsync(homePlayer, awayPlayer);
+        }
+        
+        public void FlipTurnImage(string playerName) {
+            base.Channel.FlipTurnImage(playerName);
+        }
+        
+        public System.Threading.Tasks.Task FlipTurnImageAsync(string playerName) {
+            return base.Channel.FlipTurnImageAsync(playerName);
         }
     }
 }

@@ -46,9 +46,18 @@ namespace Client {
             acceptInvitation(match);
         }
 
-        public Boolean IsWaitForOpponentEventsAreNull()
+        public void ClearWaitForOpponentEvents()
         {
-            return acceptInvitation == null && cancelInvitation == null;
+            if (acceptInvitation == null) return;
+            foreach(Delegate handler in acceptInvitation.GetInvocationList())
+            {
+             acceptInvitation -= (AcceptSenderInvitationDelegate)handler;                
+            }
+
+            foreach(Delegate handler in cancelInvitation.GetInvocationList())
+            {
+              cancelInvitation -= (CancelSenderInvitationDelegate)handler;
+            }
         }
 
         public delegate void UpdateOpponentBoardDelegate(MinesweeperItemCellDefinition cell);
@@ -72,11 +81,35 @@ namespace Client {
             notifyTie();
         }
 
-        public Boolean IsGameBoardEventsAreNull()
+        public delegate void NotifyTurnFlipDelegate();
+        public event NotifyTurnFlipDelegate notifyTurnFlip;
+        public void FlipTurnImageNotify()
         {
-            return updateOpponentBoard == null && notifyWinner == null
-                && notifyTie == null;
+            notifyTurnFlip();
         }
 
+        public void ClearGameBoardEvents()
+        {
+            if (updateOpponentBoard == null) return;
+            foreach (Delegate handler in updateOpponentBoard.GetInvocationList())
+            {
+                updateOpponentBoard -= (UpdateOpponentBoardDelegate)handler;
+            }
+
+            foreach (Delegate handler in notifyWinner.GetInvocationList())
+            {
+                notifyWinner -= (NotifyWinnerDelegate)handler;
+            }
+
+            foreach (Delegate handler in notifyTie.GetInvocationList())
+            {
+                notifyTie -= (NotifyTieDelegate)handler;
+            }
+
+            foreach (Delegate handler in notifyTurnFlip.GetInvocationList())
+            {
+                notifyTurnFlip -= (NotifyTurnFlipDelegate)handler;
+            }
+        }
     }
 }

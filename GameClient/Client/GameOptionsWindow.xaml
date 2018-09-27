@@ -63,8 +63,7 @@
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>                </Grid.ColumnDefinitions>
                 <GroupBox Background="AliceBlue" Grid.Column="0" Margin="10" Header="Percentage">
                     <Grid Margin="10,0,-3,-1.6">
                         <Grid.RowDefinitions>
@@ -82,7 +81,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition/>           
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Name="winsNumber"  Grid.Row="0"  Content="Wins: " VerticalAlignment="Center"/>

@@ -7,22 +7,28 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Loaded="Window_Loaded"
-        Closing="Window_Closing"
       Title="MineSweeper" Height="380" Width="525" WindowStartupLocation="CenterScreen">
-    <Grid Margin="30,0,-0.351,0.039">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <UniformGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Columns="4" x:Name="gamePanel" VerticalAlignment="Center" HorizontalAlignment="Center" Height="268" Margin="10,0,0,0"  >
-
-        </UniformGrid>
-
+        <UniformGrid Grid.Row="2"  Columns="4" x:Name="gamePanel" VerticalAlignment="Center" HorizontalAlignment="Center" Height="268"/>
+        <Grid Name="PlayerDetailsArea" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontSize="10" FontWeight="Bold" Content="Home Player"/>
+            <Label  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" FontSize="10" FontWeight="Bold" Content="Away Player"/>
+            <Image Name="TurnImage" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="34,10,0,0" VerticalAlignment="Top" Width="44" Grid.RowSpan="2"/>
+            <Label  Name="HomePlayerName" Foreground="Blue" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" FontSize="10"  Content="First Name"/>
+            <Label Name="AwayPlayerName" Foreground="Red" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" FontSize="10"  Content="Second Name"/>
+        </Grid>
     </Grid>
 </Window>

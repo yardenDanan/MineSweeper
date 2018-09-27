@@ -255,6 +255,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="FlipTurnImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="playerName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FlipTurnImageResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateClientsList">
     <xs:complexType>
       <xs:sequence>
@@ -304,6 +316,11 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyTie">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FlipTurnImageNotify">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

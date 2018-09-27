@@ -31,8 +31,7 @@ namespace GamesServer
                     new UserExistsFault
                     {
                         Message = username + " already Loged in"
-                    });
-            }
+                    });            }
             else
             {
                 try
@@ -50,8 +49,7 @@ namespace GamesServer
                 catch (Exception ex)
                 {
                     throw new FaultException(ex.Message);
-                }
-            }
+                }            }
         }
 
         private void UpdateUsersList()
@@ -69,7 +67,7 @@ namespace GamesServer
         public void ClientDisconnected(string username)
         {
             callbacks.Remove(username);
-            UpdateUsersList();
+            UpdatUsersList();
         }
 
 
@@ -87,7 +85,7 @@ namespace GamesServer
             {
                 RegisterNewPlayer(username, password);
                 IGameServiceCallback callback =
-                    OperationContext.Current.GetCallbackChannel
+                   OperationContext.Current.GetCallbackChannel
                     <IGameServiceCallback>();
                 callbacks.Add(username, callback);
                 UpdateUsersList();
@@ -106,7 +104,6 @@ namespace GamesServer
         {
             return new PlayerDTO(GetPlayerFromDB(username));
         }
-
         private void RegisterNewPlayer(string username, string password)
         {
             if (!IsValidName(username))
@@ -124,7 +121,7 @@ namespace GamesServer
             using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
             {
                 ctx.Players.Add(new Player()
-                {
+               {
                     UserName = username,
                     Password = password
                 });
@@ -142,7 +139,6 @@ namespace GamesServer
                 }
             }
         }
-
         private Player GetPlayerFromDB(string username)
         {
             Player player = null;
@@ -161,7 +157,6 @@ namespace GamesServer
             }
             return player;
         }
-
         public List<GameDTO> GetAllGamesPlayed()
         {
             List<GameDTO> toRet = new List<GameDTO>();
@@ -180,7 +175,7 @@ namespace GamesServer
             return toRet.Count == 0 ? null : toRet;
         }
 
-        public List<PlayerDTO> GetAllPlayers()
+       public List<PlayerDTO> GetAllPlayers()
         {
             List<PlayerDTO> toRet = new List<PlayerDTO>();
             List<Player> players = new List<Player>();
@@ -198,7 +193,7 @@ namespace GamesServer
         }
 
         public void SendMessage(string message, string fromClient, string toClient)
-        {
+       {
             if (callbacks.ContainsKey(toClient))
             {
                 Thread sendThread = new Thread(() =>
@@ -216,7 +211,7 @@ namespace GamesServer
             }
             Player passClient = new Player
             {
-                UserName = userName,
+               UserName = userName,
                 Password = oldPassword
             };
 
@@ -234,7 +229,7 @@ namespace GamesServer
                 catch (Exception)
                 {
                     UserFaultException fault = new UserFaultException()
-                    { Message = "Password change failed" };
+                   { Message = "Password change failed" };
                     throw new FaultException<UserFaultException>(fault);
                 }
             }
@@ -252,7 +247,7 @@ namespace GamesServer
 
         public void DeleteAccount(string userName, string password)
         {
-            using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
+           using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
             {
                 Player playerToRemove = ctx.Players.Where
                     (p => p.UserName.Equals(userName) &&
@@ -270,7 +265,6 @@ namespace GamesServer
                 }
             }
         }
-
         public LiveMatch GetRandomGrid(int rows, int columns, int mines)
         {
             MinesweeperGrid randomGrid =  new MinesweeperGrid(rows, columns, mines);
@@ -289,7 +283,7 @@ namespace GamesServer
             else
             {
                 throw new FaultException<UserFaultException>(
-                   new UserFaultException(), new FaultReason("Not found such user."));
+                  new UserFaultException(), new FaultReason("Not found such user."));
             }
         }
 
@@ -307,7 +301,7 @@ namespace GamesServer
             }
         }
 
-        public void AcceptInvitation(string senderName, string reciverName, GameParams gameParams)
+       public void AcceptInvitation(string senderName, string reciverName, GameParams gameParams)
         {
             if (callbacks.ContainsKey(senderName))
             {
@@ -325,7 +319,7 @@ namespace GamesServer
             {
                 throw new FaultException<UserFaultException>(
                    new UserFaultException(), new FaultReason("Not found such user."));
-            }
+           }
         }
 
         public LiveMatch GetSameGridAsOpponent(string senderName, string reciverName)
@@ -343,7 +337,7 @@ namespace GamesServer
             }
             else
             {
-                throw new FaultException<UserFaultException>(
+               throw new FaultException<UserFaultException>(
                   new UserFaultException(), new FaultReason("Something went wrong, match not found."));
             }
         }
@@ -361,7 +355,7 @@ namespace GamesServer
                 Thread sendThread = new Thread(() => callbacks[playerToNotfiy].UpdateOpponentBoard(cell));
                 sendThread.Start();
             }
-            else
+           else
             {
                 throw new FaultException<UserFaultException>(
                    new UserFaultException(), new FaultReason("Opponent not found."));
@@ -379,7 +373,7 @@ namespace GamesServer
                 return match;
             }
             else
-            {
+           {
                 throw new FaultException<UserFaultException>(
                   new UserFaultException(), new FaultReason("Something went wrong, match not found."));
             }
@@ -397,7 +391,7 @@ namespace GamesServer
             UpdatePlayerStats(playerToNotify, GameResult.Win);
             UpdatePlayerStats(loser, GameResult.Lose);
             SaveGameToDB(match, playerToNotify);
-        }
+       }
 
         private void UpdatePlayerStats(string playerName, GameResult result)
         {
@@ -415,7 +409,7 @@ namespace GamesServer
                     player.GamesTie++;
                     break;
                 default:
-                    break;
+                   break;
             }
             using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
             {
@@ -433,7 +427,7 @@ namespace GamesServer
             game.Date =  DateTime.Now;
             using (var ctx = new minesweeper_ShlomiOhana_YardenDananEntities())
             {
-                ctx.Games.Add(game);
+               ctx.Games.Add(game);
                 ctx.SaveChanges();
             }
             LiveMatches.Remove(match);
@@ -451,7 +445,7 @@ namespace GamesServer
             {
                 Thread notifyWinner = new Thread(() => callbacks[awayPlayer].NotifyTie());
                 notifyWinner.Start();
-            }
+           }
 
             UpdatePlayerStats(homePlayer, GameResult.Tie);
             UpdatePlayerStats(awayPlayer, GameResult.Tie);
@@ -469,8 +463,16 @@ namespace GamesServer
                 });
                 toRet.Add(temp);
             }
-
             return toRet.Count == 0 ? null : toRet;
+        }
+
+        public void FlipTurnImage(string playerName)
+        {
+            if (callbacks.ContainsKey(playerName))
+            {
+                Thread flipTurnImageNotify = new Thread(() => callbacks[playerName].FlipTurnImageNotify());
+                flipTurnImageNotify.Start();
+            }
         }
     }
 }

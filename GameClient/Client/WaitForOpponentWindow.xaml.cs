@@ -57,11 +57,9 @@ namespace Client
         {
             this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
             titleText.Content = "Waiting for " + OpponentName + "'s response";
-            if (CallBack.IsWaitForOpponentEventsAreNull())
-            {
-                CallBack.acceptInvitation += RequestAccepted;
-                CallBack.cancelInvitation += RequestRejected;
-            }
+            CallBack.ClearWaitForOpponentEvents();
+            CallBack.acceptInvitation += RequestAccepted;
+            CallBack.cancelInvitation += RequestRejected;
         }
     }
 }

@@ -32,6 +32,8 @@ namespace Client
         public LiveMatch Match { get; set; }
         public string UserName { get; set; }
         private Boolean OpponentLost = false;
+        private string homeArrow = "left-turn-arrow.png";
+        private string awayArrow = "right-turn-arrow.png";
 
         public GameBoardWindow()
         {
@@ -80,11 +82,11 @@ namespace Client
                 //arbitrary value
                 int sizeMargin = 100;
 
-                this.Width = (Match.Board.Cols * CELL_SIDE) + sizeMargin;
-                this.Height = (Match.Board.Rows * CELL_SIDE) + sizeMargin;
+                this.Width = (Match.Board.Cols * CELL_SIDE) + sizeMargin + 50;
+                this.Height = (Match.Board.Rows * CELL_SIDE) + sizeMargin + 35;
 
-                gamePanel.Width = this.Width - sizeMargin;
-                gamePanel.Height = this.Height - sizeMargin;
+                gamePanel.Width = this.Width - 25 - sizeMargin;
+                gamePanel.Height = this.Height - 35 - sizeMargin;
 
             }
             catch (Exception ex)
@@ -161,13 +163,29 @@ namespace Client
             {
                 Button button = (Button)sender;
                 MinesweeperItem item = (MinesweeperItem)button.Tag;
-                Thread notifyServer = new Thread(() => Client.FinishTurn(item.cell, Match.HomePlayer, Match.AwayPlayer, UserName));
-                notifyServer.Start();
+                if(Mode == GameMode.Mode.Online)
+                {
+                    Thread notifyFinishTurn = new Thread(() => Client.FinishTurn(item.cell, Match.HomePlayer, Match.AwayPlayer, UserName));
+                    notifyFinishTurn.Start();
+                    FlipTurnImage();
+                    string playerToNotfiy = (Type == PlayerType.Home) ? 
+                        Match.AwayPlayer : Match.HomePlayer;
+                    Thread notifyFlipTurnImage = new Thread(() => Client.FlipTurnImage(playerToNotfiy));
+                    notifyFlipTurnImage.Start();    
+                }
                 Match.Board.EvaluateItem(item);
                 if (IsAllCellsOpened())
                 {
-                    Thread notifyServerAboutTie = new Thread(() => Client.GameFinishInTie(Match.HomePlayer,Match.AwayPlayer));
-                    notifyServerAboutTie.Start();
+                    if (Mode == GameMode.Mode.Online)
+                    {
+                        Thread notifyServerAboutTie = new Thread(() => Client.GameFinishInTie(Match.HomePlayer, Match.AwayPlayer));
+                        notifyServerAboutTie.Start();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You successfully opened all cells :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
                 }
             }
             catch (Exception ex)
@@ -176,15 +194,35 @@ namespace Client
             }
         }
 
+        private void FlipTurnImage()
+        {
+            if (TurnImage.Source.ToString().Contains(homeArrow))
+            {
+                TurnImage.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + awayArrow));
+            }
+            else
+            {
+                TurnImage.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + homeArrow));
+            }
+        }
+
         private void GameGrid_gameOver(MinesweeperItem item)
         {
-            if (!OpponentLost)
+            if(Mode == GameMode.Mode.Online)
             {
-                Thread notifyServer = new Thread(() => Client.PlayerLose(Match.HomePlayer, Match.AwayPlayer, UserName));
-                notifyServer.Start();
+                if (!OpponentLost)
+                {
+                    Thread notifyServer = new Thread(() => Client.PlayerLose(Match.HomePlayer, Match.AwayPlayer, UserName));
+                    notifyServer.Start();
+                    MessageBox.Show("You lost the game :(", "Sorry", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+
+                }
+            }
+            else
+            {
                 MessageBox.Show("You lost the game :(", "Sorry", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
-
             }
         }
 
@@ -300,19 +338,28 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
-            if (CallBack.IsGameBoardEventsAreNull())
+            if(Mode == GameMode.Mode.Alone)
             {
-                CallBack.updateOpponentBoard += PerformOpponentMove;
-                CallBack.notifyWinner += NotifyWinner;
-                CallBack.notifyTie += NotifyTie;
+                PlayerDetailsArea.Visibility = Visibility.Hidden;
             }
+            else
+            {
+                SetOnlineBoardDetails();
+            }
+            this.Icon = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/app-icon2.png"));
+            CallBack.ClearGameBoardEvents();
+            CallBack.updateOpponentBoard += PerformOpponentMove;
+            CallBack.notifyWinner += NotifyWinner;
+            CallBack.notifyTie += NotifyTie;
+            CallBack.notifyTurnFlip += FlipTurnImage;
             StartGame();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void SetOnlineBoardDetails()
         {
-            MessageBox.Show("closing");
+            AwayPlayerName.Content = Match.AwayPlayer;
+            HomePlayerName.Content = Match.HomePlayer;
+            TurnImage.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + homeArrow));
         }
     }
 }

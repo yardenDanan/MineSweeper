@@ -79,6 +79,9 @@ namespace GamesServer {
         [OperationContract]
         [FaultContract(typeof(UserFaultException))]
         void GameFinishInTie(string homePlayer, string awayPlayer);
+
+        [OperationContract]
+        void FlipTurnImage(string playerName);
     }
 
     public interface IGameServiceCallback {
@@ -106,5 +109,8 @@ namespace GamesServer {
 
         [OperationContract(IsOneWay = true)]
         void NotifyTie();
+
+        [OperationContract(IsOneWay = true)]
+        void FlipTurnImageNotify();
     }
 }
