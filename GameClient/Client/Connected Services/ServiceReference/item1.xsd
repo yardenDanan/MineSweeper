@@ -55,10 +55,10 @@
   <xs:element name="LiveMatch" nillable="true" type="tns:LiveMatch" />
   <xs:complexType name="MinesweeperGrid">
     <xs:sequence>
-      <xs:element minOccurs="0" name="cols" type="xs:int" />
-      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfMinesweeperItem" />
-      <xs:element minOccurs="0" name="maxMines" type="xs:int" />
-      <xs:element minOccurs="0" name="rows" type="xs:int" />
+      <xs:element minOccurs="0" name="Cols" type="xs:int" />
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfMinesweeperItem" />
+      <xs:element minOccurs="0" name="MaxMines" type="xs:int" />
+      <xs:element minOccurs="0" name="Rows" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MinesweeperGrid" nillable="true" type="tns:MinesweeperGrid" />

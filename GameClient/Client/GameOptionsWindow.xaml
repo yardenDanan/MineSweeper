@@ -35,7 +35,7 @@
                     <Separator />
                     <MenuItem Header="Leaderboard"  Click="Leaderboard_Click"/>
                     <MenuItem Header="_Games statistics"  Click="GameStatistics_Click"/>
-                    <MenuItem Header="_Live games" />
+                    <MenuItem Name="LiveGames" Header="_Live games" Click="LiveGames_Click"/>
                 </MenuItem>
                 <MenuItem Header="_Options">
                     <MenuItem Header="_Change Password" Click="ChangePassword_Click" />

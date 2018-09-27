@@ -457,5 +457,20 @@ namespace GamesServer
             UpdatePlayerStats(awayPlayer, GameResult.Tie);
             SaveGameToDB(match, "Tie");
         }
+
+        public List<GameDTO> GetLiveGames()
+        {
+            List<GameDTO> toRet = new List<GameDTO>();
+            foreach(LiveMatch liveMatch in LiveMatches)
+            {
+                GameDTO temp = new GameDTO(new Game {
+                    Player1_UserName = liveMatch.HomePlayer,
+                    Player2_UserName = liveMatch.AwayPlayer   
+                });
+                toRet.Add(temp);
+            }
+
+            return toRet.Count == 0 ? null : toRet;
+        }
     }
 }

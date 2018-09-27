@@ -141,6 +141,12 @@ namespace Client.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetAllGamesPlayed", ReplyAction="http://tempuri.org/IGameService/GetAllGamesPlayedResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<GamesServer.GameDTO>> GetAllGamesPlayedAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetLiveGames", ReplyAction="http://tempuri.org/IGameService/GetLiveGamesResponse")]
+        System.Collections.Generic.List<GamesServer.GameDTO> GetLiveGames();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetLiveGames", ReplyAction="http://tempuri.org/IGameService/GetLiveGamesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<GamesServer.GameDTO>> GetLiveGamesAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetAllPlayers", ReplyAction="http://tempuri.org/IGameService/GetAllPlayersResponse")]
         System.Collections.Generic.List<GamesServer.PlayerDTO> GetAllPlayers();
         
@@ -324,6 +330,14 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<GamesServer.GameDTO>> GetAllGamesPlayedAsync() {
             return base.Channel.GetAllGamesPlayedAsync();
+        }
+        
+        public System.Collections.Generic.List<GamesServer.GameDTO> GetLiveGames() {
+            return base.Channel.GetLiveGames();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<GamesServer.GameDTO>> GetLiveGamesAsync() {
+            return base.Channel.GetLiveGamesAsync();
         }
         
         public System.Collections.Generic.List<GamesServer.PlayerDTO> GetAllPlayers() {

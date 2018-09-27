@@ -90,6 +90,9 @@
     <Compile Include="LeaderBoardWindow.xaml.cs">
       <DependentUpon>LeaderBoardWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LiveGamesWindow.xaml.cs">
+      <DependentUpon>LiveGamesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PlayAloneConfigWindow.xaml.cs">
       <DependentUpon>PlayAloneConfigWindow.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LeaderBoardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LiveGamesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

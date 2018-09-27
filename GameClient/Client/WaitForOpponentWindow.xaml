@@ -8,9 +8,9 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
-        Title="Minesweeper" Height="120" Width="400">
+        Title="Minesweeper" Height="140" Width="400">
     <Grid>
-        <Label Name="titleText" Content="Wait for opponent response" HorizontalAlignment="Center"  VerticalAlignment="Top"  Width="351" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0" Margin="21,23,22,35"/>
+        <Label Name="titleText" Content="Wait for opponent response" HorizontalAlignment="Center"  VerticalAlignment="Top"  Width="351" FontFamily="Rockwell" FontSize="20" Foreground="#FF24B8F0" Margin="21,23,22,0" Height="50"/>
 
     </Grid>
 </Window>

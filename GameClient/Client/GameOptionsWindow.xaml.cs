@@ -220,5 +220,12 @@ namespace Client
             gameStatsWindow.Client = Client;
             gameStatsWindow.ShowDialog();
         }
+
+        private void LiveGames_Click(object sender, RoutedEventArgs e)
+        {
+            LiveGamesWindow liveGamesWindow = new LiveGamesWindow();
+            liveGamesWindow.Client = Client;
+            liveGamesWindow.ShowDialog();
+        }
     }
 }

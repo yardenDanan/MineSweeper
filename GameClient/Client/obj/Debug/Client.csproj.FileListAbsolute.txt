@@ -44,3 +44,5 @@ C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\Client.pdb
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\GameStatisticsWindow.g.cs
 C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\GameStatisticsWindow.baml
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\LiveGamesWindow.g.cs
+C:\Users\yarden\source\repos\MineSweeper\MineSweeper\GameClient\Client\obj\Debug\LiveGamesWindow.baml

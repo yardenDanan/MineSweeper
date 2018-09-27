@@ -309,6 +309,11 @@ namespace Client
             }
             StartGame();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBox.Show("closing");
+        }
     }
 }
 

@@ -29,6 +29,9 @@ namespace GamesServer {
         List<GameDTO> GetAllGamesPlayed();
 
         [OperationContract]
+        List<GameDTO> GetLiveGames();
+
+        [OperationContract]
         List<PlayerDTO> GetAllPlayers();
 
         [OperationContract(IsOneWay = true)]
