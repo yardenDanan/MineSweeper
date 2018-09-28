@@ -14,6 +14,9 @@ namespace GamesServer {
         void ClientConnected(string username, string password);
 
         [OperationContract]
+        void UpdateClientsStatus();
+
+        [OperationContract]
         void ClientDisconnected(string username);
 
         [OperationContract]

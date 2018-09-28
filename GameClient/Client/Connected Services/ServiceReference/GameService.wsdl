@@ -172,6 +172,52 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_UpdateClientsStatus_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_UpdateClientsStatus_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IGameService_ClientDisconnected_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -1546,6 +1592,12 @@
   <wsdl:message name="IGameService_ClientConnected_UserExistsFaultFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GamesServer" name="detail" element="q1:UserExistsFault" />
   </wsdl:message>
+  <wsdl:message name="IGameService_UpdateClientsStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateClientsStatus" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_UpdateClientsStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateClientsStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="IGameService_ClientDisconnected_InputMessage">
     <wsdl:part name="parameters" element="tns:ClientDisconnected" />
   </wsdl:message>
@@ -1729,6 +1781,10 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ClientConnectedResponse" message="tns:IGameService_ClientConnected_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/ClientConnectedUserExistsFaultFault" name="UserExistsFaultFault" message="tns:IGameService_ClientConnected_UserExistsFaultFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateClientsStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/UpdateClientsStatus" message="tns:IGameService_UpdateClientsStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/UpdateClientsStatusResponse" message="tns:IGameService_UpdateClientsStatus_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ClientDisconnected">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ClientDisconnected" message="tns:IGameService_ClientDisconnected_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ClientDisconnectedResponse" message="tns:IGameService_ClientDisconnected_OutputMessage" />
@@ -1862,6 +1918,17 @@
         <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_ClientConnected_UserExistsFaultFault_Fault" />
         <soap12:fault use="literal" name="UserExistsFaultFault" namespace="" />
       </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClientsStatus">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/UpdateClientsStatus" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_UpdateClientsStatus_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IGameService_UpdateClientsStatus_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ClientDisconnected">
       <soap12:operation soapAction="http://tempuri.org/IGameService/ClientDisconnected" style="document" />

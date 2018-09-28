@@ -32,8 +32,9 @@ namespace Client
         public LiveMatch Match { get; set; }
         public string UserName { get; set; }
         private Boolean OpponentLost = false;
+        private Boolean MatchFinish = false;
         private string homeArrow = "left-turn-arrow.png";
-        private string awayArrow = "right-turn-arrow.png";
+        private string awayArrow = "right-turn-arrow.jpg";
 
         public GameBoardWindow()
         {
@@ -169,7 +170,7 @@ namespace Client
                     notifyFinishTurn.Start();
                     FlipTurnImage();
                     string playerToNotfiy = (Type == PlayerType.Home) ? 
-                        Match.AwayPlayer : Match.HomePlayer;
+                    Match.AwayPlayer : Match.HomePlayer;
                     Thread notifyFlipTurnImage = new Thread(() => Client.FlipTurnImage(playerToNotfiy));
                     notifyFlipTurnImage.Start();    
                 }
@@ -215,6 +216,7 @@ namespace Client
                     Thread notifyServer = new Thread(() => Client.PlayerLose(Match.HomePlayer, Match.AwayPlayer, UserName));
                     notifyServer.Start();
                     MessageBox.Show("You lost the game :(", "Sorry", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MatchFinish = true;
                     this.Close();
 
                 }
@@ -316,12 +318,14 @@ namespace Client
         private void NotifyWinner()
         {
             MessageBox.Show("You are the Winner :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
+            MatchFinish = true;
             this.Close();
         }
 
         private void NotifyTie()
         {
             MessageBox.Show("Game finish in a Tie -)", "Stretching Finish", MessageBoxButton.OK, MessageBoxImage.Information);
+            MatchFinish = true;
             this.Close();
         }
 
@@ -354,12 +358,29 @@ namespace Client
             CallBack.notifyTurnFlip += FlipTurnImage;
             StartGame();
         }
-
+            
         private void SetOnlineBoardDetails()
         {
             AwayPlayerName.Content = Match.AwayPlayer;
             HomePlayerName.Content = Match.HomePlayer;
             TurnImage.Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "/Resources/" + homeArrow));
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(Mode == GameMode.Mode.Online)
+            {
+                if (!MatchFinish)
+                {
+                    MessageBoxResult userChoice = MessageBox.Show("Are you sure you want to surrender?", "Notice", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    if (userChoice.Equals(MessageBoxResult.Yes))
+                    {
+                        Thread notifySurrender = new Thread(() => Client.PlayerLose(Match.HomePlayer,
+                            Match.AwayPlayer, UserName));
+                        notifySurrender.Start();
+                    }
+                }
+            }
         }
     }
 }

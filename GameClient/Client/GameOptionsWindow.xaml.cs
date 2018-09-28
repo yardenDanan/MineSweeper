@@ -131,14 +131,21 @@ namespace Client
             if (lbUsers.SelectedIndex == -1)
             {
                 MessageBox.Show("In order to invite player you need to choose player first.",
-                    "Error occurred!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            String selectedUser = lbUsers.SelectedItem.ToString();
+            String selectedUser = lbUsers.SelectedItem.ToString().Split(' ')[0];
             if (selectedUser.Equals(Username))
             {
                 MessageBox.Show("You cant invite yourself, choose other player.",
-                    "Error occurred!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (lbUsers.SelectedItem.ToString().Contains("Playing*"))
+            {
+                MessageBox.Show("You cant invite player that already in a match.",
+                    "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             GameInvitationWindow invitationWindow = new GameInvitationWindow();
@@ -181,7 +188,7 @@ namespace Client
         private void lbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lbUsers.SelectedIndex == -1) return;
-            string username = lbUsers.SelectedItem.ToString();
+            string username = lbUsers.SelectedItem.ToString().Split(' ')[0];
             PlayerDTO player = Client.GetPlayerDetailes(username);
             int totalGames = player.GamesLost + player.GamesTie + player.GamesWon;
             winsNumber.Content = "Wins: " + player.GamesWon;

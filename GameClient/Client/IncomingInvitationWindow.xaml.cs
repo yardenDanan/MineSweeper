@@ -72,6 +72,8 @@ namespace Client
             try
             {
                 Client.AcceptInvitation(SenderName,Username,GameParams);
+                Thread updatePLayingList = new Thread(() => Client.UpdateClientsStatus());
+                updatePLayingList.Start();
             }
             catch (FaultException<UserFaultException> ex)
             {

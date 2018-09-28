@@ -114,6 +114,12 @@ namespace Client.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ClientConnected", ReplyAction="http://tempuri.org/IGameService/ClientConnectedResponse")]
         System.Threading.Tasks.Task ClientConnectedAsync(string username, string password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/UpdateClientsStatus", ReplyAction="http://tempuri.org/IGameService/UpdateClientsStatusResponse")]
+        void UpdateClientsStatus();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/UpdateClientsStatus", ReplyAction="http://tempuri.org/IGameService/UpdateClientsStatusResponse")]
+        System.Threading.Tasks.Task UpdateClientsStatusAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ClientDisconnected", ReplyAction="http://tempuri.org/IGameService/ClientDisconnectedResponse")]
         void ClientDisconnected(string username);
         
@@ -307,6 +313,14 @@ namespace Client.ServiceReference {
         
         public System.Threading.Tasks.Task ClientConnectedAsync(string username, string password) {
             return base.Channel.ClientConnectedAsync(username, password);
+        }
+        
+        public void UpdateClientsStatus() {
+            base.Channel.UpdateClientsStatus();
+        }
+        
+        public System.Threading.Tasks.Task UpdateClientsStatusAsync() {
+            return base.Channel.UpdateClientsStatusAsync();
         }
         
         public void ClientDisconnected(string username) {

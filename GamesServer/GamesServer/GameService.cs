@@ -13,7 +13,7 @@ namespace GamesServer
     {
         Lose = 0,
         Win = 1,
-        Tie
+        Tie = 2
     }
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
     ConcurrencyMode = ConcurrencyMode.Multiple)]
@@ -58,16 +58,34 @@ namespace GamesServer
             {
                 foreach (var callback in callbacks.Values)
                 {
-                    callback.UpdateClientsList(callbacks.Keys);
+                    List<string> listToSend = PreparePlayersList();
+                    callback.UpdateClientsList(listToSend);
                 }
             });
             updateListThread.Start();
         }
 
+        private List<string> PreparePlayersList()
+        {
+            List<string> toRet = new List<string>();
+            foreach(string player in callbacks.Keys)
+            {
+                if (IsPlayerInMatch(player))
+                {
+                    toRet.Add(player + " : Playing*");
+                }
+                else
+                {
+                    toRet.Add(player + " : Available");
+                }
+            }
+            return toRet;
+        }
+
         public void ClientDisconnected(string username)
         {
             callbacks.Remove(username);
-            UpdatUsersList();
+            UpdateUsersList();
         }
 
 
@@ -431,6 +449,7 @@ namespace GamesServer
                 ctx.SaveChanges();
             }
             LiveMatches.Remove(match);
+            UpdateUsersList();
         }
 
         public void GameFinishInTie(string homePlayer, string awayPlayer)
@@ -473,6 +492,24 @@ namespace GamesServer
                 Thread flipTurnImageNotify = new Thread(() => callbacks[playerName].FlipTurnImageNotify());
                 flipTurnImageNotify.Start();
             }
+        }
+
+        private Boolean IsPlayerInMatch(string playerName)
+        {
+            foreach(LiveMatch match in LiveMatches)
+            {
+                if(playerName.Equals(match.HomePlayer) ||
+                    playerName.Equals(match.AwayPlayer))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void UpdateClientsStatus()
+        {
+            UpdateUsersList();
         }
     }
 }
